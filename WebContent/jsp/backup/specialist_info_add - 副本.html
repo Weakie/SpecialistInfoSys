@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>信息登记表-上海同济城市规划设计研究院</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+	<!--script src="js/less-1.3.3.min.js"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="img/favicon.png">
+  
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+</head>
+
+<body>
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-10 column">
+			<h5 class="text-center text-muted">
+				上海同济城市规划设计研究院
+			</h5>
+			<h3 class="text-center">
+				<Strong>同济专家库信息登记表</Strong>
+			</h3>
+			
+			<form class="form-horizontal">
+				<hr>
+				<span class="label label-default">基本资料</span><br><br>
+				<div class="form-group">
+					 <label for="name" class="col-sm-2 col-xs-2 control-label">姓名</label>
+					 <div class="col-sm-2 col-xs-2">
+						<input type="text" class="form-control" id="name" placeholder="姓名">
+					 </div>
+				</div>
+				<div class="form-group">
+					 <label for="name" class="col-sm-2 col-xs-2 control-label">性别</label>
+					 <div class="col-sm-2 col-xs-3">
+						<select name="cars" class="form-control" id="sex">
+							<option value="0">男</option>
+							<option value="1">女</option>
+						</select>
+					 </div>
+				</div>
+				<div class="form-group">
+					 <label for="name" class="col-sm-2 col-xs-2 control-label">出生年月</label>
+					 <div class="col-sm-5 col-xs-7">
+						<table class="col-sm-5 col-xs-7">
+							 <tbody>
+								 <tr>
+									<th>
+										<select name="cars" class="form-control" id="year">
+											<option value="1960">1960</option>
+											<option value="1970">1970</option>
+											<option value="1980">1980</option>
+											<option value="1990">1990</option>
+										</select>
+									</th>
+									<th>
+										<select name="cars" class="form-control" id="month">
+											<option value="1">12</option>
+											<option value="2">02</option>
+											<option value="3">03</option>
+											<option value="4">04</option>
+										</select>
+									</th>
+								 </tr>
+							 </tbody>
+						</table>
+					</div>						 
+				</div>
+				<div class="form-group">
+					 <label for="name" class="col-sm-2 col-xs-2 control-label">专家电子邮箱</label>
+					 <div class="col-sm-3 col-xs-3">
+						<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+					 </div>
+				</div>
+				
+				
+				<div class="form-group">
+					 <label for="name" class="col-sm-2 col-xs-2 control-label">联系人及联系方式</label>
+					<div class="col-sm-8">
+						<table class="col-sm-8">
+							 <tbody>
+								 <tr>
+									<th><input type="text" class="form-control" id="name" placeholder="联系人1"></th>
+									<th><input type="text" class="form-control" id="name" placeholder="联系方式"></th>
+								 </tr>
+								 <tr>
+									<th><input type="text" class="form-control" id="name" placeholder="联系人2"></th>
+									<th><input type="text" class="form-control" id="name" placeholder="联系方式"></th>
+								 </tr>
+							 </tbody>
+						</table>
+					</div>
+				</div>
+				<div class="form-group">
+					 <label for="name" class="col-sm-2 control-label">上传照片</label>
+					 <div class="col-sm-6">
+						<input type="file" id="exampleInputFile">
+						<p class="help-block">
+							Example block-level help text here.
+						</p>
+					 </div>
+				</div>
+				<!---------------------------------------------------------------------------------------------------->
+				<hr>
+				<span class="label label-default">工作信息</span><br><br>
+				<div class="form-group">
+					 <label for="name" class="col-sm-2 col-xs-2 control-label">工作单位</label>
+					 <div class="col-sm-3 col-xs-3">
+						<input type="text" class="form-control" id="name" placeholder="工作单位">
+					 </div>
+					 <label for="name" class="col-sm-2 col-xs-2 control-label">单位性质</label>
+					 <div class="col-sm-2 col-xs-2">
+						<select name="cars" class="form-control" id="sex">
+							<option value="volvo">Volvo</option>
+							<option value="saab">Saab</option>
+							<option value="fiat">Fiat</option>
+							<option value="audi">Audi</option>
+						</select>
+					 </div>
+				</div>
+				<div class="form-group">
+					 <label for="name" class="col-sm-2 col-xs-2 control-label">单位网站</label>
+					 <div class="col-sm-3 col-xs-3">
+						<input type="text" class="form-control" id="name" placeholder="工作单位网站">
+					 </div>
+					 <label for="name" class="col-sm-2 col-xs-2 control-label">担任职务</label>
+					 <div class="col-sm-2 col-xs-2">
+						<input type="text" class="form-control" id="name" placeholder="职务">
+					 </div>
+				</div>
+				<div class="form-group">
+					 <label for="name" class="col-sm-2 col-xs-2 control-label">工作地点</label>
+					  <div class="col-sm-1 col-xs-2">
+						<label class="checkbox-inline">
+							<input type="checkbox" id="inlineCheckbox1" value="option1" checked> 国内
+						</label>
+					 </div>
+					<div class="row clearfix">
+						 <div class="col-sm-8 col-xs-12">
+							<div class="col-sm-2 col-xs-4">
+								<select name="cars" class="form-control" id="sex">
+									<option value="volvo">上海</option>
+										<option value="saab">浙江</option>
+										<option value="fiat">江苏</option>
+										<option value="audi">北京</option>
+									</select>
+									</div>	
+							<div class="col-sm-2 col-xs-4">
+									<select name="cars" class="form-control" id="month">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+									</select>
+							</div>					
+						 </div>
+					</div>
+				</div>
+				<div class="form-group">
+					 <label for="name" class="col-sm-2 col-xs-2 control-label">社会兼职</label>
+					 <div class="col-sm-7 col-xs-7">
+						<textarea class="form-control" rows="5" placeholder="社会兼职"></textarea>
+					 </div>
+				</div>
+				<!---------------------------------------------------------------------------------------------------->
+				<hr>
+				<span class="label label-default">学习、培训及工作经历</span><br><br>
+				<div class="form-group">
+					<div class="col-sm-13">
+							<table>
+							<tbody>
+								<tr>
+									<th>
+										<div class="form-group">
+											<label for="name" class="col-sm-6 control-label">最高学位、学历</label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="name" placeholder="学位、学历">
+											</div>
+										</div>
+									</th>
+									<th>
+										<div class="form-group">
+											 <label for="name" class="col-sm-6 control-label">毕业院校</label>
+											 <div class="col-sm-6">
+												<input type="text" class="form-control" id="name" placeholder="毕业院校">
+											 </div>
+										</div>
+									</th>
+								</tr>
+								<tr>
+									<th>
+										<div class="form-group">
+											 <label for="name" class="col-sm-6 control-label">外语能力</label>
+											 <div class="col-sm-6">
+												<input type="text" class="form-control" id="name" placeholder="外语能力">
+											 </div>
+										</div>
+									</th>
+									<th>
+										<div class="form-group">
+											 <label for="name" class="col-sm-6 control-label">从业时间</label>
+											 <div class="col-sm-6">
+												<input type="text" class="form-control" id="name" placeholder="从业时间：年">
+											 </div>
+										</div>
+									</th>
+								<tr>
+									<th>
+										<div class="form-group">
+											 <label for="name" class="col-sm-6 control-label">执业资格</label>
+											 <div class="col-sm-6">
+												<select name="cars" class="form-control" id="sex">
+													<option value="volvo">注册规划师</option>
+													<option value="saab">建造师</option>
+													<option value="fiat">一级建筑师</option>
+													<option value="audi">其他</option>
+												</select>
+											 </div>
+										</div>
+									</th>
+									<th>
+										<div class="form-group">
+											 <label for="name" class="col-sm-6 control-label">职称</label>
+											 <div class="col-sm-6">
+												<select name="cars" class="form-control" id="sex">
+													<option value="volvo">中级</option>
+													<option value="saab">高级</option>
+												</select>
+											 </div>
+										</div>
+									</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label">专业方向</label>
+						 <div class="col-sm-2">
+							<select name="cars" class="form-control" id="sex">
+								<option value="volvo">建筑</option>
+								<option value="saab">规划</option>
+								<option value="fiat">景观</option>
+								<option value="audi">其他</option>
+							</select>
+						 </div>
+						 <div class="col-sm-2">
+							<select name="cars" class="form-control" id="sex">
+								<option value="volvo">公共建筑</option>
+								<option value="saab">别墅</option>
+								<option value="fiat">住宅</option>
+								<option value="audi">工业建筑</option>
+							</select>
+						 </div>
+					</div>					 
+					<div class="form-group">
+						<label for="name" class="col-sm-2 control-label">主要项目经历<br>科研经历<br>获奖情况</label>
+							 <div class="col-sm-6 col-xs-6">
+								<textarea class="form-control" rows="6" placeholder="社会兼职"></textarea>
+							</div>
+					</div>
+				</div>
+				
+				<button type="submit" class="btn btn-default">Submit</button>
+			
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

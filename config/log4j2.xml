@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration monitorInterval="30">
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level [%-20t] %logger{36} - %msg%n" />
+		</Console>
+		<RollingRandomAccessFile name="RollingRandomAccessFile" fileName="logs/TDFS.log"
+                 filePattern="logs/$${date:yyyy-MM}/app-%d{yyyy-MM-dd-HH}-%i.log.gz">
+      		<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level [%-20t] %logger{36} - %msg%n" />
+      		<Policies>
+       			<TimeBasedTriggeringPolicy interval="6" modulate="true"/>
+        		<SizeBasedTriggeringPolicy size="250 MB"/>
+      		</Policies>
+   		</RollingRandomAccessFile>
+	</appenders>
+	<loggers>
+		<Logger name="com.weakie" level="debug" additivity="false">
+      		<AppenderRef ref="RollingRandomAccessFile"/>
+      		<AppenderRef ref="Console" />
+   		</Logger>
+		<root level="info">
+			<AppenderRef ref="RollingRandomAccessFile" />
+		</root>
+	</loggers>
+</configuration>

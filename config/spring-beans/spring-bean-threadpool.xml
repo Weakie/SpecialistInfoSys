@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+		
+	<bean id="executorFactory" class="com.weakie.factory.ThreadPoolFactory" />
+	<!-- 
+	<bean id="executorFactory" class="com.weakie.factory.ThreadPoolFactory" factory-method="getInstance">
+		<constructor-arg type="int" value="1" /> 
+	</bean>
+	-->
+	<!-- https://jira.springsource.org/browse/IDE-122?page=com.atlassian.jira.plugin.system.issuetabpanels%3Achangehistory-tabpanel -->
+	<!-- http://forum.spring.io/forum/spring-projects/container/48256-using-factory-beans-with-factory-method-parameters -->
+	<bean id="executor" factory-bean="executorFactory" factory-method="newFixedThreadPool">
+		<!-- <constructor-arg type="java.lang.String" value="config.properties"/>
+		<constructor-arg><ref bean="anotherExampleBean"/></constructor-arg>
+  		<constructor-arg><ref bean="yetAnotherBean"/></constructor-arg> -->
+  		<constructor-arg type="int" value="1" />
+	</bean>
+</beans>

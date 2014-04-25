@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<import resource="spring-bean-threadpool.xml"/>
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/test"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>org/login/vo/Users.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	 -->
+	
+	<bean id="socketDispatcher" class="com.weakie.listener.SocketDispatcher"></bean>
+
+	<bean id="initialize" class="com.weakie.initialize.Initialize">
+		<property name="dispatcher">
+			<ref bean="socketDispatcher" />
+		</property>
+		<property name="executor">
+			<ref bean="executor" />
+		</property>
+	</bean>
+	<!-- Action Bean -->
+	<bean name="helloAction" class="com.weakie.action.HelloWorldAction" scope="prototype">
+	</bean>
+	
+	<bean name="userLoginRegisterAction" class="com.weakie.action.UserLoginRegisterAction" scope="prototype">
+	</bean>
+	
+	<bean name="specialistInfoAction" class="com.weakie.action.SpecialistInfoAction" scope="prototype">
+	</bean>
+	
+	<bean name="specialistInfoAddPrepareAction" class="com.weakie.action.SpecialistInfoAddPrepareAction" scope="prototype">
+	</bean>
+	
+	<!--
+	<bean id="userService" class="org.login.service.Impl.UsersService">
+		<property name="userDAO">
+			<ref bean="userDAO" />
+		</property>
+	</bean>
+ 	-->
+	<!-- <bean id="login" class="org.login.actions.Login" scope="prototype" parent="baseDAO">
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	 -->
+</beans>

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<project name="Ant-Test" default="build" basedir=".">
+	<!-- Sets variables which can later be used. -->
+	<!-- The value of a property is accessed via ${} -->
+	<property name="src.dir" location="src" />
+	<property name="lib.dir" location="WebContent/WEB-INF/lib" />
+	<property name="config.dir" location="config" />
+	<property name="spring.dir" location="config/spring-beans" />
+	<property name="build.dir" location="build/classes" />
+	<property name="dist.dir" location="dist" />
+	<property name="web-xml-file" value="WebContent/WEB-INF/web.xml" />
+	<property name="war-file-name" value="TDFS.war" />
+
+	<property name="tomcat.dir" value="/home/syh/apache-tomcat-6.0.37"/>
+	<!-- other info -->
+	<property name="builder" value="Weakie" />
+	<tstamp prefix="build-info">
+		<format property="current-date" pattern="d-MMMM-yyyy" locale="en" />
+		<format property="current-time" pattern="hh:mm:ss a z" locale="en" />
+	</tstamp>
+
+	<!-- Create a classpath container which can be later used in the ant task -->
+	<path id="build.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- Deletes the existing build, docs and dist directory-->
+	<target name="clean">
+		<delete dir="${dist.dir}" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<!-- Creates the  build, docs and dist directory-->
+	<target name="makedir">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+
+	<!-- Compiles the java code (including the usage of library for JUnit -->
+	<target name="compile" depends="clean, makedir">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="build.classpath" includeantruntime="on" />
+		<copy file="${config.dir}/log4j2.xml" todir="${build.dir}"  overwrite="true"  />
+		<copy file="${spring.dir}/applicationContext.xml" todir="${build.dir}"  overwrite="true"  />
+		<copy file="${spring.dir}/spring-bean-threadpool.xml" todir="${build.dir}"  overwrite="true"  />
+	</target>
+
+	<!--Creates the deployable war file  -->
+	<target name="build" depends="compile">
+		<echo message="将Web工程打包成war可部署文件格式" />
+		<war destfile="${dist.dir}/${war-file-name}" webxml="${web-xml-file}">
+			<fileset dir="WebContent">
+				<include name="**/*.*" />
+				<!-- Need to exclude it since webxml is an attribute of the war tag above -->
+				<exclude name="WEB-INF/web.xml" />
+			</fileset>
+			<classes dir="${build.dir}" />
+			<manifest>
+				<attribute name="Built-By" value="${builder}" />
+				<attribute name="Built-On" value="${build-info.current-date}" />
+				<attribute name="Built-At" value="${build-info.current-time}" />
+			</manifest>
+		</war>
+		<echo message="完成打包成war可部署文件格式" />
+	</target>
+
+	<target name="dist" depends="build">
+		<echo message="发布项目文件" />
+		<exec dir="${tomcat.dir}/bin" executable="./shutdown.sh" os="Linux" failonerror="true" />
+		<delete dir="${tomcat.dir}/webapps/TDFS" />
+		<copy file="${dist.dir}/${war-file-name}" todir="${tomcat.dir}/webapps" />
+		<exec dir="${tomcat.dir}/bin" executable="./startup.sh" os="Linux" failonerror="true" />
+		<echo message="完成发布文件" />
+	</target>
+	
+</project>
