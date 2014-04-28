@@ -1,36 +1,49 @@
 package com.weakie.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.weakie.bean.MessageStore;
 import com.weakie.bean.SpecialistInfoBean;
+import com.weakie.util.log.LogUtil;
 
 public class SpecialistInfoAction extends ActionSupport {
  
     private static final long serialVersionUID = 1L;
  
     private SpecialistInfoBean specInfoBean;
-    private MessageStore messageStore;
- 
+  
     private int year;
     private int month;
    
-    
+    private MessageStore messageStore;
     
 	public String executeAddInfo() throws Exception{
-    	
-    	//LogUtil.debug("exits: "+personBean.getUserName());
-    	
-        return SUCCESS;
-    }
-    
-   
-    
-    public String executeLogin() throws Exception {
-    	
-        messageStore = new MessageStore();
-        if(true){
-        	messageStore.setMessage("µÇÂ¼Ê§°Ü"); 
-        }
+    	LogUtil.info("add info: " + specInfoBean);
+    	LogUtil.info("year:"+year+";month:"+month);
+    	Map<String,String> contact = new HashMap<String,String>();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		for(int i=1;i<20;i++){
+			String name = request.getParameter("contactName-"+i);
+			String method = request.getParameter("contactMethod-"+i);
+			if(StringUtils.isNotEmpty(name)&&StringUtils.isNotEmpty(method))
+				contact.put(name, method);
+		}
+		LogUtil.info("user:"+specInfoBean.getUserName()+";contact:"+contact);
+		
+		specInfoBean.setBirthday(year+"-"+StringUtils.rightPad(""+month, 2, '0'));
+		specInfoBean.setContact(contact);
+		
+		LogUtil.info("finish set info:"+specInfoBean);
+		/**
+		 * database stored
+		 */
         return SUCCESS;
     }
  

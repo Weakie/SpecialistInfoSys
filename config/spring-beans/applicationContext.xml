@@ -58,6 +58,12 @@
 	<bean name="specialistInfoAddPrepareAction" class="com.weakie.action.SpecialistInfoAddPrepareAction" scope="prototype">
 	</bean>
 	
+	<bean name="specialistInfoImageAction" class="com.weakie.action.SpecialistInfoImageAction" scope="prototype">
+		<property name="imgpath" value="/WEB-INF/userimage" />
+		<property name="prePath" value="d:/tmp/image" />
+		<property name="pathUnderServer" value="false" />
+	</bean>
+	
 	<!--
 	<bean id="userService" class="org.login.service.Impl.UsersService">
 		<property name="userDAO">

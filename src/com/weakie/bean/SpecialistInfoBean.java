@@ -1,6 +1,7 @@
 package com.weakie.bean;
 
 import java.util.List;
+import java.util.Map;
 
 public class SpecialistInfoBean {
 
@@ -10,11 +11,11 @@ public class SpecialistInfoBean {
 	private boolean sex;	//性别true:woman;false:man
 	private String birthday;//出生年月：2000-02
 	private String email;	//邮箱
-	private String contact;	//联系人及联系方式：John:18721992134;Kate:1990909201
+	private String contact;	//联系人及联系方式：John:18721992134;Kate:1990909201;
 	private String photoPath;//照片
 	
 	private String organization;//工作单位
-	private String webSite;		//单位网站
+	private String website;		//单位网站
 	private String role;		//担任职务
 	
 	private int orgTypeId;		//单位性质：add
@@ -77,6 +78,14 @@ public class SpecialistInfoBean {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
+	public void setContact(Map<String,String> contact){
+		StringBuilder sb = new StringBuilder(50);
+		for(String name:contact.keySet()){
+			String method = contact.get(name);
+			sb.append(name+":"+method+";");
+		}
+		this.setContact(sb.toString());
+	}
 	public String getPhotoPath() {
 		return photoPath;
 	}
@@ -89,11 +98,11 @@ public class SpecialistInfoBean {
 	public void setOrganization(String organization) {
 		this.organization = organization;
 	}
-	public String getWebSite() {
-		return webSite;
+	public String getWebsite() {
+		return website;
 	}
-	public void setWebSite(String webSite) {
-		this.webSite = webSite;
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 	public String getRole() {
 		return role;
@@ -208,7 +217,7 @@ public class SpecialistInfoBean {
 		return "SpecialistInfoBean [userName=" + userName + ", name=" + name
 				+ ", sex=" + sex + ", birthday=" + birthday + ", email="
 				+ email + ", contact=" + contact + ", photoPath=" + photoPath
-				+ ", organization=" + organization + ", webSite=" + webSite
+				+ ", organization=" + organization + ", website=" + website
 				+ ", role=" + role + ", orgTypeId=" + orgTypeId + ", orgType="
 				+ orgType + ", workPositionId=" + workPositionId
 				+ ", workPosition=" + workPosition + ", partTimeJob="

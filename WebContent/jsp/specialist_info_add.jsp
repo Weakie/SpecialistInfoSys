@@ -19,7 +19,6 @@
 		return queryString;
 	}
 
-
 	function refreshProvinceList(index) {
 		var orgPlace = document.getElementById("orgPlace-"+index).checked;
 
@@ -159,7 +158,8 @@
 		var input1 = document.createElement("input");
 		input1.setAttribute("type", "text");
 		input1.setAttribute("class", "form-control");
-		input1.setAttribute("id","name");
+		input1.setAttribute("id","contactName-"+contactTableIndex);
+		input1.setAttribute("name","contactName-"+contactTableIndex);
 		input1.setAttribute("placeholder","联系人"+contactTableIndex);
 		th1.appendChild(input1);
 		
@@ -167,8 +167,9 @@
 		var input2 = document.createElement("input");
 		input2.setAttribute("type", "text");
 		input2.setAttribute("class", "form-control");
-		input2.setAttribute("id","name");
-		input2.setAttribute("placeholder","联系方式");
+		input2.setAttribute("id","contactMethod-"+contactTableIndex);
+		input2.setAttribute("name","contactMethod-"+contactTableIndex);
+		input2.setAttribute("placeholder","联系方式"+contactTableIndex);
 		th2.appendChild(input2);
 		
 		var th3 = document.createElement("th");
@@ -240,7 +241,7 @@
 		
 		var th3 = document.createElement("th");
 		var select3 = document.createElement("select");
-		select3.setAttribute("name", "text");
+		select3.setAttribute("name", "specInfoBean.workPositionId");
 		select3.setAttribute("class", "form-control");
 		select3.setAttribute("id", "city-"+addressTableIndex);
 		select3.setAttribute("style", "width:100px;");
@@ -279,6 +280,74 @@
 				break;
 			}
 		}
+	}
+</script>
+<script type="text/javascript">
+	function createXMLHttpRequestInstance() {
+		var xmlHttp;
+		if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		} else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+		}
+		return xmlHttp;
+	}
+	
+	function fileSelected() {
+	    var file = document.getElementById('fileToUpload').files[0];
+	    if (file) {
+	        var fileSize = 0;
+	        if (file.size > 1024 * 1024)
+	            fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+	        else
+	            fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+	
+	        //document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
+	        document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
+	        //document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
+	        document.getElementById('fileToUploadButton').setAttribute('type', 'button');
+	    }
+	}
+	
+	function uploadFile(username) {
+	    var fd = new FormData();
+	    fd.append("file", document.getElementById('fileToUpload').files[0]);
+	    var xhr = createXMLHttpRequestInstance();
+	    xhr.upload.addEventListener("progress", uploadProgress, false);
+	    xhr.addEventListener("load", uploadComplete, false);
+	    xhr.addEventListener("error", uploadFailed, false);
+	    xhr.addEventListener("abort", uploadCanceled, false);
+	    xhr.open("POST", "/SpecialistInfoSys/uploadImage.action?username="+username);
+	    xhr.send(fd);
+	}
+	
+	function uploadProgress(evt) {
+	    if (evt.lengthComputable) {
+	        var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+	        document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
+	    }
+	    else {
+	        document.getElementById('progressNumber').innerHTML = 'unable to compute';
+	    }
+	}
+	
+	function uploadComplete(evt) {
+	    /* This event is raised when the server send back a response */
+	    alert(evt.target.responseText);
+	}
+	
+	function uploadFailed(evt) {
+	    alert("There was an error attempting to upload the file.");
+	}
+	
+	function uploadCanceled(evt) {
+	    alert("The upload has been canceled by the user or the browser dropped the connection.");
+	}
+</script>
+<script type="text/javascript">
+	function checkform(){
+		//do not upload image in form!!
+		document.getElementById('fileToUpload').setAttribute('type', 'button');
 	}
 </script>
 <head>
@@ -372,7 +441,7 @@
 			<h3 class="text-left">
 				<Strong>信息登记表</Strong>
 			</h3>
-			<form action="/SpecialistInfoSys/specInfoAdd.action" enctype="multipart/form-data" method="post" class="form-horizontal">
+			<form action="/SpecialistInfoSys/specInfoAdd.action" method="post" onsubmit="return checkform();" class="form-horizontal">
 				<span class="label label-default">基本资料</span><br><br>
 				<input type="hidden" name="specInfoBean.userName" value="<s:property value="userName"/>" />
 				<div class="form-group">
@@ -441,12 +510,15 @@
 					</div>
 				</div>
 				<div class="form-group">
-					 <label for="exampleInputFile" class="col-sm-2 control-label">上传照片</label>
+					 <label for="fileToUpload" class="col-sm-2 control-label">上传照片</label>
 					 <div class="col-sm-6">
-						<input type="file" id="exampleInputFile">
+						<input type="file" name="file" id="fileToUpload" onchange="fileSelected();" />
 						<p class="help-block">
-							Example block-level help text here.
+							上传图片为jpeg格式,大小不能超过2MB.
 						</p>
+						<div id="fileSize"></div>
+				        <input type="hidden" onclick="uploadFile('<s:property value="userName"/>')"  id="fileToUploadButton" value="上传文件" />
+				        <div id="progressNumber"></div>
 					 </div>
 				</div>
 				<!---------------------------------------------------------------------------------------------------->
@@ -546,7 +618,7 @@
 										<div class="form-group">
 											 <label for="language" class="col-sm-6 control-label">外语能力</label>
 											 <div class="col-sm-6">
-												<input type="text" class="form-control" id="language" name="specInfoBean.languane" placeholder="外语能力">
+												<input type="text" class="form-control" id="language" name="specInfoBean.language" placeholder="外语能力">
 											 </div>
 										</div>
 									</th>

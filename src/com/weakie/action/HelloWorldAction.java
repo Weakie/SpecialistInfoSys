@@ -13,6 +13,11 @@ import com.weakie.bean.MessageStore;
 import com.weakie.util.log.LogUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * 开发测试使用
+ * @author dell
+ *
+ */
 public class HelloWorldAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
@@ -30,7 +35,7 @@ public class HelloWorldAction extends ActionSupport {
 	
 	public String execute() throws Exception {
 
-		LogUtil.debug(age.toString());
+		LogUtil.debug(age+"");
 		LogUtil.debug(agew + ":ooo");
 		agew = age.get(0);
 		LogUtil.debug(agew + ":ppp");
@@ -40,7 +45,7 @@ public class HelloWorldAction extends ActionSupport {
 	
 	
 	public String executeUpload() throws Exception{
-		LogUtil.debug(age.toString());
+		LogUtil.debug(age+"");
 		LogUtil.debug(agew + ":ooo");
 		agew = age.get(0);
 		LogUtil.debug(agew + ":ppp");
