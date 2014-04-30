@@ -42,8 +42,10 @@
 	<target name="compile" depends="clean, makedir">
 		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="build.classpath" includeantruntime="on" />
 		<copy file="${config.dir}/log4j2.xml" todir="${build.dir}"  overwrite="true"  />
+		<copy file="${config.dir}/struts.xml" todir="${build.dir}"  overwrite="true"  />
 		<copy file="${spring.dir}/applicationContext.xml" todir="${build.dir}"  overwrite="true"  />
 		<copy file="${spring.dir}/spring-bean-threadpool.xml" todir="${build.dir}"  overwrite="true"  />
+		<copy file="${spring.dir}/spring-bean-service-test.xml" todir="${build.dir}"  overwrite="true"  />
 	</target>
 
 	<!--Creates the deployable war file  -->

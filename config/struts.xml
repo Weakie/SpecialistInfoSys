@@ -85,12 +85,21 @@
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<!-- 用户图片采用ajax的形式上传 -->
 			<result name="input">/errortext.jsp</result>
-			<result type="stream">
+			<result name="success" type="stream">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
-			
 		</action>
+		
+		<!-- 用户下载自己的图片 -->
+		<action name="downloadImage" class="specialistInfoImageAction" method="executeDownload">
+			<result name="success" type="stream">
+			　　<param name="contentType">image/jpeg</param>
+			　　<param name="inputName">inputStream</param>
+			　　<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		
 		
 	</package>
 </struts>

@@ -5,6 +5,7 @@
 
 
 	<import resource="spring-bean-threadpool.xml"/>
+	<import resource="spring-bean-service-test.xml"/>
 	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
@@ -53,9 +54,18 @@
 	</bean>
 	
 	<bean name="specialistInfoAction" class="com.weakie.action.SpecialistInfoAction" scope="prototype">
+		<property name="specInfoService">
+			<ref bean="specialistInfoService" />
+		</property>
 	</bean>
 	
 	<bean name="specialistInfoAddPrepareAction" class="com.weakie.action.SpecialistInfoAddPrepareAction" scope="prototype">
+		<property name="specInfoService">
+			<ref bean="specialistInfoService" />
+		</property>
+		<property name="selectService">
+			<ref bean="selectionService" />
+		</property>
 	</bean>
 	
 	<bean name="specialistInfoImageAction" class="com.weakie.action.SpecialistInfoImageAction" scope="prototype">
@@ -63,6 +73,7 @@
 		<property name="prePath" value="d:/tmp/image" />
 		<property name="pathUnderServer" value="false" />
 	</bean>
+	
 	
 	<!--
 	<bean id="userService" class="org.login.service.Impl.UsersService">

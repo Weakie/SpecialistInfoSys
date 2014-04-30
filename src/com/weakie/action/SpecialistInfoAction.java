@@ -11,6 +11,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.weakie.bean.MessageStore;
 import com.weakie.bean.SpecialistInfoBean;
+import com.weakie.service.SpecialistInfoService;
 import com.weakie.util.log.LogUtil;
 
 public class SpecialistInfoAction extends ActionSupport {
@@ -18,11 +19,11 @@ public class SpecialistInfoAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
  
     private SpecialistInfoBean specInfoBean;
-  
     private int year;
     private int month;
    
     private MessageStore messageStore;
+    private SpecialistInfoService specInfoService;
     
 	public String executeAddInfo() throws Exception{
     	LogUtil.info("add info: " + specInfoBean);
@@ -37,13 +38,11 @@ public class SpecialistInfoAction extends ActionSupport {
 		}
 		LogUtil.info("user:"+specInfoBean.getUserName()+";contact:"+contact);
 		
-		specInfoBean.setBirthday(year+"-"+StringUtils.rightPad(""+month, 2, '0'));
+		specInfoBean.setBirthday(year+"-"+StringUtils.leftPad(""+month, 2, '0'));
 		specInfoBean.setContact(contact);
 		
 		LogUtil.info("finish set info:"+specInfoBean);
-		/**
-		 * database stored
-		 */
+		specInfoService.updateSpecialistInfo(specInfoBean);
         return SUCCESS;
     }
  
@@ -77,6 +76,10 @@ public class SpecialistInfoAction extends ActionSupport {
 
 	public void setMonth(int month) {
 		this.month = month;
+	}
+
+	public void setSpecInfoService(SpecialistInfoService specInfoService) {
+		this.specInfoService = specInfoService;
 	}
     
 }

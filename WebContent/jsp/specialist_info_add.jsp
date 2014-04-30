@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <script type="text/javascript">
@@ -140,11 +141,13 @@
 		}
 	}
 	
-	var contactTableIndex = 1;
+	//EL Expression
+	var contactTableIndex = ${contactNum};
 	function addContactTable() {
 		contactTableIndex++;
 		
-		if(contactTableIndex > 10){
+		//EL Expression
+		if(contactTableIndex > ${contactNum+10} ){
 			var button = document.getElementById("contactButton");
 			button.setAttribute("class", "btn btn-default disabled");
 			return;
@@ -203,11 +206,11 @@
 		}
 	}
 	
-	var addressTableIndex = 1;
+	var addressTableIndex = ${workPosNum};
 	function addAddressTable() {
 		addressTableIndex++;
 		
-		if(addressTableIndex > 10){
+		if(addressTableIndex > ${workPosNum+10} ){
 			var button = document.getElementById("addressButton");
 			button.setAttribute("class", "btn btn-default disabled");
 			return;
@@ -232,7 +235,6 @@
 		
 		var th2 = document.createElement("th");
 		var select2 = document.createElement("select");
-		select2.setAttribute("name", "text");
 		select2.setAttribute("class", "form-control");
 		select2.setAttribute("id", "province-"+addressTableIndex);
 		select2.setAttribute("onchange","refreshCityList("+addressTableIndex+");");
@@ -303,7 +305,7 @@
 	            fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
 	
 	        //document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
-	        document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
+	        document.getElementById('fileSize').innerHTML = "图片大小:" + fileSize;
 	        //document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
 	        document.getElementById('fileToUploadButton').setAttribute('type', 'button');
 	    }
@@ -324,7 +326,7 @@
 	function uploadProgress(evt) {
 	    if (evt.lengthComputable) {
 	        var percentComplete = Math.round(evt.loaded * 100 / evt.total);
-	        document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
+	        document.getElementById('progressNumber').innerHTML = "上传进度:" + percentComplete.toString() + '%';
 	    }
 	    else {
 	        document.getElementById('progressNumber').innerHTML = 'unable to compute';
@@ -334,6 +336,11 @@
 	function uploadComplete(evt) {
 	    /* This event is raised when the server send back a response */
 	    alert(evt.target.responseText);
+	    var result = evt.target.responseText.split(":");
+	    if(result[0]=="user"){
+	    	var image = document.getElementById("image");
+	 	    image.src="/SpecialistInfoSys/downloadImage?username="+result[1];
+	    }
 	}
 	
 	function uploadFailed(evt) {
@@ -443,19 +450,19 @@
 			</h3>
 			<form action="/SpecialistInfoSys/specInfoAdd.action" method="post" onsubmit="return checkform();" class="form-horizontal">
 				<span class="label label-default">基本资料</span><br><br>
-				<input type="hidden" name="specInfoBean.userName" value="<s:property value="userName"/>" />
+				<input type="hidden" name="specInfoBean.userName" value="${userName }" />
 				<div class="form-group">
 					 <label for="name" class="col-sm-2 col-xs-2 control-label">姓名</label>
 					 <div class="col-sm-2 col-xs-2">
-						<input type="text" class="form-control" id="name" name="specInfoBean.name" placeholder="姓名">
+						<input type="text" class="form-control" id="name" name="specInfoBean.name" value="${specInfoBean.name }" placeholder="姓名">
 					 </div>
 				</div>
 				<div class="form-group">
 					 <label for="sex" class="col-sm-2 col-xs-2 control-label">性别</label>
 					 <div class="col-sm-2 col-xs-3">
 						<select name="specInfoBean.sex" class="form-control" id="sex">
-							<option value="false">男</option>
-							<option value="true">女</option>
+							<option value="false" <c:if test="${specInfoBean.sex==false}">selected</c:if>>男</option>
+							<option value="true"  <c:if test="${specInfoBean.sex==true}">selected</c:if>>女</option>
 						</select>
 					 </div>
 				</div>
@@ -467,16 +474,16 @@
 								 <tr>
 									<th>
 										<select name="year" class="form-control" id="year" style="width:105px;">
-										<%for(int i=1950;i<2050;i++){ %>
-											<option value="<%=i %>"><%=i %></option>
-										<%} %>
+										<c:forEach var="i" begin="1950" end="2050" step="1">
+											<option value="${i}" <c:if test="${specInfoBean.year==i}">selected</c:if> >${i}</option>
+										</c:forEach>
 										</select>
 									</th>
 									<th>
 										<select name="month" class="form-control" id="month" style="width:80px;">
-										<%for(int i=1;i<13;i++){ %>
-											<option value="<%=i %>"><%=StringUtils.leftPad(i+"", 2, '0') %></option>
-										<%} %>
+										<c:forEach var="i" begin="1" end="12" step="1">
+											<option value="${i}" <c:if test="${specInfoBean.month==i}">selected</c:if> ><c:if test="${i<10}">0</c:if>${i}</option>
+										</c:forEach>
 										</select>
 									</th>
 								 </tr>
@@ -487,7 +494,7 @@
 				<div class="form-group">
 					 <label for="email" class="col-sm-2 col-xs-2 control-label">专家电子邮箱</label>
 					 <div class="col-sm-3 col-xs-3">
-						<input type="email" class="form-control" id="email" name="specInfoBean.email" placeholder="输入电子邮箱地址">
+						<input type="email" class="form-control" id="email" name="specInfoBean.email" value="${specInfoBean.email }" placeholder="输入电子邮箱地址">
 					 </div>
 				</div>
 				
@@ -498,13 +505,36 @@
 						<p class="help-block">
 							最多添加10个联系人.
 						</p>
+						
 						<table class="col-sm-8">
 							 <tbody id="contact-table">
-								 <tr>
-									<th><input type="text" class="form-control" id="contactName-1" name="contactName-1" placeholder="联系人1"></th>
-									<th><input type="text" class="form-control" id="contactMethod-1" name="contactMethod-1" placeholder="联系方式"></th>
-									<th><button type="button" class="btn btn-default" id="contactButton" onclick="addContactTable()"><i class="glyphicon glyphicon-plus"></i></button></th>
-								 </tr>
+								<c:if test="${empty specInfoBean.contactMap}">
+									<tr>
+										<th><input type="text" class="form-control" id="contactName-1" name="contactName-1"  placeholder="联系人1"></th>
+										<th><input type="text" class="form-control" id="contactMethod-1" name="contactMethod-1"  placeholder="联系方式"></th>
+										<th><button type="button" class="btn btn-default" id="contactButton" onclick="addContactTable()"><i class="glyphicon glyphicon-plus"></i></button></th>
+									</tr>
+								</c:if>
+							  	<c:if test="${!empty specInfoBean.contactMap}">
+							 	<c:set var="i" value="1" scope="page"/>
+								<s:iterator value="specInfoBean.contactMap">
+									<c:if test="${i==1}">
+										<tr>
+											<th><input type="text" class="form-control" id="contactName-1" name="contactName-1" value="<s:property value="key"/>" placeholder="联系人1"></th>
+											<th><input type="text" class="form-control" id="contactMethod-1" name="contactMethod-1" value="<s:property value="value"/>" placeholder="联系方式"></th>
+											<th><button type="button" class="btn btn-default" id="contactButton" onclick="addContactTable()"><i class="glyphicon glyphicon-plus"></i></button></th>
+										</tr>
+									</c:if>
+									<c:if test="${i!=1}">
+										<tr id="tableContact:${i}">
+											<th><input type="text" class="form-control" id="contactName-${i}" name="contactName-${i}" value="<s:property value="key"/>" placeholder="联系人${i}"></th>
+											<th><input type="text" class="form-control" id="contactMethod-${i}" name="contactMethod-${i}" value="<s:property value="value"/>" placeholder="联系方式"></th>
+											<th><button type="button" class="btn btn-default" id="contactButton" onclick="removeContactTable(${i})"><i class="glyphicon glyphicon-minus"></i></button></th>
+										</tr>
+									</c:if>
+									<c:set var="i" value="${i+1}" />
+								</s:iterator>
+								</c:if>
 							 </tbody>
 						</table>
 					</div>
@@ -518,8 +548,10 @@
 						</p>
 						<div id="fileSize"></div>
 				        <input type="hidden" onclick="uploadFile('<s:property value="userName"/>')"  id="fileToUploadButton" value="上传文件" />
-				        <div id="progressNumber"></div>
+				       	<div id="progressNumber"></div>
+				        <img id="image" alt="暂无照片" width="160" height="180" src="/SpecialistInfoSys/downloadImage?username=${userName}">
 					 </div>
+					 
 				</div>
 				<!---------------------------------------------------------------------------------------------------->
 				<hr>
@@ -527,13 +559,13 @@
 				<div class="form-group">
 					 <label for="organization" class="col-sm-2 col-xs-2 control-label">工作单位</label>
 					 <div class="col-sm-3 col-xs-3">
-						<input type="text" class="form-control" id="organization" name="specInfoBean.organization" placeholder="工作单位">
+						<input type="text" class="form-control" id="organization" name="specInfoBean.organization" value="${specInfoBean.organization}" placeholder="工作单位">
 					 </div>
 					 <label for="orgType" class="col-sm-2 col-xs-2 control-label">单位性质</label>
 					 <div class="col-sm-2 col-xs-2">
 						<select name="specInfoBean.orgTypeId" class="form-control" id="orgType">
 							<s:iterator value="orgTypeMap">
-								<option value="<s:property value="key"/>"><s:property value="value"/></option>
+								<option value="<s:property value="key"/>" <c:if test="${specInfoBean.orgTypeId==key}">selected</c:if> ><s:property value="value"/></option>
 							</s:iterator>
 						</select>
 					 </div>
@@ -541,25 +573,26 @@
 				<div class="form-group">
 					 <label for="website" class="col-sm-2 col-xs-2 control-label">单位网站</label>
 					 <div class="col-sm-3 col-xs-3">
-						<input type="text" class="form-control" id="website" name="specInfoBean.website" placeholder="工作单位网站">
+						<input type="text" class="form-control" id="website" name="specInfoBean.website" value="${specInfoBean.website}" placeholder="工作单位网站">
 					 </div>
 					 <label for="role" class="col-sm-2 col-xs-2 control-label">担任职务</label>
 					 <div class="col-sm-2 col-xs-2">
-						<input type="text" class="form-control" id="role" name="specInfoBean.role" placeholder="职务">
+						<input type="text" class="form-control" id="role" name="specInfoBean.role" value="${specInfoBean.role}" placeholder="职务">
 					 </div>
 				</div>
 				<div class="form-group">
 					 <label for="province-1" class="col-sm-2 col-xs-2 control-label">工作地点</label>
 					 <div class="col-sm-8 col-xs-8">
 					 	<p class="help-block">
-							最多添加10个工作地点.
+							最多添加10个工作地点.若以下列表中没有,请在最后的备注栏中填写,我们的工作人员会为你添加.
 						</p>
 					  	<table class="col-sm-6">
 							 <tbody id="address-table">
-								 <tr>
+							 <c:if test="${empty specInfoBean.workPositionId}">
+							 	<tr>
 									<th>
 										<label class="checkbox-inline" style="width:60px;">
-											<input type="checkbox" id="orgPlace-1" value="1" onclick="refreshProvinceList(1);" checked /> 国内
+											<input type="checkbox" id="orgPlace-1" onclick="refreshProvinceList(1);" checked/> 国内
 										</label>
 									</th>
 									<th>
@@ -578,6 +611,58 @@
 									</th>
 									<th><button type="button" class="btn btn-default" id="addressButton" onclick="addAddressTable()"><i class="glyphicon glyphicon-plus"></i></button></th>
 								 </tr>
+							 </c:if>
+							 <c:if test="${!empty specInfoBean.workPositionId}">
+							 <c:set var="workPosIndex" value="1" scope="page"/>
+							 <s:iterator value="specInfoBean.workPositionId" var="posId">
+								 <c:if test="${workPosIndex==1}">
+								 <tr id="tableAddress:${workPosIndex}">
+									<th>
+										<label class="checkbox-inline" style="width:60px;">
+											<input type="checkbox" id="orgPlace-${workPosIndex}" onclick="refreshProvinceList(${workPosIndex});" <c:if test="${!proAbroMap[cityProMap[posId]]}">checked</c:if> /> 国内
+										</label>
+									</th>
+									<th>
+										<select class="form-control" id="province-${workPosIndex}" onchange="refreshCityList(${workPosIndex});" style="width:100px;">
+											<s:iterator value="provinceMap">
+												<option value="<s:property value="key"/>" <c:if test="${cityProMap[posId]==key}">selected</c:if> ><s:property value="value"/></option>
+											</s:iterator>
+										</select>
+									</th>
+									<th>
+										<select name="specInfoBean.workPositionId" class="form-control" id="city-${workPosIndex}" style="width:100px;">
+											<s:iterator value="cityMap">
+												<option value="<s:property value="key"/>" <c:if test="${posId==key}">selected</c:if> ><s:property value="value"/></option>
+											</s:iterator>
+										</select>
+									</th>
+									<th><button type="button" class="btn btn-default" id="addressButton" onclick="addAddressTable()"><i class="glyphicon glyphicon-plus"></i></button></th>
+								 </tr>
+								 </c:if>
+								 <c:if test="${workPosIndex!=1}">
+								 <tr id="tableAddress:${workPosIndex}">
+								 	<th>
+										<label class="checkbox-inline" style="width:60px;">
+											<input type="checkbox" id="orgPlace-${workPosIndex}" <c:if test="${!proAbroMap[cityProMap[posId]]}">checked</c:if> disabled/> 国内
+										</label>
+									</th>
+									<th>
+										<select class="form-control" id="province-${workPosIndex}" style="width:100px;" disabled>
+											<option value="${cityProMap[posId]}" >${provNameMap[cityProMap[posId]]}</option>
+										</select>
+									</th>
+									<th>
+										<select class="form-control" id="city-${workPosIndex}" name="specInfoBean.workPositionId" style="width:100px;" disabled>
+											<option value="${posId}" >${cityNameMap[posId]}</option>
+										</select>
+										<input type="hidden" name="specInfoBean.workPositionId" value="${posId}"/>
+									</th>
+									<th><button type="button" class="btn btn-default" id="addressButton" onclick="removeAddressTable(${workPosIndex})"><i class="glyphicon glyphicon-minus"></i></button></th>
+								 </tr>
+								 </c:if>
+								 <c:set var="workPosIndex" value="${workPosIndex+1}" scope="page"/>
+							 </s:iterator>
+							 </c:if>
 							 </tbody>
 						</table>
 					 </div>
@@ -585,7 +670,7 @@
 				<div class="form-group">
 					 <label for="partTimeJob" class="col-sm-2 col-xs-2 control-label">社会兼职</label>
 					 <div class="col-sm-7 col-xs-7">
-						<textarea class="form-control" rows="5" id="partTimeJob" name="specInfoBean.partTimeJob" placeholder="社会兼职"></textarea>
+						<textarea class="form-control" rows="5" id="partTimeJob" name="specInfoBean.partTimeJob" placeholder="社会兼职">${specInfoBean.partTimeJob}</textarea>
 					 </div>
 				</div>
 				<!---------------------------------------------------------------------------------------------------->
@@ -600,7 +685,7 @@
 										<div class="form-group">
 											<label for="degree" class="col-sm-6 control-label">最高学位、学历</label>
 											<div class="col-sm-6">
-												<input type="text" class="form-control" id="degree" name="specInfoBean.degree" placeholder="学位、学历">
+												<input type="text" class="form-control" id="degree" name="specInfoBean.degree" value="${specInfoBean.degree}" placeholder="学位、学历">
 											</div>
 										</div>
 									</th>
@@ -608,7 +693,7 @@
 										<div class="form-group">
 											 <label for="school" class="col-sm-6 control-label">毕业院校</label>
 											 <div class="col-sm-6">
-												<input type="text" class="form-control" id="school" name="specInfoBean.school" placeholder="毕业院校">
+												<input type="text" class="form-control" id="school" name="specInfoBean.school" value="${specInfoBean.school}" placeholder="毕业院校">
 											 </div>
 										</div>
 									</th>
@@ -618,7 +703,7 @@
 										<div class="form-group">
 											 <label for="language" class="col-sm-6 control-label">外语能力</label>
 											 <div class="col-sm-6">
-												<input type="text" class="form-control" id="language" name="specInfoBean.language" placeholder="外语能力">
+												<input type="text" class="form-control" id="language" name="specInfoBean.language" value="${specInfoBean.language}" placeholder="外语能力">
 											 </div>
 										</div>
 									</th>
@@ -626,7 +711,7 @@
 										<div class="form-group">
 											 <label for="workTime" class="col-sm-6 control-label">从业时间</label>
 											 <div class="col-sm-6">
-												<input type="text" class="form-control" id="workTime" name="specInfoBean.workTime" placeholder="从业时间：年">
+												<input type="text" class="form-control" id="workTime" name="specInfoBean.workTime" value="${specInfoBean.workTime}" placeholder="从业时间：年">
 											 </div>
 										</div>
 									</th>
@@ -636,9 +721,9 @@
 										<div class="form-group">
 											 <label for="qualification" class="col-sm-6 control-label">执业资格</label>
 											 <div class="col-sm-6">
-												<select name="specInfoBean,qualificationId" class="form-control" id="qualification">
+												<select name="specInfoBean.qualificationId" class="form-control" id="qualification">
 													<s:iterator value="qualificationMap">
-														<option value="<s:property value="key"/>"><s:property value="value"/></option>
+														<option value="<s:property value="key"/>" <c:if test="${specInfoBean.qualificationId==key}">selected</c:if> ><s:property value="value"/></option>
 													</s:iterator>
 												</select>
 											 </div>
@@ -650,7 +735,7 @@
 											 <div class="col-sm-6">
 												<select name="specInfoBean.titleId" class="form-control" id="title">
 													<s:iterator value="titleMap">
-														<option value="<s:property value="key"/>"><s:property value="value"/></option>
+														<option value="<s:property value="key"/>" <c:if test="${specInfoBean.titleId==key}">selected</c:if> ><s:property value="value"/></option>
 													</s:iterator>
 												</select>
 											 </div>
@@ -668,16 +753,16 @@
 							 <tbody id="contact-table">
 								 <tr>
 									<th>
-										<select name="majorClass" class="form-control" id="majorClass" onchange="refreshMajorList();" >
+										<select class="form-control" id="majorClass" onchange="refreshMajorList();" >
 											<s:iterator value="majorClassMap">
-												<option value="<s:property value="key"/>"><s:property value="value"/></option>
+												<option value="<s:property value="key"/>" <c:if test="${majorClassId==key}">selected</c:if> ><s:property value="value"/></option>
 											</s:iterator>
 										</select>
 									</th>
 									<th>
 										<select name="specInfoBean.majorId" class="form-control" id="major">
 											<s:iterator value="majorMap">
-												<option value="<s:property value="key"/>"><s:property value="value"/></option>
+												<option value="<s:property value="key"/>" <c:if test="${specInfoBean.majorId==key}">selected</c:if> ><s:property value="value"/></option>
 											</s:iterator>
 										</select>
 									</th>
@@ -689,20 +774,20 @@
 				<div class="form-group">
 					<label for="experience" class="col-sm-2 control-label">主要项目经历<br>科研经历<br>获奖情况</label>
 					<div class="col-sm-6 col-xs-6">
-						<textarea class="form-control" id="experience" name="specInfoBean.experience" rows="6" placeholder="主要项目经历,科研经历,获奖情况"></textarea>
+						<textarea class="form-control" id="experience" name="specInfoBean.experience" rows="6" placeholder="主要项目经历,科研经历,获奖情况">${specInfoBean.experience}</textarea>
 					</div>
 				</div>
 				<span class="label label-default">其他</span><br>
 				<div class="form-group">
 					<label for="other" class="col-sm-2 control-label">备注</label>
 					<div class="col-sm-6 col-xs-6">
-						<textarea class="form-control" id="other" name="specInfoBean.other" rows="3" placeholder="备注信息"></textarea>
+						<textarea class="form-control" id="other" name="specInfoBean.other" rows="3" placeholder="备注信息">${specInfoBean.other}</textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="experience" class="col-sm-2 control-label"></label>
 					<div class="col-sm-2">
-						<button type="submit" class="btn btn-default">提交</button>
+						<button type="submit" class="btn btn-default">提交申请</button>
 					</div>
 				</div>
 			</form>

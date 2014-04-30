@@ -15,11 +15,13 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.weakie.util.log.LogUtil;
 
-public class SpecialistInfoImageAction extends ActionSupport {
+public class CopyOfSpecialistInfoImageAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
-	//upload-download
+	//upload
 	private File file;
+	private String fileFileName;
+	private String fileContentType;
 	private String username;
 	
 	//result
@@ -74,27 +76,13 @@ public class SpecialistInfoImageAction extends ActionSupport {
 				}
 			}
 		}
-		String result = "user:"+this.username+":照片上传成功";
-		this.inputStream = new ByteArrayInputStream(result.getBytes("UTF-8"));
+		
+		this.inputStream = new ByteArrayInputStream("上传成功".getBytes("UTF-8"));
 		return SUCCESS;
 	}
 	
 	public String executeDownload() {
-		LogUtil.debug("download image userName: " + username);
 		
-		if(pathUnderServer){
-			prePath = ServletActionContext.getServletContext().getRealPath("/");;
-		}
-		File tarFile = new File(prePath + imgpath, username+".jpg");
-		if(tarFile.exists()){
-			try {
-				this.inputStream = new FileInputStream(tarFile);
-			} catch (FileNotFoundException e) {
-				LogUtil.error(e);
-			}
-		}else{
-			this.inputStream = null;
-		}
 		return SUCCESS;
 	}
 
@@ -104,6 +92,22 @@ public class SpecialistInfoImageAction extends ActionSupport {
 
 	public void setFile(File file) {
 		this.file = file;
+	}
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
+	}
+
+	public String getFileContentType() {
+		return fileContentType;
+	}
+
+	public void setFileContentType(String fileContentType) {
+		this.fileContentType = fileContentType;
 	}
 	
 	public String getUsername() {

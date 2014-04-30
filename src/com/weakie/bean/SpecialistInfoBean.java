@@ -1,7 +1,11 @@
 package com.weakie.bean;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 
 public class SpecialistInfoBean {
 
@@ -12,7 +16,8 @@ public class SpecialistInfoBean {
 	private String birthday;//出生年月：2000-02
 	private String email;	//邮箱
 	private String contact;	//联系人及联系方式：John:18721992134;Kate:1990909201;
-	private String photoPath;//照片
+	@Deprecated
+	private String photoPath;//照片使用userName代替
 	
 	private String organization;//工作单位
 	private String website;		//单位网站
@@ -22,7 +27,7 @@ public class SpecialistInfoBean {
 	private String orgType;		//单位性质 ：show
 	
 	private List<Integer> workPositionId;	//工作地点:add
-	private String workPosition;//工作地点:浙江:杭州;浙江:温州:show
+	private String workPosition;//工作地点:浙江:杭州;浙江:温州;show
 	
 	private String partTimeJob;	//社会兼职
 	private String degree;		//最高学位，学历
@@ -31,13 +36,13 @@ public class SpecialistInfoBean {
 	private String workTime;	//从业时间
 	
 	private int qualificationId;//执业职格：add
-	private String qualification;//职业资格:show
+	private String qualification;//职业资格;show
 	
 	private int titleId;		//职称：add
-	private String title;		//职称：show
+	private String title;		//职称;show
 	
 	private int majorId;		//专业方向：add
-	private String major;		//专业方向：建筑：公共建筑：show
+	private String major;		//专业方向：建筑:公共建筑;show
 	
 	private String experience;	//项目经历
 	private String other;		//其他
@@ -66,6 +71,26 @@ public class SpecialistInfoBean {
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
+	/**
+	 * birthday-year
+	 * @return
+	 */
+	public String getYear(){
+		if(StringUtils.isNotEmpty(this.birthday)){
+			return this.birthday.split("-")[0];
+		}
+		return StringUtils.EMPTY;
+	}
+	/**
+	 * birthday-month
+	 * @return
+	 */
+	public String getMonth(){
+		if(StringUtils.isNotEmpty(this.birthday)){
+			return this.birthday.split("-")[1];
+		}
+		return StringUtils.EMPTY;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -78,6 +103,18 @@ public class SpecialistInfoBean {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
+	public Map<String,String> getContactMap(){
+		if(StringUtils.isEmpty(contact)){
+			return Collections.emptyMap();
+		}
+		String[] contactsArray = contact.split(";");
+		Map<String,String> contactMap = new HashMap<String,String>(contactsArray.length);
+		for(String contact:contactsArray){
+			String splits[] = contact.split(":");
+			contactMap.put(splits[0], splits[1]);
+		}
+		return contactMap;
+	}
 	public void setContact(Map<String,String> contact){
 		StringBuilder sb = new StringBuilder(50);
 		for(String name:contact.keySet()){
@@ -86,9 +123,11 @@ public class SpecialistInfoBean {
 		}
 		this.setContact(sb.toString());
 	}
+	@Deprecated
 	public String getPhotoPath() {
 		return photoPath;
 	}
+	@Deprecated
 	public void setPhotoPath(String photoPath) {
 		this.photoPath = photoPath;
 	}
@@ -123,6 +162,9 @@ public class SpecialistInfoBean {
 		this.orgType = orgType;
 	}
 	public List<Integer> getWorkPositionId() {
+		if(this.workPositionId==null){
+			return Collections.emptyList();
+		}
 		return workPositionId;
 	}
 	public void setWorkPositionId(List<Integer> workPositionId) {
