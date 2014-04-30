@@ -1,4 +1,4 @@
-TDFS
+Specialist info system.
 ====
 
-A tiny distribute file system.
+A system that manage the specialist's info.
