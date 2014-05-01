@@ -25,9 +25,9 @@
   <![endif]-->
 
   <!-- Fav and touch icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/SpecialistInfoSys/jsp/img/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/SpecialistInfoSys/jsp/img/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/SpecialistInfoSys/jsp/img/apple-touch-icon-72-precomposed.png">
   <link rel="apple-touch-icon-precomposed" href="/SpecialistInfoSys/jsp/img/apple-touch-icon-57-precomposed.png">
   <link rel="shortcut icon" href="/SpecialistInfoSys/jsp/img/favicon.png">
   
@@ -39,7 +39,12 @@
 <body>
 <div class="container">
 	<div class="row clearfix">
+		<!-- page header -->
+		<c:set var="pageHeader" value="1" scope="page"/>
+		<%@ include file="header.jsp" %>
+		
 		<div class="page-header">
+			<br><br>
 			<h3 class="text-left">
 				<strong>专家信息主页</strong>
 			</h3>
@@ -52,7 +57,7 @@
 					</h3>
 					<span class="label label-default">基本资料</span><br><br>
 					<p class="text-left">
-						<i><c:if test="${!specInfoBean.sex}">男</c:if><c:if test="${specInfoBean.sex}">男</c:if>, ${specInfoBean.year}年${specInfoBean.month}月</i>
+						<i><c:if test="${!specInfoBean.sex}">男</c:if><c:if test="${specInfoBean.sex}">女</c:if>, ${specInfoBean.year}年${specInfoBean.month}月</i>
 					</p>
 					<p class="text-left">
 						<em>${specInfoBean.email }</em>
@@ -72,6 +77,9 @@
 					<span class="label label-default">工作信息</span><br><br>
 					<p>
 						<b>工作单位: </b> <a class="btn-left" href="${specInfoBean.website}" target=_blank>${specInfoBean.organization} </a>
+					</p>
+					<p>
+						<b>单位网址: </b> <a class="btn-left" href="${specInfoBean.website}" target=_blank>${specInfoBean.website} </a>
 					</p>
 					<p>
 						<b>单位性质: </b> ${specInfoBean.orgType}

@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/errortext.jsp=UTF-8
 encoding//WebContent/jsp/register.jsp=UTF-8
-encoding//WebContent/jsp/specialist_info_add.jsp=UTF-8
+encoding//WebContent/jsp/spec/specialist_info_add.jsp=UTF-8
 encoding//config/com/weakie/action/fileuploadmessage.properties=UTF-8

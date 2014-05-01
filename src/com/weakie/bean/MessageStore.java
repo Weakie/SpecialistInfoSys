@@ -4,9 +4,11 @@ public class MessageStore {
     
     private String message;
     
-    public MessageStore() {
+    public MessageStore(){}
+    
+    public MessageStore(String message) {
          
-        setMessage("Hello Struts User");
+        this.message = message;
     }
  
     public String getMessage() {

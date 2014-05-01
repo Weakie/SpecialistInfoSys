@@ -392,57 +392,10 @@
 <body>
 <div class="container">
 	<div class="row clearfix">
+		<!-- page header -->
+		<c:set var="pageHeader" value="2" scope="page"/>
+		<%@ include file="header.jsp" %>
 		
-		<div class="col-md-12 column">
-			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-					<a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同济专家信息库&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="active">
-							<a href="#">基本信息</a>
-						</li>
-						<li>
-							<a href="#">修改信息</a>
-						</li>
-						<li>
-							<a href="#">高级搜索</a>
-						</li>
-					</ul>
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" style="width:305px;" placeholder="关键字：专业类别、研究专长、工作地点"/>
-						</div> <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>搜索</button>
-					</form>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a href="#">Link</a>
-						</li>
-						<li class="dropdown">
-							 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i>个人设置<strong class="caret"></strong></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">Action</a>
-								</li>
-								<li>
-									<a href="#">Another action</a>
-								</li>
-								<li>
-									<a href="#">Something else here</a>
-								</li>
-								<li class="divider">
-								</li>
-								<li>
-									<a href="#">Separated link</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</nav>
-		</div>
 		<div class="col-md-10 column">
 			<br><br><br>
 			<h3 class="text-left">
@@ -450,7 +403,7 @@
 			</h3>
 			<form action="/SpecialistInfoSys/specInfoAdd.action" method="post" onsubmit="return checkform();" class="form-horizontal">
 				<span class="label label-default">基本资料</span><br><br>
-				<input type="hidden" name="specInfoBean.userName" value="${userName }" />
+				<input type="hidden" id="userName" name="specInfoBean.userName" value="${userName }" />
 				<div class="form-group">
 					 <label for="name" class="col-sm-2 col-xs-2 control-label">姓名</label>
 					 <div class="col-sm-2 col-xs-2">
@@ -549,7 +502,7 @@
 						<div id="fileSize"></div>
 				        <input type="hidden" onclick="uploadFile('<s:property value="userName"/>')"  id="fileToUploadButton" value="上传文件" />
 				       	<div id="progressNumber"></div>
-				        <img id="image" alt="暂无照片" width="160" height="160" src="/SpecialistInfoSys/downloadImage?username=${userName}">
+				        <img id="image" class="img-thumbnail" alt="暂无照片" width="160" height="160" src="/SpecialistInfoSys/downloadImage?username=${specInfoBean.userName}">
 					 </div>
 					 
 				</div>

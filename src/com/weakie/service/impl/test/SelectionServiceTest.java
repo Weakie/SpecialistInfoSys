@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.weakie.service.SelectionService;
+import com.weakie.util.ReadOnlyMap;
 
 /**
  * @author weakie E-mail:weakielin@gmail.com 2014年4月29日下午5:59:27
@@ -15,18 +16,18 @@ import com.weakie.service.SelectionService;
 public class SelectionServiceTest implements SelectionService {
 
 	@Override
-	public Map<Integer, String> getOrgType() {
+	public ReadOnlyMap<Integer, String> getOrgType() {
 		Map<Integer, String> orgTypeMap = new HashMap<Integer, String>();
 		orgTypeMap.put(1, "政府");
 		orgTypeMap.put(2, "大学");
 		orgTypeMap.put(3, "研究所");
 		orgTypeMap.put(4, "企业");
 		orgTypeMap.put(5, "其他");
-		return orgTypeMap;
+		return new ReadOnlyMap<Integer, String>(orgTypeMap);
 	}
 
 	@Override
-	public Map<Integer, String> getProvince(boolean isAbroad) {
+	public ReadOnlyMap<Integer, String> getProvince(boolean isAbroad) {
 		Map<Integer, String> provinceMap = new HashMap<Integer, String>();
 		if (!isAbroad) {
 			provinceMap.put(1, "浙江");
@@ -41,11 +42,11 @@ public class SelectionServiceTest implements SelectionService {
 			provinceMap.put(9, "德国");
 			provinceMap.put(10, "法国");
 		}
-		return provinceMap;
+		return new ReadOnlyMap<Integer, String>(provinceMap);
 	}
 
 	@Override
-	public Map<Integer, String> getCity(int provinceId) {
+	public ReadOnlyMap<Integer, String> getCity(int provinceId) {
 		Map<Integer, String> cityMap = new HashMap<Integer, String>();
 		switch (provinceId) {
 		case 1:
@@ -104,39 +105,39 @@ public class SelectionServiceTest implements SelectionService {
 			cityMap.put(33, "上3");
 		}
 
-		return cityMap;
+		return new ReadOnlyMap<Integer, String>(cityMap);
 	}
 
 	@Override
-	public Map<Integer, String> getQualification() {
+	public ReadOnlyMap<Integer, String> getQualification() {
 		Map<Integer, String> qualificationMap = new HashMap<Integer, String>();
 		qualificationMap.put(1, "注册规划师");
 		qualificationMap.put(2, "建造师");
 		qualificationMap.put(3, "一级建筑师");
 		qualificationMap.put(4, "其他");
-		return qualificationMap;
+		return new ReadOnlyMap<Integer, String>(qualificationMap);
 	}
 
 	@Override
-	public Map<Integer, String> getTitle() {
+	public ReadOnlyMap<Integer, String> getTitle() {
 		Map<Integer, String> titleMap = new HashMap<Integer, String>();
 		titleMap.put(1, "中级");
 		titleMap.put(2, "高级");
-		return titleMap;
+		return new ReadOnlyMap<Integer, String>(titleMap);
 	}
 
 	@Override
-	public Map<Integer, String> getMajorClass() {
+	public ReadOnlyMap<Integer, String> getMajorClass() {
 		Map<Integer, String> majorClassMap = new HashMap<Integer, String>();
 		majorClassMap.put(1, "建筑");
 		majorClassMap.put(2, "规划");
 		majorClassMap.put(3, "景观");
 		majorClassMap.put(4, "其他");
-		return majorClassMap;
+		return new ReadOnlyMap<Integer, String>(majorClassMap);
 	}
 
 	@Override
-	public Map<Integer, String> getMajor(int majorClassId) {
+	public ReadOnlyMap<Integer, String> getMajor(int majorClassId) {
 		Map<Integer, String> majorMap = new HashMap<Integer, String>();
 		switch (majorClassId) {
 		case 1:
@@ -169,7 +170,7 @@ public class SelectionServiceTest implements SelectionService {
 			break;
 		}
 
-		return majorMap;
+		return new ReadOnlyMap<Integer, String>(majorMap);
 	}
 
 	@Override
@@ -179,16 +180,16 @@ public class SelectionServiceTest implements SelectionService {
 	}
 
 	@Override
-	public Map<Integer, Integer> getCityProvinceMap(List<Integer> cityList) {
+	public ReadOnlyMap<Integer, Integer> getCityProvinceMap(List<Integer> cityList) {
 		Map<Integer, Integer> cityProMap = new HashMap<Integer, Integer>();
 		for (int i : cityList) {
 			cityProMap.put(i, (i + 2) / 3);
 		}
-		return cityProMap;
+		return new ReadOnlyMap<Integer, Integer>(cityProMap);
 	}
 
 	@Override
-	public Map<Integer, Boolean> getAbroadProvinceMap(List<Integer> provinceList) {
+	public ReadOnlyMap<Integer, Boolean> getAbroadProvinceMap(List<Integer> provinceList) {
 		Map<Integer, Boolean> abroadProMap = new HashMap<Integer, Boolean>();
 		for (int i : provinceList) {
 			if (i > 5) {
@@ -197,11 +198,11 @@ public class SelectionServiceTest implements SelectionService {
 				abroadProMap.put(i, false);
 			}
 		}
-		return abroadProMap;
+		return new ReadOnlyMap<Integer, Boolean>(abroadProMap);
 	}
 
 	@Override
-	public Map<Integer, String> getCityNameMap(List<Integer> cityList) {
+	public ReadOnlyMap<Integer, String> getCityNameMap(List<Integer> cityList) {
 		Map<Integer, String> cityMap = new HashMap<Integer, String>();
 		cityMap.put(1, "杭州");
 		cityMap.put(2, "温州");
@@ -241,11 +242,11 @@ public class SelectionServiceTest implements SelectionService {
 		for (int i : cityList) {
 			cityMap2.put(i, cityMap.get(i));
 		}
-		return cityMap2;
+		return new ReadOnlyMap<Integer, String>(cityMap2);
 	}
 
 	@Override
-	public Map<Integer, String> getProvNameMap(List<Integer> cityList) {
+	public ReadOnlyMap<Integer, String> getProvNameMap(List<Integer> cityList) {
 		Map<Integer, String> provinceMap = new HashMap<Integer, String>();
 		provinceMap.put(1, "浙江");
 		provinceMap.put(2, "北京");
@@ -262,7 +263,7 @@ public class SelectionServiceTest implements SelectionService {
 		for (int i : cityList) {
 			cityMap.put((i+2)/3, provinceMap.get((i+2)/3));
 		}
-		return cityMap;
+		return new ReadOnlyMap<Integer, String>(cityMap);
 	}
 
 }

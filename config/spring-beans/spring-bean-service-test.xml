@@ -7,4 +7,6 @@
 	</bean>
 	<bean name="selectionService" class="com.weakie.service.impl.test.SelectionServiceTest" >
 	</bean>
+	<bean name="userAccountService" class="com.weakie.service.impl.test.UserAccountServiceTest" >
+	</bean>
 </beans>

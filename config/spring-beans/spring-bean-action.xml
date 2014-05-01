@@ -8,6 +8,9 @@
 	</bean>
 	
 	<bean name="userLoginRegisterAction" class="com.weakie.action.UserLoginRegisterAction" scope="prototype">
+		<property name="accountService">
+			<ref bean="userAccountService" />
+		</property>
 	</bean>
 	
 	<bean name="specialistInfoAction" class="com.weakie.action.SpecialistInfoAction" scope="prototype">
@@ -34,6 +37,9 @@
 	<bean name="specialistInfoDisplayAction" class="com.weakie.action.SpecialistInfoDisplayAction" scope="prototype">
 		<property name="specInfoService">
 			<ref bean="specialistInfoService" />
+		</property>
+		<property name="selectService">
+			<ref bean="selectionService" />
 		</property>
 	</bean>
 	

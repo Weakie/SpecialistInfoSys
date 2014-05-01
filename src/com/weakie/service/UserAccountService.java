@@ -1,0 +1,27 @@
+package com.weakie.service;
+
+import com.weakie.bean.Person;
+/**
+ * 处理用户账户情况
+ * @author weakie E-mail:weakielin@gmail.com
+ * 2014年5月1日下午11:19:29
+ */
+public interface UserAccountService {
+
+	/**
+	 * 登录，登录不成功返回null
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public Person login(String userName,String password) throws Exception;
+	
+	/**
+	 * 检查账户是否存在，存在则返回true
+	 * @param userName
+	 * @return
+	 */
+	public boolean checkAccount(String userName);
+	
+	public boolean register(String userName,String password) throws Exception;
+}

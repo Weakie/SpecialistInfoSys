@@ -2,6 +2,15 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en">
+<script type="text/javascript">
+window.onload=function()
+{
+	if(!(document.cookie || navigator.cookieEnabled))
+	{
+		alert('浏览器 cookie 未打开!使用本系统请先打开浏览器cookie。');
+	}
+};
+</script>
 <head>
   <meta charset="utf-8">
   <title>登录-上海同济城市规划设计研究院</title>
@@ -9,13 +18,13 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
-	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
-	<!--script src="js/less-1.3.3.min.js"></script-->
-	<!--append â#!watchâ to the browser URL, then refresh the page. -->
+	<!--link rel="stylesheet/less" href="/SpecialistInfoSys/jsp/less/bootstrap.less" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="/SpecialistInfoSys/jsp/less/responsive.less" type="text/css" /-->
+	<!--script src="/SpecialistInfoSys/jsp/js/less-1.3.3.min.js"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
 	
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
+	<link href="/SpecialistInfoSys/jsp/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/SpecialistInfoSys/jsp/css/style.css" rel="stylesheet">
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -23,15 +32,15 @@
   <![endif]-->
 
   <!-- Fav and touch icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
-  <link rel="shortcut icon" href="img/favicon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/SpecialistInfoSys/jsp/img/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/SpecialistInfoSys/jsp/img/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/SpecialistInfoSys/jsp/img/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="/SpecialistInfoSys/jsp/img/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="/SpecialistInfoSys/jsp/img/favicon.png">
   
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
+	<script type="text/javascript" src="/SpecialistInfoSys/jsp/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/SpecialistInfoSys/jsp/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/SpecialistInfoSys/jsp/js/scripts.js"></script>
 </head>
 
 <body>
@@ -70,13 +79,13 @@
 						<div class="form-group">
 							<label for="userName" class="col-sm-3 control-label">用户名</label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" id="userName" name="personBean.userName"/>
+								<input type="text" class="form-control" id="userName" name="userName"/>
 							</div>
 						</div>
 						<div class="form-group">
 							 <label for="inputPassword" class="col-sm-3 control-label">密码</label>
 							<div class="col-sm-8">
-								<input type="password" class="form-control" id="inputPassword" name="personBean.password">
+								<input type="password" class="form-control" id="inputPassword" name="password">
 							</div>
 						</div>
 						<div class="form-group">
