@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,17 +52,18 @@
 					</h3>
 					<span class="label label-default">基本资料</span><br><br>
 					<p class="text-left">
-						<i>男, 1970年06月</i>
+						<i><c:if test="${!specInfoBean.sex}">男</c:if><c:if test="${specInfoBean.sex}">男</c:if>, ${specInfoBean.year}年${specInfoBean.month}月</i>
 					</p>
 					<p class="text-left">
-						<em>244161716@qq.com</em>
+						<em>${specInfoBean.email }</em>
 					</p>
 					<p class="text-left">
 						<em>联系人：</em>
+						${specInfoBean.contact }
 					</p>
 				</div>
 				<div class="col-md-4 column">
-					<img alt="140x140" src="http://lorempixel.com/140/140/" class="img-thumbnail">
+					<img id="image" class="img-thumbnail" alt="暂无照片" width="140" height="140" src="/SpecialistInfoSys/downloadImage?username=${specInfoBean.userName}">
 				</div>
 			</div>
 			<hr>
@@ -69,16 +71,16 @@
 				<div class="col-md-12 column">
 					<span class="label label-default">工作信息</span><br><br>
 					<p>
-						<b>工作单位: </b> <a class="btn-left" href="http://www.tongji.edu.cn" target=_blank>同济大学 </a>
+						<b>工作单位: </b> <a class="btn-left" href="${specInfoBean.website}" target=_blank>${specInfoBean.organization} </a>
 					</p>
 					<p>
-						<b>单位性质: </b> 大学
+						<b>单位性质: </b> ${specInfoBean.orgType}
 					</p>
 					<p>
-						<b>工作地点: </b> 上海市
+						<b>工作地点: </b> ${specInfoBean.workPosition}
 					</p>
 					<p>
-						<b>社会兼职: </b><br>
+						<b>社会兼职: </b><br>${specInfoBean.partTimeJob}
 					</p>
 				</div>
 			</div>
@@ -87,28 +89,28 @@
 				<div class="col-md-12 column">
 					<span class="label label-default">学习、培训及工作经历</span><br><br>
 					<p>
-						<b>毕业院校: </b> 同济大学 
+						<b>最高学位、学历: </b> ${specInfoBean.degree}
 					</p>
 					<p>
-						<b>最高学位、学历: </b> 大学
+						<b>毕业院校: </b> ${specInfoBean.school}
 					</p>
 					<p>
-						<b>外语能力: </b> 上海市
+						<b>外语能力: </b> ${specInfoBean.language}
 					</p>
 					<p>
-						<b>从业时间: </b>
+						<b>从业时间: </b> ${specInfoBean.workTime}年
 					</p>
 					<p>
-						<b>职业资格: </b><br>
+						<b>职业资格: </b>${specInfoBean.qualification}
 					</p>
 					<p>
-						<b>职称: </b><br>
+						<b>专业方向: </b>${specInfoBean.major}
 					</p>
 					<p>
-						<b>专业方向: </b><br>
+						<b>职称: </b>${specInfoBean.title}
 					</p>
 					<p>
-						<b>主要项目经历、科研经历、获奖情况: </b><br>
+						<b>主要项目经历、科研经历、获奖情况: </b><br>${specInfoBean.experience}
 					</p>
 				</div>
 			</div>

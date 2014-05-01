@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+		
+	<!-- Action Bean -->
+	<bean name="helloAction" class="com.weakie.action.HelloWorldAction" scope="prototype">
+	</bean>
+	
+	<bean name="userLoginRegisterAction" class="com.weakie.action.UserLoginRegisterAction" scope="prototype">
+	</bean>
+	
+	<bean name="specialistInfoAction" class="com.weakie.action.SpecialistInfoAction" scope="prototype">
+		<property name="specInfoService">
+			<ref bean="specialistInfoService" />
+		</property>
+	</bean>
+	
+	<bean name="specialistInfoAddPrepareAction" class="com.weakie.action.SpecialistInfoAddPrepareAction" scope="prototype">
+		<property name="specInfoService">
+			<ref bean="specialistInfoService" />
+		</property>
+		<property name="selectService">
+			<ref bean="selectionService" />
+		</property>
+	</bean>
+	
+	<bean name="specialistInfoImageAction" class="com.weakie.action.SpecialistInfoImageAction" scope="prototype">
+		<property name="imgpath" value="/WEB-INF/userimage" />
+		<property name="prePath" value="d:/tmp/image" />
+		<property name="pathUnderServer" value="false" />
+	</bean>
+	
+	<bean name="specialistInfoDisplayAction" class="com.weakie.action.SpecialistInfoDisplayAction" scope="prototype">
+		<property name="specInfoService">
+			<ref bean="specialistInfoService" />
+		</property>
+	</bean>
+	
+	<!--
+	<bean id="userService" class="org.login.service.Impl.UsersService">
+		<property name="userDAO">
+			<ref bean="userDAO" />
+		</property>
+	</bean>
+ 	-->
+	<!-- <bean id="login" class="org.login.actions.Login" scope="prototype" parent="baseDAO">
+		<property name="userService">
+			<ref bean="userService" />
+		</property>
+	</bean>
+	 -->
+</beans>

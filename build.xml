@@ -44,6 +44,7 @@
 		<copy file="${config.dir}/log4j2.xml" todir="${build.dir}"  overwrite="true"  />
 		<copy file="${config.dir}/struts.xml" todir="${build.dir}"  overwrite="true"  />
 		<copy file="${spring.dir}/applicationContext.xml" todir="${build.dir}"  overwrite="true"  />
+		<copy file="${spring.dir}/spring-bean-action.xml" todir="${build.dir}"  overwrite="true"  />
 		<copy file="${spring.dir}/spring-bean-threadpool.xml" todir="${build.dir}"  overwrite="true"  />
 		<copy file="${spring.dir}/spring-bean-service-test.xml" todir="${build.dir}"  overwrite="true"  />
 	</target>

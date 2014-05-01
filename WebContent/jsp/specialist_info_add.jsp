@@ -549,7 +549,7 @@
 						<div id="fileSize"></div>
 				        <input type="hidden" onclick="uploadFile('<s:property value="userName"/>')"  id="fileToUploadButton" value="上传文件" />
 				       	<div id="progressNumber"></div>
-				        <img id="image" alt="暂无照片" width="160" height="180" src="/SpecialistInfoSys/downloadImage?username=${userName}">
+				        <img id="image" alt="暂无照片" width="160" height="160" src="/SpecialistInfoSys/downloadImage?username=${userName}">
 					 </div>
 					 
 				</div>
