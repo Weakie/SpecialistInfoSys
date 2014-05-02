@@ -7,4 +7,8 @@ public class SystemConstant {
 	
 	public static final String EXIST="EXIST";
 	public static final String NOTEXIST="NOTEXIST";
+	
+	public static final String SUCCESS="SUCCESS";
+	public static final String FAIL="FAIL";
+	
 }

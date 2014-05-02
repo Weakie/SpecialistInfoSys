@@ -1,6 +1,9 @@
 package com.weakie.service;
 
+import java.util.Set;
+
 import com.weakie.bean.Person;
+import com.weakie.util.ReadOnlyMap;
 /**
  * 处理用户账户情况
  * @author weakie E-mail:weakielin@gmail.com
@@ -23,5 +26,24 @@ public interface UserAccountService {
 	 */
 	public boolean checkAccount(String userName);
 	
+	/**
+	 * 注册
+	 * @param userName
+	 * @param password
+	 * @return
+	 * @throws Exception
+	 */
 	public boolean register(String userName,String password) throws Exception;
+	
+	/**
+	 * 返回staff的nickname
+	 * @param staffId
+	 * @return
+	 */
+	public ReadOnlyMap<String,String> getStaffNiceNameMap(Set<String> staffId);
+	
+	/**
+	 * 返回syaff的nickname
+	 */
+	public String getStaffNicmName(String staffId);
 }

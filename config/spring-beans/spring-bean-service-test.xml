@@ -9,4 +9,6 @@
 	</bean>
 	<bean name="userAccountService" class="com.weakie.service.impl.test.UserAccountServiceTest" >
 	</bean>
+	<bean name="applyInfoService" class="com.weakie.service.impl.test.ApplyInfoServiceTest" >
+	</bean>
 </beans>

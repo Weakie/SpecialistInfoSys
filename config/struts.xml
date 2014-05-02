@@ -110,5 +110,16 @@
 			<result name="success">/jsp/spec/specialist_info_display.jsp</result>
 		</action>
 		
+		<action name="staffDisposeApplyShowAll" class="staffDisposeApplyShowAllAction" method="execute">
+			<result name="success">/jsp/staff/staff_dispose_apply_new.jsp</result>
+		</action>
+		
+		<action name="staffDisposeApplyAccept" class="staffDisposeApplyAcceptAction" method="execute">
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
 	</package>
 </struts>

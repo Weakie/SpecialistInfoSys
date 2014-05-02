@@ -18,11 +18,14 @@ public class SpecialistInfoAction extends ActionSupport {
  
     private static final long serialVersionUID = 1L;
  
+    //request
     private SpecialistInfoBean specInfoBean;
     private int year;
     private int month;
    
     private MessageStore messageStore;
+    
+    //spring
     private SpecialistInfoService specInfoService;
     
 	public String executeAddInfo() throws Exception{

@@ -15,8 +15,10 @@ public class SpecialistInfoAddPrepareAction extends ActionSupport {
  
     private static final long serialVersionUID = 1L;
  
-    //for prepare-add
+    //request
     private String userName;
+   
+    //for prepare-add
     private Map<Integer,String> orgTypeMap;
     private Map<Integer,String> qualificationMap;
     private Map<Integer,String> titleMap;

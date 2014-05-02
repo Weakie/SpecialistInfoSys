@@ -43,6 +43,23 @@
 		</property>
 	</bean>
 	
+	<bean name="staffDisposeApplyShowAllAction" class="com.weakie.action.staff.StaffDisposeApplyShowAll" scope="prototype">
+		<property name="applyInfoService">
+			<ref bean="applyInfoService" />
+		</property>
+		<property name="userAccountService">
+			<ref bean="userAccountService" />
+		</property>
+	</bean>
+	<bean name="staffDisposeApplyAcceptAction" class="com.weakie.action.staff.StaffDisposeApplyAccept" scope="prototype">
+		<property name="applyInfoService">
+			<ref bean="applyInfoService" />
+		</property>
+		<property name="userAccountService">
+			<ref bean="userAccountService" />
+		</property>
+	</bean>
+	
 	<!--
 	<bean id="userService" class="org.login.service.Impl.UsersService">
 		<property name="userDAO">

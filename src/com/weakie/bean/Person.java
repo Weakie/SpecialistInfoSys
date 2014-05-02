@@ -10,6 +10,7 @@ public class Person
 {
 	private String userName;//用户名
 
+	private String nickName;//昵称,工作人员可设置
 	private int role;		//角色：spec:1 staff:2 admin:3
 	private int authority;	//权限：二进制编码 搜索：1
 	private Date registerTime;
@@ -31,6 +32,15 @@ public class Person
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
 	public int getRole() {
 		return role;
 	}

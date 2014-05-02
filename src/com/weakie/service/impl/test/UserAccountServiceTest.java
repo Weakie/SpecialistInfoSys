@@ -1,11 +1,15 @@
 package com.weakie.service.impl.test;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.weakie.bean.Person;
 import com.weakie.service.UserAccountService;
+import com.weakie.util.ReadOnlyMap;
 
 public class UserAccountServiceTest implements UserAccountService {
 
@@ -40,6 +44,35 @@ public class UserAccountServiceTest implements UserAccountService {
 			return true;
 		}
 		return true;
+	}
+
+	@Override
+	public ReadOnlyMap<String, String> getStaffNiceNameMap(Set<String> staffId) {
+		Map<String,String> map = new HashMap<String,String>();
+		for(String id:staffId){
+			if(StringUtils.equals(id, "111")){
+				map.put(id, "小王1");
+			}
+			if(StringUtils.equals(id, "222")){
+				map.put(id, "小王2");
+			}
+			if(StringUtils.equals(id, "333")){
+				map.put(id, "小王3");
+			}
+			if(StringUtils.equals(id, "444")){
+				map.put(id, "小王4");
+			}
+			if(StringUtils.equals(id, "555")){
+				map.put(id, "小王5");
+			}
+		}
+		return new ReadOnlyMap<String, String>(map);
+	}
+
+	@Override
+	public String getStaffNicmName(String staffId) {
+		// TODO Auto-generated method stub
+		return "小王";
 	}
 
 }
