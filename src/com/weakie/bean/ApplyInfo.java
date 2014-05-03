@@ -7,11 +7,12 @@ import java.util.Date;
  * @author weakie E-mail:weakielin@gmail.com
  * 2014年5月2日下午7:26:58
  */
-public class ApplyInfo implements Comparable<ApplyInfo>{
+public class ApplyInfo implements java.io.Serializable, Comparable<ApplyInfo>{
+	private static final long serialVersionUID = 1L;
 	
 	private int id;         //1000000
-	private String userName;
-	private String specName;
+	private String userName;//专家用户名
+	private String specName;//专家姓名
 	private Date applyTime;
 	private Date acceptTime;
 	private Date disposeTime;

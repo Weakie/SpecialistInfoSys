@@ -23,7 +23,7 @@ public class ApplyInfoServiceTest implements ApplyInfoService {
 	public ApplyInfo acceptNewApply(String staffId, int applyId)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return new ApplyInfo(1,"111","hahaha",new Date(),new Date(),new Date(),1,"222");
+		return new ApplyInfo(1,"hahaha","hahaha",new Date(),new Date(),new Date(),1,"hahaha");
 	}
 
 }

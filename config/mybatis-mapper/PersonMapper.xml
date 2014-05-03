@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.weakie.dao.PersonDAO">
+
+	<cache />
+
+	<resultMap id="personMap" type="com.weakie.bean.Person">
+		<result property="userName" column="userName" />
+		<result property="nickName" column="nickName" />
+		<result property="password" column="password" />
+		<result property="role" column="role" />
+		<result property="authority" column="authority" />
+		<result property="registerTime" column="registerTime" javaType="java.util.Date" />
+		<result property="loginTime" column="loginTime" javaType="java.util.Date" />
+	</resultMap>
+	
+	<insert id="insertPerson" useGeneratedKeys="true" keyProperty="id">
+		insert into person (userName,nickName,password,role,authority,registerTime,loginTime)
+			values (
+			#{userName},
+			#{nickName},
+			#{password},
+			#{role},
+			#{authority},
+			#{registerTime},
+			#{loginTime}
+			)
+	</insert>
+	<update id="updateNickName" parameterType="Map">
+		update Person set
+		nickName = #{nickName}
+		where userName = #{userName}
+	</update>
+	<update id="updatePassword" parameterType="Map">
+		update Person set
+		password = #{newPassword}
+		where userName = #{userName} and password = #{oldPassword}
+	</update>
+	<select id="checkUsernameExist" parameterType="String" resultType="int">
+    	select count(*) from person where userName = #{userName}
+    </select>
+	<select id="checkPassword" statementType="CALLABLE" parameterType="java.util.HashMap" resultMap="personMap">
+       <![CDATA[
+           {call checkPassword(
+              #{username_in,mode=IN,jdbcType=VARCHAR},
+              #{password_in,mode=IN,jdbcType=VARCHAR},
+              #{login_time_in,mode=IN,jdbcType=TIMESTAMP}
+           )}    
+       ]]>
+    </select>
+</mapper>

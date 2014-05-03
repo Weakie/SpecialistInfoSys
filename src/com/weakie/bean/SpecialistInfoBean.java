@@ -7,8 +7,10 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-public class SpecialistInfoBean {
+public class SpecialistInfoBean implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
 
+	
 	private String userName;//关联的用户名
 	
 	private String name;	//姓名
