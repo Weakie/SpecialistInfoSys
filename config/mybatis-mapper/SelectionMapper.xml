@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.weakie.dao.PersonDAO">
+<mapper namespace="com.weakie.dao.SelectionDAO">
 
 	<cache />
 
-	<resultMap id="personMap" type="com.weakie.bean.Person">
+	<resultMap id="organizationType" type="com.weakie.bean.">
 		<result property="userName" column="userName" />
 		<result property="nickName" column="nickName" />
 		<result property="password" column="password" />
@@ -16,6 +16,9 @@
 		<result property="loginTime" column="loginTime" javaType="java.util.Date" />
 	</resultMap>
 	
+	<select id="getOrganizationType"  resultType="Map">
+    	select * from organization_type;
+    </select>
 	<insert id="insertPerson" useGeneratedKeys="true" keyProperty="id">
 		insert into person (userName,nickName,password,role,authority,registerTime,loginTime)
 			values (

@@ -25,7 +25,7 @@ public class PersonDAOTest {
 		
 		//System.out.println(dao.checkUsernameExist("aaaa"));
 		
-		System.out.println(dao.updatePassword("aaaa", "ha", "haga"));
+		System.out.println(dao.updatePassword("aaaa", "haga", "1111"));
 		
 		System.out.println(dao.updateNickName("aaaa", "haha"));
 	}

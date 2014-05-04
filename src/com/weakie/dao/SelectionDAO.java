@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.weakie.bean.Person;
 import com.weakie.util.log.LogUtil;
 
-public class PersonDAO extends AbstractBaseDao {
+public class SelectionDAO extends AbstractBaseDao {
 
 	public int addNewPerson(Person p){
 		SqlSession session = getSession();
@@ -25,22 +25,17 @@ public class PersonDAO extends AbstractBaseDao {
 		return result;
 	}
 	
-	public Person checkPassword(String userName,String password){
+	public Map<Integer,String> getOrganizationType(){
 		SqlSession session = getSession();
-		Map<String,Object> param = new HashMap<String,Object>();
-		param.put("username_in", userName);
-		param.put("password_in", password);
-		param.put("login_time_in", new Date());
-		Person p = null;
+		Map<Integer,String> result=null;
 		try {
-			p = session.selectOne("com.weakie.dao.PersonDAO.checkPassword", param);
-			session.commit();
+			List = session.selectList("com.weakie.dao.PersonDAO.checkPassword", null);
 		} catch(Exception e){
 			LogUtil.error(e);
 		} finally {
 		  session.close();
 		}
-		return p;
+		return result;
 	}
 	
 	public int checkUsernameExist(String userName){

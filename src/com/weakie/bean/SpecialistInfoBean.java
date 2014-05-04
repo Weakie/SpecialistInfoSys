@@ -20,22 +20,16 @@ public class SpecialistInfoBean implements java.io.Serializable{
 	private String contact;	//联系人及联系方式：John:18721992134;Kate:1990909201;
 	@Deprecated
 	private String photoPath;//照片使用userName代替
-	
 	private String organization;//工作单位
 	private String website;		//单位网站
-	private String role;		//担任职务
-	
-	private int orgTypeId;		//单位性质：add
-	private String orgType;		//单位性质 ：show
-	
-	private List<Integer> workPositionId;	//工作地点:add
-	private String workPosition;//工作地点:浙江:杭州;浙江:温州;show
-	
+	private String role;		//担任职务	
 	private String partTimeJob;	//社会兼职
 	private String degree;		//最高学位，学历
 	private String language;	//外语能力
 	private String school;		//毕业院校
 	private String workTime;	//从业时间
+	private String experience;	//项目经历
+	private String other;		//其他
 	
 	private int qualificationId;//执业职格：add
 	private String qualification;//职业资格;show
@@ -46,8 +40,46 @@ public class SpecialistInfoBean implements java.io.Serializable{
 	private int majorId;		//专业方向：add
 	private String major;		//专业方向：建筑:公共建筑;show
 	
-	private String experience;	//项目经历
-	private String other;		//其他
+	private int orgTypeId;		//单位性质：add
+	private String orgType;		//单位性质 ：show
+	
+	private List<Integer> workPositionId;	//工作地点:add
+	private String workPosition;//工作地点:浙江:杭州;浙江:温州;show
+	
+	private int state;			//状态
+	
+	public SpecialistInfoBean(){};
+	
+	public SpecialistInfoBean(String userName, String name, boolean sex,
+			String birthday, String email, String contact, String organization,
+			String website, String role, String partTimeJob, String degree,
+			String language, String school, String workTime, String experience,
+			String other, int qualificationId, int titleId, int majorId,
+			int orgTypeId, List<Integer> workPositionId, int state) {
+		super();
+		this.userName = userName;
+		this.name = name;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.email = email;
+		this.contact = contact;
+		this.organization = organization;
+		this.website = website;
+		this.role = role;
+		this.partTimeJob = partTimeJob;
+		this.degree = degree;
+		this.language = language;
+		this.school = school;
+		this.workTime = workTime;
+		this.experience = experience;
+		this.other = other;
+		this.qualificationId = qualificationId;
+		this.titleId = titleId;
+		this.majorId = majorId;
+		this.orgTypeId = orgTypeId;
+		this.workPositionId = workPositionId;
+		this.state = state;
+	}
 	
 	public String getUserName() {
 		return userName;
@@ -256,6 +288,13 @@ public class SpecialistInfoBean implements java.io.Serializable{
 	public void setOther(String other) {
 		this.other = other;
 	}
+	
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
 	@Override
 	public String toString() {
 		return "SpecialistInfoBean [userName=" + userName + ", name=" + name
@@ -270,7 +309,34 @@ public class SpecialistInfoBean implements java.io.Serializable{
 				+ ", qualificationId=" + qualificationId + ", qualification="
 				+ qualification + ", titleId=" + titleId + ", title=" + title
 				+ ", majorId=" + majorId + ", major=" + major + ", experience="
-				+ experience + ", other=" + other + "]";
+				+ experience + ", other=" + other + ", state=" + state + "]";
 	}
 	
+	public Map<String, Object> getMapValues() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username_in", this.userName);
+		map.put("name_in", this.name);
+		map.put("sex_in", this.sex);
+		map.put("birthday_in", this.birthday);
+		map.put("email_in", email);
+		map.put("contact_in", this.contact);
+		map.put("organization_in", this.organization);
+		map.put("website_in", this.website);
+		map.put("role_in", this.role);
+		map.put("part_time_job_in", partTimeJob);
+		map.put("degree_in", this.degree);
+		map.put("language_in", this.language);
+		map.put("school_in", this.school);
+		map.put("work_time_in", this.workTime);
+		map.put("experience_in", experience);
+		map.put("other_in", this.other);
+		
+		map.put("org_type_id_in", this.orgTypeId);
+		map.put("qualification_id_in", this.qualificationId);
+		map.put("title_id_in", this.titleId);
+		map.put("major_id_in", this.majorId);
+		map.put("state_in", this.state);
+		
+		return map;
+	}
 }
