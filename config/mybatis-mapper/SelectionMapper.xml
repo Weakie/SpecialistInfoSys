@@ -6,55 +6,104 @@
 
 	<cache />
 
-	<resultMap id="organizationType" type="com.weakie.bean.">
-		<result property="userName" column="userName" />
-		<result property="nickName" column="nickName" />
-		<result property="password" column="password" />
-		<result property="role" column="role" />
-		<result property="authority" column="authority" />
-		<result property="registerTime" column="registerTime" javaType="java.util.Date" />
-		<result property="loginTime" column="loginTime" javaType="java.util.Date" />
+	<resultMap id="organizationTypeMap" type="com.weakie.bean.KeyValuePair">
+		<result property="key" column="id" javaType="int"/>
+		<result property="value" column="field_name" javaType="String"/>
+	</resultMap>
+	<resultMap id="titleTypeMap" type="com.weakie.bean.KeyValuePair">
+		<result property="key" column="id" javaType="int"/>
+		<result property="value" column="field_name" javaType="String"/>
+	</resultMap>
+	<resultMap id="majorFieleCatMap" type="com.weakie.bean.KeyValuePair">
+		<result property="key" column="id" javaType="int"/>
+		<result property="value" column="field_name" javaType="String"/>
+	</resultMap>
+	<resultMap id="majorFieleMap" type="com.weakie.bean.KeyValuePair">
+		<result property="key" column="id" javaType="int"/>
+		<result property="value" column="field_name" javaType="String"/>
+	</resultMap>
+	<resultMap id="majorFieleMajorFieldCatMap" type="com.weakie.bean.KeyValuePair">
+		<result property="key" column="id" javaType="int"/>
+		<result property="value" column="field_category" javaType="int"/>
+	</resultMap>
+	<resultMap id="cityProvinceMap" type="com.weakie.bean.KeyValuePair">
+		<result property="key" column="id" javaType="int"/>
+		<result property="value" column="field_province" javaType="int"/>
+	</resultMap>
+	<resultMap id="provinceAbroadMap" type="com.weakie.bean.KeyValuePair">
+		<result property="key" column="id" javaType="int"/>
+		<result property="value" column="field_country" javaType="boolean"/>
+	</resultMap>
+	<resultMap id="cityMap" type="com.weakie.bean.KeyValuePair">
+		<result property="key" column="id" javaType="int"/>
+		<result property="value" column="field_city" javaType="String"/>
+	</resultMap>
+	<resultMap id="provinceMap" type="com.weakie.bean.KeyValuePair">
+		<result property="key" column="id" javaType="int"/>
+		<result property="value" column="field_name" javaType="String"/>
 	</resultMap>
 	
-	<select id="getOrganizationType"  resultType="Map">
+	<select id="getOrganizationType"  resultMap="organizationTypeMap">
     	select * from organization_type;
     </select>
-	<insert id="insertPerson" useGeneratedKeys="true" keyProperty="id">
-		insert into person (userName,nickName,password,role,authority,registerTime,loginTime)
-			values (
-			#{userName},
-			#{nickName},
-			#{password},
-			#{role},
-			#{authority},
-			#{registerTime},
-			#{loginTime}
-			)
-	</insert>
-	<update id="updateNickName" parameterType="Map">
-		update Person set
-		nickName = #{nickName}
-		where userName = #{userName}
-	</update>
-	<update id="updatePassword" statementType="CALLABLE" parameterType="java.util.HashMap">
-	   <![CDATA[
-           {call updatePassword(
-              #{username_in,mode=IN,jdbcType=VARCHAR},
-              #{password_old_in,mode=IN,jdbcType=VARCHAR},
-              #{password_new_in,mode=IN,jdbcType=VARCHAR}
-           )}    
-       ]]>
-	</update>
-	<select id="checkUsernameExist" parameterType="String" resultType="int">
-    	select count(*) from person where userName = #{userName}
+    
+	<select id="getTitleType"  resultMap="titleTypeMap">
+    	select * from title;
     </select>
-	<select id="checkPassword" statementType="CALLABLE" parameterType="java.util.HashMap" resultMap="personMap">
-       <![CDATA[
-           {call checkPassword(
-              #{username_in,mode=IN,jdbcType=VARCHAR},
-              #{password_in,mode=IN,jdbcType=VARCHAR},
-              #{login_time_in,mode=IN,jdbcType=TIMESTAMP}
-           )}    
-       ]]>
+    
+	<select id="getMajorFieldCat"  resultMap="majorFieleCatMap">
+    	select * from major_field_category;
+    </select>
+    
+	<select id="getMajorField" parameterType="int" resultMap="majorFieleMap">
+    	select id,field_name from major_field where field_category = #{majorCate}
+    </select>
+    
+    <select id="getMajorFieldMajorFieldCat"  resultMap="majorFieleMajorFieldCatMap">
+    	select id,field_category from major_field;
+    </select>
+    
+    <select id="getCityProvince"  resultMap="cityProvinceMap">
+    	select id,field_province from working_position where id in
+    	<foreach collection="list" item="classIdList"  open="(" separator="," close=")">  
+        	#{classIdList}  
+     	</foreach>
+    </select>
+    <select id="getProvinceAbroad"  resultMap="provinceAbroadMap">
+    	select id,field_country from province_country where id in
+    	<foreach collection="list" item="classIdList"  open="(" separator="," close=")">  
+        	#{classIdList}  
+     	</foreach>
+    </select>
+    <select id="getCity" parameterType="int" resultMap="cityMap">
+    	select id,field_city from working_position where field_province = #{province_id}
+    </select>
+    <select id="getProvince" parameterType="boolean" resultMap="provinceMap">
+    	select id,field_name from province_country where field_country = #{isAbroad}
+    </select>
+    <select id="getCityNameMap"  resultMap="cityMap">
+    	select id,field_city from working_position where id in
+    	<foreach collection="list" item="classIdList"  open="(" separator="," close=")">  
+        	#{classIdList}  
+     	</foreach>
+    </select>
+    <select id="getProvinceNameMap"  resultMap="provinceMap">
+   		select pc.id,pc.field_name from province_country pc 
+    	where pc.id in
+    	( 
+    		select distinct wp.field_province from working_position wp 
+    		where wp.id in
+    		<foreach collection="list" item="classIdList"  open="(" separator="," close=")">  
+        		#{classIdList}  
+     		</foreach>
+    	)
+    	<!-- 
+    	select pc.id,pc.field_name from province_country pc , working_position wp 
+    	where pc.id = wp.field_province 
+    	and wp.id in
+    	<foreach collection="list" item="classIdList"  open="(" separator="," close=")">  
+        	#{classIdList}  
+     	</foreach>
+     	 -->
     </select>
 </mapper>

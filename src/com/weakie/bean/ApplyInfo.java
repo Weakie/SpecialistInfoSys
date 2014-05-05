@@ -19,6 +19,13 @@ public class ApplyInfo implements java.io.Serializable, Comparable<ApplyInfo>{
 	private int status;
 	private String staffID;
 	
+	public ApplyInfo(){}
+	
+	public ApplyInfo(String userName, String specName, Date applyTime) {
+		this.userName = userName;
+		this.specName = specName;
+		this.applyTime = applyTime;
+	}
 	
 	public ApplyInfo(int id, String userName, String specName, Date applyTime,
 			Date acceptTime, Date disposeTime, int status, String staffID) {

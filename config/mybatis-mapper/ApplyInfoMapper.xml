@@ -2,108 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.weakie.dao.SpecInfoDAO">
+<mapper namespace="com.weakie.dao.ApplyInfoDAO">
 
 	<cache />
 
-	<resultMap id="specInfoMap" type="com.weakie.bean.SpecialistInfoBean" >
+	<resultMap id="applyInfoMap" type="com.weakie.bean.ApplyInfo" >
+		<result property="id" column="id" javaType="int" />
 		<result property="userName" column="username" />
-		<result property="name" column="name" />
-		<result property="sex" column="sex" javaType="boolean" />
-		<result property="birthday" column="birthday" />
-		<result property="email" column="email" />
-		<result property="contact" column="contact" />
-		<result property="organization" column="organization" />
-		<result property="website" column="website" />
-		<result property="role" column="role" />
-		<result property="partTimeJob" column="partTimeJob" />
-		<result property="degree" column="degree" />
-		<result property="language" column="language" />
-		<result property="school" column="school" />
-		<result property="workTime" column="workTime" />
-		<result property="experience" column="experience" />
-		<result property="other" column="other" />
-		
-		<result property="qualificationId" column="qualificationId" javaType="_int" />
-		<result property="titleId" column="titleId" javaType="_int" />
-		<result property="majorId" column="majorId" javaType="_int" />
-		<result property="orgTypeId" column="orgTypeId" javaType="_int" />
-		
-		<result property="state" column="state" javaType="int" />
+		<result property="specName" column="specName" />
+		<result property="status" column="status" javaType="int" />
+		<result property="applyTime" column="applyTime" javaType="java.util.Date" />
+		<result property="acceptTime" column="acceptTime" javaType="java.util.Date" />
+		<result property="disposeTime" column="disposeTime" javaType="java.util.Date" />
+		<result property="staffID" column="staffID" />
 	</resultMap>
 	
-	<select id="selectPositionForSpecInfo" parameterType="String" resultType="int">
-	  SELECT position_id FROM working_position_con WHERE user_name = #{userName}
-	</select>
 	
-	<select id="selectSpecInfo" parameterType="String" resultMap="specInfoMap">
-	  SELECT * FROM spec_info WHERE userName = #{userName}
+	<select id="selectSpecInfo" parameterType="String" resultMap="applyInfoMap">
+	  	SELECT * FROM apply_info WHERE userName = #{userName}
 	</select>
 
-	<insert id="insertSpecInfo" parameterType="com.weakie.bean.SpecialistInfoBean" useGeneratedKeys="true" keyProperty="id">
-		insert into spec_info (userName,name,sex,birthday,email,contact,organization,
-		website,role,partTimeJob,degree,language,school,workTime,experience,other,qualificationId,titleId,majorId,orgTypeId,state)
+	<!-- below is for insert new applyInfo -->
+	<update id="updateStatusOvertime" parameterType="String">
+		UPDATE apply_info SET
+		status = 2
+		WHERE userName = #{userName} AND ( status = 1 OR status = 3 )
+	</update>
+	<insert id="insertApplyInfo" parameterType="com.weakie.bean.ApplyInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into apply_info (userName,specName,applyTime,status)
 			values (
 				#{userName},
-				#{name},
-				#{sex},
-				#{birthday},
-				#{email},
-				#{contact},
-				#{organization},
-				#{website},
-				#{role},
-				#{partTimeJob},
-				#{degree},
-				#{language},
-				#{school},
-				#{workTime},
-				#{experience},
-				#{other},
-				#{qualificationId},
-				#{titleId},
-				#{majorId},
-				#{orgTypeId},
-				#{state}
+				#{specName},
+				#{applyTime},
+				1
 			)
 	</insert>
 	
-	<update id="updateSpecInfo" statementType="CALLABLE" parameterType="java.util.HashMap">
-	   <![CDATA[
-           {call updateSpecInfo(
-              	#{username_in,mode=IN,jdbcType=VARCHAR},
-				#{name_in,mode=IN,jdbcType=VARCHAR}, 
-				#{sex_in,mode=IN,jdbcType=BIT}, 
-				#{birthday_in,mode=IN,jdbcType=VARCHAR}, 
-				#{email_in,mode=IN,jdbcType=VARCHAR},
-				#{contact_in,mode=IN,jdbcType=VARCHAR}, 
-				#{organization_in,mode=IN,jdbcType=VARCHAR}, 
-				#{website_in,mode=IN,jdbcType=VARCHAR}, 
-				#{role_in,mode=IN,jdbcType=VARCHAR}, 
-				#{part_time_job_in,mode=IN,jdbcType=CLOB}, 
-				#{degree_in,mode=IN,jdbcType=VARCHAR}, 
-				#{language_in,mode=IN,jdbcType=VARCHAR}, 
-				#{school_in,mode=IN,jdbcType=VARCHAR}, 
-				#{work_time_in,mode=IN,jdbcType=VARCHAR}, 
-				#{experience_in,mode=IN,jdbcType=CLOB}, 
-				#{other_in,mode=IN,jdbcType=VARCHAR}, 
-				
-				#{org_type_id_in,mode=IN,jdbcType=INTEGER}, 
-				#{qualification_id_in,mode=IN,jdbcType=INTEGER}, 
-				#{title_id_in,mode=IN,jdbcType=INTEGER}, 
-				#{major_id_in,mode=IN,jdbcType=INTEGER}, 
-				
-				#{state_in,mode=IN,jdbcType=INTEGER}, 
-				
-              	#{position_in,mode=IN,jdbcType=VARCHAR},
-              	#{pos_length_in,mode=IN,jdbcType=INTEGER}
-           )}    
-       ]]>
+	<!-- below is for accept the applyInfo -->
+	<update id="updateApplyInfoForAccept" parameterType="Map" >
+		UPDATE apply_info SET
+			acceptTime 	= #{acceptTime},
+			staffId 	= #{staffId},
+			status 		= 3
+		WHERE 
+			id 		 = 	#{id} 	   AND 
+			status 	 = 	1
 	</update>
+	<select id="selectApplyInfoForAccept" parameterType="Map" resultMap="applyInfoMap">
+	  	SELECT * FROM apply_info 
+	 	WHERE 
+		  	id		 = 	#{id} 	   AND 
+		  	staffId  = 	#{staffId} AND 
+		  	status   = 	3
+	</select>
 	
-	<update id="updateState" parameterType="Map">
-		update spec_info set
-		state = #{state}
-		where userName = #{userName}
+	<!-- below is for disposed the applyInfo -->
+	<update id="updateApplyInfoForDisposed" parameterType="Map" >
+		UPDATE apply_info SET
+			disposeTime	= #{disposeTime},
+			status 		= 4
+		WHERE 
+			id 		 = 	#{id} 	   AND 
+			staffId  = 	#{staffId} AND
+			status 	 = 	3
 	</update>
 </mapper>

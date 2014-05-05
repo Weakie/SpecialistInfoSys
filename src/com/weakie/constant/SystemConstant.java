@@ -11,4 +11,8 @@ public class SystemConstant {
 	public static final String SUCCESS="SUCCESS";
 	public static final String FAIL="FAIL";
 	
+	public static final int SPECINFO_NEW = 1;
+	public static final int SPECINFO_CONFIRMING = 2;
+	public static final int SPECINFO_CONFIRMED = 3;
+	
 }

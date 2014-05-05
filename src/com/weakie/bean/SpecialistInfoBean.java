@@ -312,6 +312,10 @@ public class SpecialistInfoBean implements java.io.Serializable{
 				+ experience + ", other=" + other + ", state=" + state + "]";
 	}
 	
+	/**
+	 * for database update
+	 * @return
+	 */
 	public Map<String, Object> getMapValues() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("username_in", this.userName);
@@ -337,6 +341,14 @@ public class SpecialistInfoBean implements java.io.Serializable{
 		map.put("major_id_in", this.majorId);
 		map.put("state_in", this.state);
 		
+		StringBuilder sb = new StringBuilder();
+		int length = 0;
+		for(int pos:this.getWorkPositionId()){
+			sb.append(","+pos);
+			length++;
+		}
+		map.put("position_in", (length==0? "" : sb.substring(1)));
+		map.put("pos_length_in", length);
 		return map;
 	}
 }

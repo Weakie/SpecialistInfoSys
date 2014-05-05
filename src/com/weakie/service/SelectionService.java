@@ -60,7 +60,7 @@ public interface SelectionService {
 	 * @param provinceList
 	 * @return key-province value-isAbroad
 	 */
-	public ReadOnlyMap<Integer,Boolean> getAbroadProvinceMap(List<Integer> provinceList);
+	public ReadOnlyMap<Integer,Boolean> getProvinceAbroadMap(List<Integer> provinceList);
 	
 	/**
 	 * 根据城市获相应城市id-name的映射

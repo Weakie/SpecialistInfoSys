@@ -1,6 +1,8 @@
 package com.weakie.bean;
 
 import java.util.Date;
+
+import com.weakie.constant.UserAccountConstant;
 /**
  * 账户信息类
  * @author weakie E-mail:weakielin@gmail.com
@@ -20,6 +22,18 @@ public class Person implements java.io.Serializable
 	private Date loginTime;	//上次登录时间
 	
 	public Person(){}
+	
+	public Person(String userName, String password, int role, int authority,
+			Date registerTime) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.role = role;
+		this.authority = authority;
+		this.registerTime = registerTime;
+		this.nickName = UserAccountConstant.DEFAULT_NICKNAME;
+	}
+
 	public Person(String userName, int role, int authority, Date registerTime,
 			Date loginTime) {
 		this.userName = userName;

@@ -189,7 +189,7 @@ public class SelectionServiceTest implements SelectionService {
 	}
 
 	@Override
-	public ReadOnlyMap<Integer, Boolean> getAbroadProvinceMap(List<Integer> provinceList) {
+	public ReadOnlyMap<Integer, Boolean> getProvinceAbroadMap(List<Integer> provinceList) {
 		Map<Integer, Boolean> abroadProMap = new HashMap<Integer, Boolean>();
 		for (int i : provinceList) {
 			if (i > 5) {

@@ -16,6 +16,11 @@
 		<result property="loginTime" column="loginTime" javaType="java.util.Date" />
 	</resultMap>
 	
+	<resultMap id="nickNameMap" type="com.weakie.bean.KeyValuePair">
+		<result property="key" column="userName" javaType="String"/>
+		<result property="value" column="nickName" javaType="String"/>
+	</resultMap>
+	
 	<insert id="insertPerson" useGeneratedKeys="true" keyProperty="id">
 		insert into person (userName,nickName,password,role,authority,registerTime,loginTime)
 			values (
@@ -53,5 +58,15 @@
               #{login_time_in,mode=IN,jdbcType=TIMESTAMP}
            )}    
        ]]>
+    </select>
+    
+    <select id="getStaffNickName"  resultMap="nickNameMap">
+    	select userName,nickName from Person where userName in
+    	<foreach collection="list" item="classIdList"  open="(" separator="," close=")">  
+        	#{classIdList}  
+     	</foreach>
+    </select>
+    <select id="getStaffNickNameByUserName" parameterType="String" resultType="String">
+    	select userName,nickName from Person where userName = #{userName}
     </select>
 </mapper>

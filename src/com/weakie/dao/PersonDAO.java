@@ -1,11 +1,15 @@
 package com.weakie.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.weakie.bean.KeyValuePair;
 import com.weakie.bean.Person;
 import com.weakie.util.log.LogUtil;
 
@@ -89,5 +93,37 @@ public class PersonDAO extends AbstractBaseDao {
 		  session.close();
 		}
 		return result;	
+	}
+	
+	public Map<String,String> getStuffNickName(Set<String> staffId){
+		SqlSession session = getSession();
+		Map<String,String> result = new HashMap<String,String>();
+		List<KeyValuePair> list = null;
+		try {
+			list = session.selectList("com.weakie.dao.PersonDAO.getStaffNickName",new ArrayList<String>(staffId));
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		if(list!=null){
+			for(KeyValuePair pair:list){
+				result.put((String)pair.getKey(), (String)pair.getValue());
+			}
+		}
+		return result;
+	}
+	
+	public String getStuffNickName(String staffId){
+		SqlSession session = getSession();
+		String result = null;
+		try {
+			result = session.selectOne("com.weakie.dao.PersonDAO.getStaffNickNameByUserName",staffId);
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		return result;
 	}
 }

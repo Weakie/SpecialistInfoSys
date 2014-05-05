@@ -1,22 +1,23 @@
 package com.weakie.bean;
 
-public class KeyValuePair {
-
-	private Integer key;
+public class KeyValuePair implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	private Object key;
 	private Object value;
 	
 	public KeyValuePair() {
 		super();
 	}
-	public KeyValuePair(Integer key, Object value) {
+	public KeyValuePair(Object key, Object value) {
 		super();
 		this.key = key;
 		this.value = value;
 	}
-	public Integer getKey() {
+	public Object getKey() {
 		return key;
 	}
-	public void setKey(Integer key) {
+	public void setKey(Object key) {
 		this.key = key;
 	}
 	public Object getValue() {

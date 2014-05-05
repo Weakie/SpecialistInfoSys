@@ -44,15 +44,7 @@ public class SpecInfoDAO extends AbstractBaseDao {
 	
 	public int updateSpecInfo(SpecialistInfoBean specInfo){
 		SqlSession session = getSession();
-		StringBuilder sb = new StringBuilder();
-		int length = 0;
-		for(int pos:specInfo.getWorkPositionId()){
-			sb.append(","+pos);
-			length++;
-		}
 		Map<String,Object> param = specInfo.getMapValues();
-		param.put("position_in", (length==0? "" : sb.substring(1)));
-		param.put("pos_length_in", length);
 		int result = 0;
 		try {
 			session.update("com.weakie.dao.SpecInfoDAO.updateSpecInfo", param);

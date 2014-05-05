@@ -62,7 +62,7 @@ public class SpecialistInfoAddPrepareAction extends ActionSupport {
 	    	this.workPosNum = this.specInfoBean.getWorkPositionId().size();
 	    	this.majorClassId = this.selectService.getMajorClassIdByMajorId(this.specInfoBean.getMajorId());	//根据专业获得专业大类id
 	    	this.cityProMap = this.selectService.getCityProvinceMap(this.specInfoBean.getWorkPositionId());		//根据城市获得城市-省映射
-	    	this.proAbroMap = this.selectService.getAbroadProvinceMap(new ArrayList<Integer>(this.cityProMap.values()));//根据省获得省-国内外映射
+	    	this.proAbroMap = this.selectService.getProvinceAbroadMap(new ArrayList<Integer>(this.cityProMap.values()));//根据省获得省-国内外映射
 	    	//获取相应名称
 	    	this.cityNameMap = this.selectService.getCityNameMap(this.specInfoBean.getWorkPositionId());
 	    	this.provNameMap = this.selectService.getProvNameMap(this.specInfoBean.getWorkPositionId());

@@ -40,6 +40,10 @@
 	  SELECT * FROM spec_info WHERE userName = #{userName}
 	</select>
 
+	<select id="selectSpecInfoForUpdate" parameterType="String" resultType="int">
+	  SELECT id FROM spec_info WHERE userName = #{userName} FOR UPDATE
+	</select>
+	
 	<insert id="insertSpecInfo" parameterType="com.weakie.bean.SpecialistInfoBean" useGeneratedKeys="true" keyProperty="id">
 		insert into spec_info (userName,name,sex,birthday,email,contact,organization,
 		website,role,partTimeJob,degree,language,school,workTime,experience,other,qualificationId,titleId,majorId,orgTypeId,state)

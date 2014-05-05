@@ -20,5 +20,7 @@
   <mappers>
     <mapper resource="mybatis-mapper/PersonMapper.xml"/>
     <mapper resource="mybatis-mapper/SpecialistInfoMapper.xml"/>
+    <mapper resource="mybatis-mapper/SelectionMapper.xml"/>
+    <mapper resource="mybatis-mapper/ApplyInfoMapper.xml"/>
   </mappers>
 </configuration>
