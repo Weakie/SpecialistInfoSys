@@ -12,4 +12,6 @@ public interface SpecialistInfoService {
 	public SpecialistInfoBean getSpecialistInfoByUsername(String UserName);
 
 	public int updateSpecialistInfo(SpecialistInfoBean bean);
+	
+	public int insertNewSpecialistInfo(String userName);
 }

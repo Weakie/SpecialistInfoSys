@@ -21,6 +21,12 @@ public class ApplyInfo implements java.io.Serializable, Comparable<ApplyInfo>{
 	
 	public ApplyInfo(){}
 	
+	/**
+	 * insert  into DB
+	 * @param userName
+	 * @param specName
+	 * @param applyTime
+	 */
 	public ApplyInfo(String userName, String specName, Date applyTime) {
 		this.userName = userName;
 		this.specName = specName;
@@ -106,5 +112,11 @@ public class ApplyInfo implements java.io.Serializable, Comparable<ApplyInfo>{
 		return 0;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "ApplyInfo [id=" + id + ", userName=" + userName + ", specName="
+				+ specName + ", applyTime=" + applyTime + ", acceptTime="
+				+ acceptTime + ", disposeTime=" + disposeTime + ", status="
+				+ status + ", staffID=" + staffID + "]";
+	}
 }

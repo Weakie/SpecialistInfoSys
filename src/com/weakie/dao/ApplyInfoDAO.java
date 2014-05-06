@@ -8,26 +8,74 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.weakie.bean.ApplyInfo;
-import com.weakie.bean.SpecialistInfoBean;
 import com.weakie.util.log.LogUtil;
 
 public class ApplyInfoDAO extends AbstractBaseDao {
 
-	public SpecialistInfoBean selectSpecInfo(String userName){
+	public List<ApplyInfo> selectApplyInfo(int begin,int number){
 		SqlSession session = getSession();
-		SpecialistInfoBean p = null;
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("begin", begin);
+		param.put("number", number);
+		List<ApplyInfo> list = null;
 		try {
-			p = session.selectOne("com.weakie.dao.SpecInfoDAO.selectSpecInfo", userName);
-			if(p!=null){
-				List<Integer> pos = session.selectList("com.weakie.dao.SpecInfoDAO.selectPositionForSpecInfo", userName);
-				p.setWorkPositionId(pos);
-			}
+			list = session.selectList("com.weakie.dao.ApplyInfoDAO.selectApplyInfo", param);
 		} catch(Exception e){
 			LogUtil.error(e);
 		} finally {
 		  session.close();
 		}
-		return p;
+		return list;
+	}
+	
+	public List<ApplyInfo> selectApplyInfoOfNew(int begin,int number){
+		SqlSession session = getSession();
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("begin", begin);
+		param.put("number", number);
+		List<ApplyInfo> list = null;
+		try {
+			list = session.selectList("com.weakie.dao.ApplyInfoDAO.selectApplyInfoNew", param);
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		return list;
+	}
+	
+	public List<ApplyInfo> selectApplyInfoOfAccepted(String staffID,int begin,int number){
+		SqlSession session = getSession();
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("begin", begin);
+		param.put("number", number);
+		param.put("staffID", staffID);
+		List<ApplyInfo> list = null;
+		try {
+			list = session.selectList("com.weakie.dao.ApplyInfoDAO.selectApplyInfoACCEPTED", param);
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		return list;
+	}
+	
+	public List<ApplyInfo> selectApplyInfoOfDisposed(String staffID,int begin,int number){
+		SqlSession session = getSession();
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("begin", begin);
+		param.put("number", number);
+		param.put("staffID", staffID);
+		List<ApplyInfo> list = null;
+		try {
+			list = session.selectList("com.weakie.dao.ApplyInfoDAO.selectApplyInfoDISPOSED", param);
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		return list;
 	}
 	
 	public int insertApplyInfo(ApplyInfo applyInfo){

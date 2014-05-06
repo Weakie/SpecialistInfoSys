@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.weakie.constant.SpecInfoConstant;
+
 public class SpecialistInfoBean implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -31,16 +33,16 @@ public class SpecialistInfoBean implements java.io.Serializable{
 	private String experience;	//项目经历
 	private String other;		//其他
 	
-	private int qualificationId;//执业职格：add
+	private Integer qualificationId;//执业职格：add
 	private String qualification;//职业资格;show
 	
-	private int titleId;		//职称：add
+	private Integer titleId;		//职称：add
 	private String title;		//职称;show
 	
-	private int majorId;		//专业方向：add
+	private Integer majorId;		//专业方向：add
 	private String major;		//专业方向：建筑:公共建筑;show
 	
-	private int orgTypeId;		//单位性质：add
+	private Integer orgTypeId;		//单位性质：add
 	private String orgType;		//单位性质 ：show
 	
 	private List<Integer> workPositionId;	//工作地点:add
@@ -50,6 +52,15 @@ public class SpecialistInfoBean implements java.io.Serializable{
 	
 	public SpecialistInfoBean(){};
 	
+	/**
+	 * for register insert to DB
+	 * @param userName
+	 */
+	public SpecialistInfoBean(String userName){
+		this.userName = userName;
+		this.sex = SpecInfoConstant.DEFAULT_SEX;
+		this.state = SpecInfoConstant.DEFAULT_STATUS;
+	}
 	public SpecialistInfoBean(String userName, String name, boolean sex,
 			String birthday, String email, String contact, String organization,
 			String website, String role, String partTimeJob, String degree,
@@ -183,10 +194,10 @@ public class SpecialistInfoBean implements java.io.Serializable{
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public int getOrgTypeId() {
+	public Integer getOrgTypeId() {
 		return orgTypeId;
 	}
-	public void setOrgTypeId(int orgTypeId) {
+	public void setOrgTypeId(Integer orgTypeId) {
 		this.orgTypeId = orgTypeId;
 	}
 	public String getOrgType() {
@@ -240,10 +251,10 @@ public class SpecialistInfoBean implements java.io.Serializable{
 	public void setWorkTime(String workTime) {
 		this.workTime = workTime;
 	}
-	public int getQualificationId() {
+	public Integer getQualificationId() {
 		return qualificationId;
 	}
-	public void setQualificationId(int qualificationId) {
+	public void setQualificationId(Integer qualificationId) {
 		this.qualificationId = qualificationId;
 	}
 	public String getQualification() {
@@ -252,10 +263,10 @@ public class SpecialistInfoBean implements java.io.Serializable{
 	public void setQualification(String qualification) {
 		this.qualification = qualification;
 	}
-	public int getTitleId() {
+	public Integer getTitleId() {
 		return titleId;
 	}
-	public void setTitleId(int titleId) {
+	public void setTitleId(Integer titleId) {
 		this.titleId = titleId;
 	}
 	public String getTitle() {
@@ -264,10 +275,10 @@ public class SpecialistInfoBean implements java.io.Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getMajorId() {
+	public Integer getMajorId() {
 		return majorId;
 	}
-	public void setMajorId(int majorId) {
+	public void setMajorId(Integer majorId) {
 		this.majorId = majorId;
 	}
 	public String getMajor() {

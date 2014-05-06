@@ -32,7 +32,7 @@
 					</c:if>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="#">你好, 244161716</a>
+							<a href="#">你好, ${sessionScope.USER.nickName}</a>
 						</li>
 						<li>
 							<a href="#"><span class="badge pull-right">42</span>系统消息</a>

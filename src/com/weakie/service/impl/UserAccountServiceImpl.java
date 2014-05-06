@@ -1,6 +1,8 @@
 package com.weakie.service.impl;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
 import java.util.Set;
 
 import com.weakie.bean.Person;
@@ -35,14 +37,16 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 	@Override
 	public ReadOnlyMap<String, String> getStaffNiceNameMap(Set<String> staffId) {
-		// TODO Auto-generated method stub
-		return null;
+		if(staffId.isEmpty()){
+			Map<String,String> tmp = Collections.emptyMap();
+			return new ReadOnlyMap<String,String>(tmp);
+		}
+		return new ReadOnlyMap<String,String>(this.personDAO.getStuffNickName(staffId));
 	}
 
 	@Override
 	public String getStaffNicmName(String staffId) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.personDAO.getStuffNickName(staffId);
 	}
 
 	public void setPersonDAO(PersonDAO personDAO) {

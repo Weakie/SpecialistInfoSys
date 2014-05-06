@@ -93,7 +93,7 @@ public class SpecialistInfoImageAction extends ActionSupport {
 				LogUtil.error(e);
 			}
 		}else{
-			this.inputStream = null;
+			this.inputStream = new ByteArrayInputStream("No Picture".getBytes());;
 		}
 		return SUCCESS;
 	}

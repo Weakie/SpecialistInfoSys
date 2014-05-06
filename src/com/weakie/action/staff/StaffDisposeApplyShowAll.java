@@ -1,7 +1,6 @@
 package com.weakie.action.staff;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.weakie.bean.ApplyInfo;
 import com.weakie.service.ApplyInfoService;
 import com.weakie.service.UserAccountService;
+import com.weakie.util.log.LogUtil;
 
 public class StaffDisposeApplyShowAll extends ActionSupport {
  
@@ -30,13 +30,15 @@ public class StaffDisposeApplyShowAll extends ActionSupport {
     
     //method
 	public String execute() throws Exception{
+		LogUtil.info("staffId:"+staffId+" ,pageIndex:"+pageIndex+" ,status:"+status);
     	this.applyInfo = this.applyInfoService.getApplyInfos(staffId, status, pageIndex);
-    	Collections.sort(this.applyInfo);
+    	//get staffId
     	Set<String> staffIdSet = new HashSet<String>();
     	for(ApplyInfo info:applyInfo){
     		staffIdSet.add(info.getStaffID());
     	}
     	this.staffIdNameMap = this.userAccountService.getStaffNiceNameMap(staffIdSet);
+    	this.generatePages();
         return SUCCESS;
     }
 
@@ -45,21 +47,6 @@ public class StaffDisposeApplyShowAll extends ActionSupport {
 	}
 	
 	public List<Integer> getPages() {
-		this.pages = new ArrayList<Integer>();
-		if(this.pageIndex==1){
-			this.pages.add(1);
-			for(int i=0;i<6;i++){
-				this.pages.add(i+this.pageIndex);
-			}
-		} else if(this.pageIndex%5==0){
-			for(int i=-5;i<2;i++){
-				this.pages.add(i+this.pageIndex);
-			}
-		} else if(this.pageIndex%5==1){
-			for(int i=-1;i<6;i++){
-				this.pages.add(i+this.pageIndex);
-			}
-		}
 		return pages;
 	}
 	
@@ -93,4 +80,27 @@ public class StaffDisposeApplyShowAll extends ActionSupport {
 	}
 
  
+	private void generatePages(){
+		this.pages = new ArrayList<Integer>();
+		if(this.pageIndex<=1){
+			this.pages.add(1);
+			for(int i=0;i<6;i++){
+				this.pages.add(i+this.pageIndex);
+			}
+		} else if(this.pageIndex%5==0){
+			for(int i=-5;i<2;i++){
+				this.pages.add(i+this.pageIndex);
+			}
+		} else if(this.pageIndex%5==1){
+			for(int i=-1;i<6;i++){
+				this.pages.add(i+this.pageIndex);
+			}
+		} else {
+			int begin = this.pageIndex-this.pageIndex%5;
+			for(int i=0;i<7;i++){
+				this.pages.add(i+begin);
+			}
+		}
+		LogUtil.debug("pageIndex:"+pageIndex+" ,Pahes: "+pages);
+	}
 }

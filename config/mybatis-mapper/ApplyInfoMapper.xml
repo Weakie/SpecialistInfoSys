@@ -18,8 +18,33 @@
 	</resultMap>
 	
 	
-	<select id="selectSpecInfo" parameterType="String" resultMap="applyInfoMap">
-	  	SELECT * FROM apply_info WHERE userName = #{userName}
+	<select id="selectApplyInfo" parameterType="Map" resultMap="applyInfoMap">
+	  	SELECT * FROM apply_info 
+	  	ORDER BY applyTime DESC 
+	  	LIMIT #{begin},#{number};
+	</select>
+	
+	<select id="selectApplyInfoNew" parameterType="Map" resultMap="applyInfoMap">
+	  	SELECT * FROM apply_info 
+	  	WHERE status = 1
+	  	ORDER BY applyTime DESC 
+	  	LIMIT #{begin},#{number};
+	</select>
+	
+	<select id="selectApplyInfoACCEPTED" parameterType="Map" resultMap="applyInfoMap">
+	  	SELECT * FROM apply_info 
+	  	WHERE ( status = 2 OR status = 3 )
+	  			AND staffID = #{staffID} 
+	  	ORDER BY acceptTime DESC 
+	  	LIMIT #{begin},#{number};
+	</select>
+	
+	<select id="selectApplyInfoDISPOSED" parameterType="Map" resultMap="applyInfoMap">
+	  	SELECT * FROM apply_info 
+	  	WHERE 	status = 4
+	  		AND staffID = #{staffID} 
+	  	ORDER BY applyTime DESC 
+	  	LIMIT #{begin},#{number};
 	</select>
 
 	<!-- below is for insert new applyInfo -->

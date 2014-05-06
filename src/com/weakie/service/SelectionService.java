@@ -40,9 +40,9 @@ public interface SelectionService {
 	
 	/**
 	 * 根据专业方向获得所属的专业大类id
-	 * @return
+	 * @return null if not exist
 	 */
-	public int getMajorClassIdByMajorId(int majorId);
+	public Integer getMajorClassIdByMajorId(Integer majorId);
 	
 	public ReadOnlyMap<Integer,String> getOrgType();
 	public ReadOnlyMap<Integer,String> getQualification();

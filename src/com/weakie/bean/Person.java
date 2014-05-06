@@ -23,6 +23,14 @@ public class Person implements java.io.Serializable
 	
 	public Person(){}
 	
+	/**
+	 * for register. insert into DB
+	 * @param userName
+	 * @param password
+	 * @param role
+	 * @param authority
+	 * @param registerTime
+	 */
 	public Person(String userName, String password, int role, int authority,
 			Date registerTime) {
 		super();
@@ -31,6 +39,7 @@ public class Person implements java.io.Serializable
 		this.role = role;
 		this.authority = authority;
 		this.registerTime = registerTime;
+		this.loginTime = registerTime;
 		this.nickName = UserAccountConstant.DEFAULT_NICKNAME;
 	}
 

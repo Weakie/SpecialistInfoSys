@@ -44,4 +44,10 @@ public class SpecialistInfoServiceTest implements SpecialistInfoService {
 		return 0;
 	}
 
+	@Override
+	public int insertNewSpecialistInfo(String userName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

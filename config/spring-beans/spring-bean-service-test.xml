@@ -8,6 +8,9 @@
 	<bean name="selectionService" class="com.weakie.service.impl.test.SelectionServiceTest" >
 	</bean>
 	<bean name="userAccountService" class="com.weakie.service.impl.test.UserAccountServiceTest" >
+		<property name="personDAO">
+			<ref bean="personDAO" />
+		</property>
 	</bean>
 	<bean name="applyInfoService" class="com.weakie.service.impl.test.ApplyInfoServiceTest" >
 	</bean>

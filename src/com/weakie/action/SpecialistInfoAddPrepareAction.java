@@ -53,52 +53,74 @@ public class SpecialistInfoAddPrepareAction extends ActionSupport {
      * @throws Exception
      */
     public String executePrepare() {
-    	userName="hahaha";
     	LogUtil.debug("prepare action.");
+
+    	this.orgTypeMap = this.selectService.getOrgType();
+        this.qualificationMap = this.selectService.getQualification();
+        this.titleMap = this.selectService.getTitle();
+        
     	this.specInfoBean = this.specInfoService.getSpecialistInfoByUsername(userName);
     	if(specInfoBean!=null){
     		LogUtil.info("bean is not null: "+userName+", update info.");
-    		this.contactNum = this.specInfoBean.getContactMap().size();
-	    	this.workPosNum = this.specInfoBean.getWorkPositionId().size();
-	    	this.majorClassId = this.selectService.getMajorClassIdByMajorId(this.specInfoBean.getMajorId());	//根据专业获得专业大类id
-	    	this.cityProMap = this.selectService.getCityProvinceMap(this.specInfoBean.getWorkPositionId());		//根据城市获得城市-省映射
-	    	this.proAbroMap = this.selectService.getProvinceAbroadMap(new ArrayList<Integer>(this.cityProMap.values()));//根据省获得省-国内外映射
-	    	//获取相应名称
-	    	this.cityNameMap = this.selectService.getCityNameMap(this.specInfoBean.getWorkPositionId());
-	    	this.provNameMap = this.selectService.getProvNameMap(this.specInfoBean.getWorkPositionId());
+    		this.contactNum = this.specInfoBean.getContactMap().size()==0? 1 : this.specInfoBean.getContactMap().size();
+	    	this.workPosNum = this.specInfoBean.getWorkPositionId().size()==0? 1 : this.specInfoBean.getWorkPositionId().size();
 	    	
-	    	int cityId = 0;
-	    	try{
-	    		cityId = this.specInfoBean.getWorkPositionId().get(0);
-	    	}catch(java.lang.NullPointerException e){
-	    		LogUtil.error(e);
+	    	//
+	    	if(specInfoBean.getWorkPositionId().size() != 0){
+		    	this.cityProMap = this.selectService.getCityProvinceMap(this.specInfoBean.getWorkPositionId());		//根据城市获得城市-省映射
+		    	this.proAbroMap = this.selectService.getProvinceAbroadMap(new ArrayList<Integer>(this.cityProMap.values()));//根据省获得省-国内外映射
+		    	//获取相应名称
+		    	this.cityNameMap = this.selectService.getCityNameMap(this.specInfoBean.getWorkPositionId());
+		    	this.provNameMap = this.selectService.getProvNameMap(this.specInfoBean.getWorkPositionId());
+		    	
+		    	int cityId = 0;
+		    	try{
+		    		cityId = this.specInfoBean.getWorkPositionId().get(0);
+		    	}catch(java.lang.NullPointerException e){
+		    		LogUtil.error(e);
+		    	}
+		    	int firstProvinceId = this.cityProMap.get(cityId);
+		    	LogUtil.debug("first cityid: " + cityId +" ,provinceid: "+firstProvinceId+" , "+this.provNameMap.get(firstProvinceId));
+		    	//这里取值应该与specialistInfoBean的值有关
+		    	this.provinceMap = this.selectService.getProvince(this.proAbroMap.get(firstProvinceId));
+		        this.cityMap = this.selectService.getCity(firstProvinceId);
+	    	}else{
+	    		LogUtil.info("work position id is not initialized");
+		    	this.provinceMap = this.selectService.getProvince(false);
+		    	//这里参数应该与provinceMap第一个值对应的数据有关
+		    	int firstProvinceId = this.provinceMap.keySet().iterator().next();
+		        this.cityMap = this.selectService.getCity(firstProvinceId);
 	    	}
-	    	int firstProvinceId = this.cityProMap.get(cityId);
-	    	LogUtil.debug("first cityid: " + cityId +" ,provinceid: "+firstProvinceId+" , "+this.provNameMap.get(firstProvinceId));
-	    	//这里取值应该与specialistInfoBean的值有关
-	    	this.provinceMap = this.selectService.getProvince(this.proAbroMap.get(firstProvinceId));
-	        this.cityMap = this.selectService.getCity(firstProvinceId);
-	        
-	        this.majorClassMap = this.selectService.getMajorClass();
-	        this.majorMap = this.selectService.getMajor(this.majorClassId);
+	    	
+	    	//
+	    	Object id = this.selectService.getMajorClassIdByMajorId(this.specInfoBean.getMajorId());	//根据专业获得专业大类id
+	    	if(id != null){
+		    	this.majorClassId = (Integer)id;
+		        this.majorClassMap = this.selectService.getMajorClass();
+		        this.majorMap = this.selectService.getMajor(this.majorClassId);
+	    	}else{
+	    		LogUtil.info("major id is not initialized");
+	    		this.majorClassMap = this.selectService.getMajorClass();
+	 	        //这里参数应该与majorClassMap第一个值对应的数据有关
+	 	        int firstMajorId = (this.majorClassMap.keySet().iterator().hasNext()?this.majorClassMap.keySet().iterator().next():2);
+	 	        this.majorMap = this.selectService.getMajor(firstMajorId);
+	    	}
     	}else{
-    		LogUtil.info("bean is null: "+userName+", add info.");
+    		LogUtil.info("bean is not initialized: "+userName+", add info.");
+    		
+    		//
 	    	this.provinceMap = this.selectService.getProvince(false);
 	    	//这里参数应该与provinceMap第一个值对应的数据有关
 	    	int firstProvinceId = this.provinceMap.keySet().iterator().next();
 	        this.cityMap = this.selectService.getCity(firstProvinceId);
-	        
+	        LogUtil.debug("firstprovinceId: "+firstProvinceId);
+	        //
 	        this.majorClassMap = this.selectService.getMajorClass();
 	        //这里参数应该与majorClassMap第一个值对应的数据有关
 	        int firstMajorId = (this.majorClassMap.keySet().iterator().hasNext()?this.majorClassMap.keySet().iterator().next():2);
 	        this.majorMap = this.selectService.getMajor(firstMajorId);
 	        LogUtil.debug("firstMajorId: "+firstMajorId);
     	}
-    	
-        this.orgTypeMap = this.selectService.getOrgType();
-        this.qualificationMap = this.selectService.getQualification();
-        this.titleMap = this.selectService.getTitle();
-        
         return SUCCESS;
     }
     
@@ -132,7 +154,10 @@ public class SpecialistInfoAddPrepareAction extends ActionSupport {
     		for(int i:majorMap.keySet()){
     			sb.append(i+":"+majorMap.get(i)+";");
     		}
-    		String result = sb.substring(0, sb.length()-1);//"1:公共建筑;2:别墅"
+    		String result = "";
+    		if(sb.length()>0){
+    			result = sb.substring(0, sb.length()-1);//"1:公共建筑;2:别墅"
+    		}
     		this.inputStream = new ByteArrayInputStream(result.getBytes("UTF-8"));
     	}
         return SUCCESS;

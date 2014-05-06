@@ -174,7 +174,7 @@ public class SelectionServiceTest implements SelectionService {
 	}
 
 	@Override
-	public int getMajorClassIdByMajorId(int majorId) {
+	public Integer getMajorClassIdByMajorId(Integer majorId) {
 
 		return (majorId + 4) / 5;
 	}

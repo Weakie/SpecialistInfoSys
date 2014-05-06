@@ -6,7 +6,8 @@
 
 	<import resource="spring-bean-threadpool.xml"/>
 	<import resource="spring-bean-action.xml"/>
-	<import resource="spring-bean-service-test.xml"/>
+	<import resource="spring-bean-service.xml"/>
+	<import resource="spring-bean-dao.xml"/>
 	
 	<!-- 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">

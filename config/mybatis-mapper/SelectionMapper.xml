@@ -14,6 +14,10 @@
 		<result property="key" column="id" javaType="int"/>
 		<result property="value" column="field_name" javaType="String"/>
 	</resultMap>
+	<resultMap id="qualificationMap" type="com.weakie.bean.KeyValuePair">
+		<result property="key" column="id" javaType="int"/>
+		<result property="value" column="field_name" javaType="String"/>
+	</resultMap>
 	<resultMap id="majorFieleCatMap" type="com.weakie.bean.KeyValuePair">
 		<result property="key" column="id" javaType="int"/>
 		<result property="value" column="field_name" javaType="String"/>
@@ -49,6 +53,10 @@
     
 	<select id="getTitleType"  resultMap="titleTypeMap">
     	select * from title;
+    </select>
+    
+    <select id="getQualification"  resultMap="qualificationMap">
+    	select * from qualification;
     </select>
     
 	<select id="getMajorFieldCat"  resultMap="majorFieleCatMap">

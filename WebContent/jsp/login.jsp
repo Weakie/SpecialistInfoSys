@@ -47,7 +47,7 @@ window.onload=function()
 <div class="container">
 	<div class="row clearfix">
 	<div class="col-md-12 column">
-			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<nav class="navbar navbar-default navbar-fixed-top" >
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 					<a class="navbar-brand" href="login.jsp">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同济专家信息库&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
@@ -56,10 +56,10 @@ window.onload=function()
 					
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="register.jsp">注册</a>
+							<a href="/SpecialistInfoSys/jsp/register.jsp">注册</a>
 						</li>
 						<li>
-							<a href="login.jsp">登录</a>
+							<a href="/SpecialistInfoSys/jsp/login.jsp">登录</a>
 						</li>
 					</ul>
 				</div>
@@ -74,7 +74,7 @@ window.onload=function()
 				</div>
 				<div class="col-md-4 column">
 					<br><br>
-					<form action="/SpecialistInfoSys/login.action" method="post" class="form-horizontal" role="form" >
+					<form action="/SpecialistInfoSys/login.action" method="post" class="form-horizontal" >
 						<s:property value="messageStore.message" />
 						<div class="form-group">
 							<label for="userName" class="col-sm-3 control-label">用户名</label>

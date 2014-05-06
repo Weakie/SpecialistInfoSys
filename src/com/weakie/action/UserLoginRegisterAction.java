@@ -8,6 +8,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.weakie.bean.MessageStore;
 import com.weakie.bean.Person;
 import com.weakie.constant.SystemConstant;
+import com.weakie.service.SpecialistInfoService;
 import com.weakie.service.UserAccountService;
 import com.weakie.util.log.LogUtil;
 
@@ -24,6 +25,7 @@ public class UserLoginRegisterAction extends ActionSupport {
     private MessageStore messageStore;
     //spring
     private UserAccountService accountService;
+    private SpecialistInfoService specInfoService;
     
     public InputStream getInputStream() {
         return inputStream;
@@ -43,6 +45,7 @@ public class UserLoginRegisterAction extends ActionSupport {
     	LogUtil.debug("register: "+userName);
     	try {
 			if(accountService.register(userName, password)){
+				this.specInfoService.insertNewSpecialistInfo(userName);
 				return SUCCESS;
 			}else{
 				messageStore = new MessageStore("×¢²áÊ§°Ü") ;
@@ -91,6 +94,10 @@ public class UserLoginRegisterAction extends ActionSupport {
 
 	public void setAccountService(UserAccountService accountService) {
 		this.accountService = accountService;
+	}
+
+	public void setSpecInfoService(SpecialistInfoService specInfoService) {
+		this.specInfoService = specInfoService;
 	}
     
 }

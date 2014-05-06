@@ -74,14 +74,14 @@
 					<span class="divider">/</span>
 				</li>
 				<li>
-					<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=2&staffId=${sessionScope.USER.userName}">
-						<c:if test="${status==2 }"><b>待处理的申请</b></c:if><c:if test="${status!=2 }">待处理的申请</c:if>
+					<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=3&staffId=${sessionScope.USER.userName}">
+						<c:if test="${status==3 }"><b>待处理的申请</b></c:if><c:if test="${status!=3 }">待处理的申请</c:if>
 					</a> 
 					<span class="divider">/</span>
 				</li>
 				<li class="active">
-					<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=3&staffId=${sessionScope.USER.userName}">
-						<c:if test="${status==3 }"><b>已处理的申请</b></c:if><c:if test="${status!=3 }">已处理的申请</c:if>
+					<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=4&staffId=${sessionScope.USER.userName}">
+						<c:if test="${status==4 }"><b>已处理的申请</b></c:if><c:if test="${status!=4 }">已处理的申请</c:if>
 					</a> 
 					<span class="divider">/</span>
 				</li>
@@ -125,10 +125,11 @@
 						</td>
 						<td id="statu-${info.id }">
 							<c:if test="${info.status==1 }">新申请</c:if>
-							<c:if test="${info.status==2&&info.userName!=sessionScope.USER.userName }">${staffIdNameMap[info.userName]}处理</c:if>
-							<c:if test="${info.status==2&&info.userName==sessionScope.USER.userName }">已接收</c:if>
-							<c:if test="${info.status==3 }">已处理</c:if>
-							<c:if test="${info.status==4 }">已过时</c:if>
+							<c:if test="${info.status==2 }">已过时</c:if>
+							<c:if test="${info.status==3&&info.staffID!=sessionScope.USER.userName }">已被${staffIdNameMap[info.userName]}接收</c:if>
+							<c:if test="${info.status==3&&info.staffID==sessionScope.USER.userName }">已接收</c:if>
+							<c:if test="${info.status==4&&info.staffID!=sessionScope.USER.userName }">已被${staffIdNameMap[info.userName]}处理</c:if>
+							<c:if test="${info.status==4&&info.staffID==sessionScope.USER.userName }">已处理</c:if>
 						</td>
 						<td id="operation-${info.id }">
 							<c:if test="${info.status==1 }"><a href="#" onclick="acceptApplyRequest('${sessionScope.USER.userName }',${info.id})">接收</a></c:if>

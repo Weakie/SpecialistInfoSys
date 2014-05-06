@@ -44,5 +44,11 @@
 		response.setHeader("Refresh","3;URL="+"/SpecialistInfoSys/specInfoDisplay?userName="+p.getUserName()); 
 }
 %>
+<%	if(p.getRole()==2){ %>
+<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=1&staffId=${p.userName }">点此</a>
+<%
+		response.setHeader("Refresh","3;URL="+"/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=1&staffId="+p.getUserName()); 
+}
+%>
 </body>
 </html>

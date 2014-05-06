@@ -48,6 +48,25 @@ public class SelectionDAO extends AbstractBaseDao {
 		return result;
 	}
 	
+	public Map<Integer,String> getQualificationMap(){
+		SqlSession session = getSession();
+		Map<Integer,String> result = new HashMap<Integer,String>();
+		List<KeyValuePair> list = null;
+		try {
+			list = session.selectList("com.weakie.dao.SelectionDAO.getQualification");
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		if(list!=null){
+			for(KeyValuePair pair:list){
+				result.put((Integer) pair.getKey(), (String)pair.getValue());
+			}
+		}
+		return result;
+	}
+	
 	public Map<Integer,String> getMajorFieldCatMap(){
 		SqlSession session = getSession();
 		Map<Integer,String> result = new HashMap<Integer,String>();

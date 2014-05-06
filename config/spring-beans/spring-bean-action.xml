@@ -11,6 +11,9 @@
 		<property name="accountService">
 			<ref bean="userAccountService" />
 		</property>
+		<property name="specInfoService">
+			<ref bean="specialistInfoService" />
+		</property>
 	</bean>
 	
 	<bean name="specialistInfoAction" class="com.weakie.action.SpecialistInfoAction" scope="prototype">

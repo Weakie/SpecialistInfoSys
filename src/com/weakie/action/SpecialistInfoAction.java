@@ -29,7 +29,7 @@ public class SpecialistInfoAction extends ActionSupport {
     private SpecialistInfoService specInfoService;
     
 	public String executeAddInfo() throws Exception{
-    	LogUtil.info("add info: " + specInfoBean);
+    	LogUtil.info("add info: " + specInfoBean.getUserName());
     	LogUtil.info("year:"+year+";month:"+month);
     	Map<String,String> contact = new HashMap<String,String>();
 		HttpServletRequest request = ServletActionContext.getRequest();
