@@ -13,10 +13,10 @@ public interface SelectionService {
 
 	/**
 	 * 根据是否是国外获得省的id-name映射
-	 * @param isAbroad true 在国外
+	 * @param abroad true 在国内
 	 * @return
 	 */
-	public ReadOnlyMap<Integer,String> getProvince(boolean isAbroad);
+	public ReadOnlyMap<Integer,String> getProvince(boolean abroad);
 	
 	/**
 	 * 根据省的id获得相应所有城市的id-name映射
@@ -75,4 +75,7 @@ public interface SelectionService {
 	 * @return
 	 */
 	public ReadOnlyMap<Integer,String> getProvNameMap(List<Integer> cityList);
+	
+	public ReadOnlyMap<Integer,String> insertValues(String value,int key,int item) throws Exception;
+	public ReadOnlyMap<Integer,String> updateValues(String value,int key,int item,int id) throws Exception;
 }

@@ -115,6 +115,7 @@
 			<result name="success">/jsp/spec/specialist_info_display.jsp</result>
 		</action>
 		
+		<!-- 工作人员 -->
 		<action name="staffDisposeApplyShowAll" class="staffDisposeApplyShowAllAction" method="execute">
 			<result name="success">/jsp/staff/staff_dispose_apply.jsp</result>
 		</action>
@@ -126,6 +127,17 @@
 			</result>
 		</action>
 		<action name="staffDisposeApplyConfirm" class="staffDisposeApplyConfirmAction" method="execute">
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
+		<!-- 关键字维护 -->
+		<action name="selectionInfoAddPrepare" class="selectionInfoAddUpdateAction" method="executePrepare">
+			<result name="success">/jsp/staff/specialist_info_selection.jsp</result>
+		</action>
+		<action name="selectionInfoAddUpdate" class="selectionInfoAddUpdateAction" method="executeUpdate">
 			<result name="success" type="stream">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>

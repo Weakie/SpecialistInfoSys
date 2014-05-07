@@ -47,30 +47,105 @@
 		<result property="value" column="field_name" javaType="String"/>
 	</resultMap>
 	
+	<!-- organization -->
 	<select id="getOrganizationType"  resultMap="organizationTypeMap">
     	select * from organization_type;
     </select>
+    <insert id="insertOrganizationType" parameterType="Map" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO organization_type (field_name)
+    	VALUES (#{type})
+    </insert>
+    <update id="updateOrganizationType" parameterType="Map">
+    	UPDATE organization_type 
+    	SET field_name = #{type}
+    	WHERE id = #{id}
+    </update>
     
+    <!-- title -->
 	<select id="getTitleType"  resultMap="titleTypeMap">
     	select * from title;
     </select>
+    <insert id="insertTitleType" parameterType="String" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO title (field_name)
+    	VALUES (#{type})
+    </insert>
+    <update id="updateTitleType" parameterType="Map">
+    	UPDATE title 
+    	SET field_name = #{type}
+    	WHERE id = #{id}
+    </update>
     
+    <!-- qualification -->
     <select id="getQualification"  resultMap="qualificationMap">
     	select * from qualification;
     </select>
+    <insert id="insertQualification" parameterType="String" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO qualification (field_name)
+    	VALUES (#{type})
+    </insert>
+    <update id="updateQualification" parameterType="Map">
+    	UPDATE qualification 
+    	SET field_name = #{type}
+    	WHERE id = #{id}
+    </update>
     
+    <!-- major field category -->
 	<select id="getMajorFieldCat"  resultMap="majorFieleCatMap">
     	select * from major_field_category;
     </select>
+    <insert id="insertMajorFieldCat" parameterType="String" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO major_field_category (field_name)
+    	VALUES (#{type})
+    </insert>
+    <update id="updateMajorFieldCat" parameterType="Map">
+    	UPDATE major_field_category 
+    	SET field_name = #{type}
+    	WHERE id = #{id}
+    </update>
     
+    <!-- major field -->
 	<select id="getMajorField" parameterType="int" resultMap="majorFieleMap">
     	select id,field_name from major_field where field_category = #{majorCate}
     </select>
+    <insert id="insertMajorField" parameterType="Map" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO major_field (field_name, field_category)
+    	VALUES (#{type}, #{category})
+    </insert>
+    <update id="updateMajorField" parameterType="Map">
+    	UPDATE major_field 
+    	SET field_name = #{type},
+    		field_category = #{category}
+    	WHERE id = #{id}
+    </update>
     
     <select id="getMajorFieldMajorFieldCat"  resultMap="majorFieleMajorFieldCatMap">
     	select id,field_category from major_field;
     </select>
     
+    <!-- working position -->
+    <insert id="insertProvince" parameterType="Map" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO province_country (field_name, field_country)
+    	VALUES (#{type}, #{country})
+    </insert>
+    <update id="updateProvince" parameterType="Map">
+    	UPDATE province_country 
+    	SET field_name = #{type},
+    		field_country = #{country}
+    	WHERE id = #{id}
+    </update>
+    
+    <insert id="insertCity" parameterType="Map" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO working_position (field_city, field_province)
+    	VALUES (#{type}, #{province})
+    </insert>
+    <update id="updateCity" parameterType="Map">
+    	UPDATE working_position 
+    	SET field_city = #{type},
+    		field_province = #{province}
+    	WHERE id = #{id}
+    </update>
+    
+    <!-- select -->
     <select id="getCityProvince"  resultMap="cityProvinceMap">
     	select id,field_province from working_position where id in
     	<foreach collection="list" item="classIdList"  open="(" separator="," close=")">  

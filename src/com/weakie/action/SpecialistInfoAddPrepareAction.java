@@ -102,7 +102,7 @@ public class SpecialistInfoAddPrepareAction extends ActionSupport {
     		LogUtil.info("bean is not initialized: "+userName+", add info.");
     		
     		//
-	    	this.provinceMap = this.selectService.getProvince(false);
+	    	this.provinceMap = this.selectService.getProvince(true);
 	    	//这里参数应该与provinceMap第一个值对应的数据有关
 	    	int firstProvinceId = this.provinceMap.keySet().iterator().next();
 	        this.cityMap = this.selectService.getCity(firstProvinceId);

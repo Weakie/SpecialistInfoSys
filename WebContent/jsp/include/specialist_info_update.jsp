@@ -531,7 +531,7 @@
 								 <tr id="tableAddress:${workPosIndex}">
 									<th>
 										<label class="checkbox-inline" style="width:60px;">
-											<input type="checkbox" id="orgPlace-${workPosIndex}" onclick="refreshProvinceList(${workPosIndex});" <c:if test="${!proAbroMap[cityProMap[posId]]}">checked</c:if> /> 国内
+											<input type="checkbox" id="orgPlace-${workPosIndex}" onclick="refreshProvinceList(${workPosIndex});" <c:if test="${proAbroMap[cityProMap[posId]]}">checked</c:if> /> 国内
 										</label>
 									</th>
 									<th>
@@ -555,7 +555,7 @@
 								 <tr id="tableAddress:${workPosIndex}">
 								 	<th>
 										<label class="checkbox-inline" style="width:60px;">
-											<input type="checkbox" id="orgPlace-${workPosIndex}" <c:if test="${!proAbroMap[cityProMap[posId]]}">checked</c:if> disabled/> 国内
+											<input type="checkbox" id="orgPlace-${workPosIndex}" <c:if test="${proAbroMap[cityProMap[posId]]}">checked</c:if> disabled/> 国内
 										</label>
 									</th>
 									<th>

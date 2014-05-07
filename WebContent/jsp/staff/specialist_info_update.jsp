@@ -35,7 +35,7 @@
 <div class="container">
 	<div class="row clearfix">
 		<!-- page header -->
-		<c:set var="pageHeader" value="2" scope="page"/>
+		<c:set var="pageHeader" value="1" scope="page"/>
 		<%@ include file="header.jsp" %>
 		<br><br><br>
 		

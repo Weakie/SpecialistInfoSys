@@ -266,4 +266,18 @@ public class SelectionServiceTest implements SelectionService {
 		return new ReadOnlyMap<Integer, String>(cityMap);
 	}
 
+	@Override
+	public ReadOnlyMap<Integer, String> insertValues(String value, int key,
+			int item) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReadOnlyMap<Integer, String> updateValues(String value, int key,
+			int item, int id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

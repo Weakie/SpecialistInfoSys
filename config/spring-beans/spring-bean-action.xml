@@ -88,6 +88,12 @@
 			<ref bean="specialistInfoService" />
 		</property>
 	</bean>
+	
+	<bean name="selectionInfoAddUpdateAction" class="com.weakie.action.SelectionInfoAddUpdateAction" scope="prototype">
+		<property name="selectService">
+			<ref bean="selectionService" />
+		</property>
+	</bean>
 	<!--
 	<bean id="userService" class="org.login.service.Impl.UsersService">
 		<property name="userDAO">

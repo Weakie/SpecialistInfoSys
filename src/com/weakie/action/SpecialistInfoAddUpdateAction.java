@@ -26,7 +26,7 @@ public class SpecialistInfoAddUpdateAction extends ActionSupport {
     	if(item.equals("orgPlace")){
     		//index first, separate by ;
     		LogUtil.debug(item+" "+itemID);
-    		Map<Integer,String> proMap = this.selectService.getProvince(!Boolean.parseBoolean(itemID));
+    		Map<Integer,String> proMap = this.selectService.getProvince(Boolean.parseBoolean(itemID));
     		StringBuilder sb = new StringBuilder();
     		sb.append(index);
     		for(int i:proMap.keySet()){
