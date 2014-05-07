@@ -44,6 +44,11 @@ public class ApplyInfoServiceImpl implements ApplyInfoService {
 			throws Exception {
 		return dao.acceptApplyInfo(applyId, staffId);
 	}
+	
+	@Override
+	public String confirmApply(String staffId, int applyId) {
+		return this.dao.disposeApplyInfo(applyId, staffId);
+	}
 
 	public void setDao(ApplyInfoDAO dao) {
 		this.dao = dao;

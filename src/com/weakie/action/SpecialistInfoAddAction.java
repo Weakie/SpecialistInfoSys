@@ -11,10 +11,11 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.weakie.bean.MessageStore;
 import com.weakie.bean.SpecialistInfoBean;
+import com.weakie.constant.SpecInfoConstant;
 import com.weakie.service.SpecialistInfoService;
 import com.weakie.util.log.LogUtil;
 
-public class SpecialistInfoAction extends ActionSupport {
+public class SpecialistInfoAddAction extends ActionSupport {
  
     private static final long serialVersionUID = 1L;
  
@@ -43,6 +44,7 @@ public class SpecialistInfoAction extends ActionSupport {
 		
 		specInfoBean.setBirthday(year+"-"+StringUtils.leftPad(""+month, 2, '0'));
 		specInfoBean.setContact(contact);
+		specInfoBean.setState(SpecInfoConstant.SPECINFO_NEW);
 		
 		LogUtil.info("finish set info:"+specInfoBean);
 		specInfoService.updateSpecialistInfo(specInfoBean);

@@ -50,7 +50,7 @@
 <head>
   <!-- include the static header -->
   <%@ include file="../page_static_header.html" %>
-  <title>信息登记表-上海同济城市规划设计研究院</title>
+  <title>申请处理-上海同济城市规划设计研究院</title>
 </head>
 <body>
 <div class="container">
@@ -133,8 +133,8 @@
 						</td>
 						<td id="operation-${info.id }">
 							<c:if test="${info.status==1 }"><a href="#" onclick="acceptApplyRequest('${sessionScope.USER.userName }',${info.id})">接收</a></c:if>
-							<c:if test="${info.status==2&&info.userName==sessionScope.USER.userName }"><a href="/SpecialistInfoSys/staffDisposeApplyDispose.action?staffId=${sessionScope.USER.userName}&applyId=${info.id}">处理</a></c:if>
-							<c:if test="${info.status==3 }"><a href="/SpecialistInfoSys/staffDisposeApplyAccept.action?staffId=${sessionScope.USER.userName}">查看</a>-<a href="/SpecialistInfoSys/staffDisposeApplyAccept.action?staffId=${sessionScope.USER.userName}">修改</a></c:if>
+							<c:if test="${info.status==3&&info.staffID==sessionScope.USER.userName }"><a href="/SpecialistInfoSys/specInfoAddPrepare.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">处理</a></c:if>
+							<c:if test="${info.status==4 }"><a href="/SpecialistInfoSys/staffDisposeApplyAccept.action?staffId=${sessionScope.USER.userName}">查看</a>-<a href="/SpecialistInfoSys/specInfoAddPrepare.action?userName=${info.userName }">修改</a></c:if>
 							<c:if test="${info.status==4 }"></c:if>
 						</td>
 					</tr>

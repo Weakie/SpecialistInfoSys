@@ -119,17 +119,19 @@ public class ApplyInfoDAO extends AbstractBaseDao {
 		return applyInfo;
 	}
 	
-	public int disposeApplyInfo(int id,String staffId){
+	public String disposeApplyInfo(int id,String staffId){
 		SqlSession session = getSession();
 		
 		Map<String,Object> param = new HashMap<String,Object>();
 		param.put("id", id);
 		param.put("staffId", staffId);
 		param.put("disposeTime", new Date());
-		int result = 0;
+		String result = null;
 		try {
-			result = session.update("com.weakie.dao.ApplyInfoDAO.updateApplyInfoForDisposed", param);
+			session.update("com.weakie.dao.ApplyInfoDAO.updateApplyInfoForDisposed", param);
 			session.commit();
+			//get result
+			result = session.selectOne("com.weakie.dao.ApplyInfoDAO.selectApplyInfoForDisposed", param);
 		} catch(Exception e){
 			LogUtil.error(e);
 		} finally {

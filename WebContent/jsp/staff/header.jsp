@@ -12,7 +12,7 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li <c:if test="${pageHeader==1}">class="active"</c:if> >
-							<a href="/SpecialistInfoSys/specInfoDisplay?userName=${sessionScope.USER.userName}">处理申请</a>
+							<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=1&staffId=${sessionScope.USER.userName}">处理申请</a>
 						</li>
 						<li <c:if test="${pageHeader==2}">class="active"</c:if> >
 							<a href="/SpecialistInfoSys/specInfoAddPrepare?userName=${sessionScope.USER.userName}">关键字维护</a>

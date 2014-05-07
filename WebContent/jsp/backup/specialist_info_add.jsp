@@ -368,7 +368,6 @@
 	<div class="row clearfix">
 		<!-- page header -->
 		<c:set var="pageHeader" value="2" scope="page"/>
-		<%@ include file="header.jsp" %>
 		
 		<div class="col-md-10 column">
 			<br><br><br>

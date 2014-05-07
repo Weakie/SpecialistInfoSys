@@ -2,10 +2,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-		
-	<!-- Action Bean -->
-	<bean name="helloAction" class="com.weakie.action.HelloWorldAction" scope="prototype">
-	</bean>
 	
 	<bean name="userLoginRegisterAction" class="com.weakie.action.UserLoginRegisterAction" scope="prototype">
 		<property name="accountService">
@@ -16,12 +12,8 @@
 		</property>
 	</bean>
 	
-	<bean name="specialistInfoAction" class="com.weakie.action.SpecialistInfoAction" scope="prototype">
-		<property name="specInfoService">
-			<ref bean="specialistInfoService" />
-		</property>
-	</bean>
-	
+	<!-- 专家准备更新信息 -->
+	<bean name="specialistInfoAddPreparePreCheckAction" class="com.weakie.action.precheck.SpecialistInfoAddPreparePreCheckAction" scope="prototype"></bean>
 	<bean name="specialistInfoAddPrepareAction" class="com.weakie.action.SpecialistInfoAddPrepareAction" scope="prototype">
 		<property name="specInfoService">
 			<ref bean="specialistInfoService" />
@@ -30,13 +22,33 @@
 			<ref bean="selectionService" />
 		</property>
 	</bean>
+	<bean name="specialistInfoAddPrepareRedirectAction" class="com.weakie.action.aftersend.SpecialistInfoAddPrepareDirectAction" scope="prototype">
+		<property name="SPEC_UPDATE" value="SPEC_UPDATE"/>
+		<property name="STAFF_UPDATE" value ="STAFF_UPDATE"/>
+	</bean>
 	
+	<!-- 专家更新信息页面选项的动态更新 -->
+	<bean name="specialistInfoAddUpdateAction" class="com.weakie.action.SpecialistInfoAddUpdateAction" scope="prototype">
+		<property name="selectService">
+			<ref bean="selectionService" />
+		</property>
+	</bean>
+	
+	<!-- 专家更新信息 -->
+	<bean name="specialistInfoAddAction" class="com.weakie.action.SpecialistInfoAddAction" scope="prototype">
+		<property name="specInfoService">
+			<ref bean="specialistInfoService" />
+		</property>
+	</bean>
+	
+	<!-- 专家图片信息 -->
 	<bean name="specialistInfoImageAction" class="com.weakie.action.SpecialistInfoImageAction" scope="prototype">
 		<property name="imgpath" value="/WEB-INF/userimage" />
 		<property name="prePath" value="d:/tmp/image" />
 		<property name="pathUnderServer" value="false" />
 	</bean>
 	
+	<!-- 专家信息显示 -->
 	<bean name="specialistInfoDisplayAction" class="com.weakie.action.SpecialistInfoDisplayAction" scope="prototype">
 		<property name="specInfoService">
 			<ref bean="specialistInfoService" />
@@ -54,6 +66,7 @@
 			<ref bean="userAccountService" />
 		</property>
 	</bean>
+	<!-- 工作人员接收申请 -->
 	<bean name="staffDisposeApplyAcceptAction" class="com.weakie.action.staff.StaffDisposeApplyAccept" scope="prototype">
 		<property name="applyInfoService">
 			<ref bean="applyInfoService" />
@@ -61,8 +74,20 @@
 		<property name="userAccountService">
 			<ref bean="userAccountService" />
 		</property>
+		<property name="specInfoService">
+			<ref bean="specialistInfoService" />
+		</property>
 	</bean>
 	
+	<!-- 工作人员确认申请 -->
+	<bean name="staffDisposeApplyConfirmAction" class="com.weakie.action.staff.StaffDisposeApplyConfirm" scope="prototype">
+		<property name="applyInfoService">
+			<ref bean="applyInfoService" />
+		</property>
+		<property name="specInfoService">
+			<ref bean="specialistInfoService" />
+		</property>
+	</bean>
 	<!--
 	<bean id="userService" class="org.login.service.Impl.UsersService">
 		<property name="userDAO">

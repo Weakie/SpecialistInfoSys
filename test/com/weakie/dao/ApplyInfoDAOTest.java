@@ -13,16 +13,20 @@ public class ApplyInfoDAOTest {
 	@Test
 	public void testInsertApplyInfo() {
 		ApplyInfoDAO dao = new ApplyInfoDAO();
-		/*dao.insertApplyInfo(new ApplyInfo("hahaha","hehehe",new Date()));
+		dao.insertApplyInfo(new ApplyInfo("1122","hehehe",new Date()));
+		dao.insertApplyInfo(new ApplyInfo("hahaha","hehehe",new Date()));
+		dao.insertApplyInfo(new ApplyInfo("123","hehehe",new Date()));
+		/*
 		
 		dao.acceptApplyInfo(13, "aaa");
 		dao.insertApplyInfo(new ApplyInfo("hahaha","hehehe",new Date()));
 		dao.acceptApplyInfo(14, "aaa");
 		dao.disposeApplyInfo(14, "aaa");
 		*/
-		for(ApplyInfo info:dao.selectApplyInfoOfDisposed("aaa", 0, 5)){
+		/*for(ApplyInfo info:dao.selectApplyInfoOfDisposed("aaa", 0, 5)){
 			System.out.println(info);
-		}
+		}*/
+		System.out.println(dao.disposeApplyInfo(22, "aaa"));
 	}
 
 }

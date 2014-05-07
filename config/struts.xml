@@ -30,10 +30,6 @@
 			<result>/index.jsp</result>
 		</action>
 
-		<action name="hello" class="helloAction" method="execute">
-			<result name="success">/HelloWorld.jsp</result>
-		</action>
-
 		<action name="usernameConfirm" class="userLoginRegisterAction"
 			method="executeUserNameExists">
 			<result name="success" type="stream">
@@ -53,24 +49,33 @@
 		</action>
 
 		<!-- 准备专家更新信息页面 -->
-		<action name="specInfoAddPrepare" class="specialistInfoAddPrepareAction"
-			method="executePrepare">
-			<!-- <result type="chain"> <param name="actionName">showLeaveRequestExecute</param> 
-				<param name="namespace">/</param> </result> -->
-			<result name="success">/jsp/spec/specialist_info_add.jsp</result>
+		<action name="specInfoAddPrepare" class="specialistInfoAddPreparePreCheckAction" method="executeCheck">
+			<result name="success" type="chain"> 
+				<param name="actionName">specInfoAddPrepareExecute</param> 
+				<param name="namespace">/</param> 
+			</result>
 		</action>
-
+		<action name="specInfoAddPrepareExecute" class="specialistInfoAddPrepareAction" method="executePrepare">
+			<result name="success" type="chain"> 
+				<param name="actionName">specInfoAddPrepareDirect</param> 
+				<param name="namespace">/</param> 
+			</result>
+		</action>
+		<action name="specInfoAddPrepareDirect" class="specialistInfoAddPrepareRedirectAction" method="execute">
+			<result name="SPEC_UPDATE">/jsp/spec/specialist_info_update.jsp</result>
+			<result name="STAFF_UPDATE">/jsp/staff/specialist_info_update.jsp</result>
+		</action>
+		
 		<!-- 专家更新信息页面选项的动态更新 -->
-		<action name="specInfoAddUpdate" class="specialistInfoAddPrepareAction"
-			method="executeUpdate">
+		<action name="specInfoAddUpdate" class="specialistInfoAddUpdateAction" method="executeUpdate">
 			<result type="stream">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
 
-		<!-- 专家更新自己的信息 -->
-		<action name="specInfoAdd" class="specialistInfoAction" method="executeAddInfo">
+		<!-- 更新专家的信息 -->
+		<action name="specInfoAdd" class="specialistInfoAddAction" method="executeAddInfo">
 			<result name="success" type="redirectAction">
 				<param name="actionName">specInfoDisplay</param>
 				<param name="userName">${specInfoBean.userName}</param>
@@ -105,7 +110,7 @@
 			</result>
 		</action>
 		
-		<!-- 专家更新自己的信息 -->
+		<!-- 专家显示自己的信息 -->
 		<action name="specInfoDisplay" class="specialistInfoDisplayAction" method="execute">
 			<result name="success">/jsp/spec/specialist_info_display.jsp</result>
 		</action>
@@ -120,6 +125,11 @@
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
-		
+		<action name="staffDisposeApplyConfirm" class="staffDisposeApplyConfirmAction" method="execute">
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
 	</package>
 </struts>

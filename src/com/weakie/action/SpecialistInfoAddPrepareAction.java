@@ -1,7 +1,5 @@
 package com.weakie.action;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -38,12 +36,7 @@ public class SpecialistInfoAddPrepareAction extends ActionSupport {
     private Map<Integer,String> cityNameMap;//名字和id的映射：disabled的select的显示
     private Map<Integer,String> provNameMap;//名字和id的映射：disabled的select的显示
     
-    //for ajax:dynamic update
-    private int index;
-    private String item;
-    private String itemID;
-    private InputStream inputStream;
-    
+   
     //service
     private SpecialistInfoService specInfoService;
     private SelectionService selectService;
@@ -124,44 +117,7 @@ public class SpecialistInfoAddPrepareAction extends ActionSupport {
         return SUCCESS;
     }
     
-	public String executeUpdate() throws Exception{
-    	
-    	if(item.equals("orgPlace")){
-    		//index first, separate by ;
-    		LogUtil.debug(item+" "+itemID);
-    		Map<Integer,String> proMap = this.selectService.getProvince(!Boolean.parseBoolean(itemID));
-    		StringBuilder sb = new StringBuilder();
-    		sb.append(index);
-    		for(int i:proMap.keySet()){
-    			sb.append(";"+i+":"+proMap.get(i));
-    		}
-    		String result = sb.toString();//""+index+";1:上海市;2:北京市"
-    		this.inputStream = new ByteArrayInputStream(result.getBytes("UTF-8"));
-    	}else if(item.equals("province")){
-    		LogUtil.debug(item+" "+itemID);
-    		Map<Integer,String> cityMap = this.selectService.getCity(Integer.parseInt(itemID));
-    		StringBuilder sb = new StringBuilder();
-    		sb.append(index);
-    		for(int i:cityMap.keySet()){
-    			sb.append(";"+i+":"+cityMap.get(i));
-    		}
-    		String result = sb.toString();//""+index+";1:杭州;2:溫州"
-    		this.inputStream = new ByteArrayInputStream(result.getBytes("UTF-8"));
-    	}else if(item.equals("majorClass")){
-    		LogUtil.debug(item+" "+itemID);
-    		Map<Integer,String> majorMap = this.selectService.getMajor(Integer.parseInt(itemID));
-    		StringBuilder sb = new StringBuilder();
-    		for(int i:majorMap.keySet()){
-    			sb.append(i+":"+majorMap.get(i)+";");
-    		}
-    		String result = "";
-    		if(sb.length()>0){
-    			result = sb.substring(0, sb.length()-1);//"1:公共建筑;2:别墅"
-    		}
-    		this.inputStream = new ByteArrayInputStream(result.getBytes("UTF-8"));
-    	}
-        return SUCCESS;
-    }
+	
     
 	public String getUserName() {
 		return userName;
@@ -229,22 +185,6 @@ public class SpecialistInfoAddPrepareAction extends ActionSupport {
 
 	public Map<Integer, String> getProvNameMap() {
 		return provNameMap;
-	}
-
-	public void setIndex(int index){
-		this.index = index;
-	}
-	
-	public void setItem(String item) {
-		this.item = item;
-	}
-
-	public void setItemID(String itemid) {
-		this.itemID = itemid;
-	}
-	
-	public InputStream getInputStream() {
-	    return inputStream;
 	}
 
 	public void setSpecInfoService(SpecialistInfoService specInfoService) {

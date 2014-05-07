@@ -699,7 +699,7 @@
 				<div class="form-group">
 					<label for="experience" class="col-sm-2 control-label"></label>
 					<div class="col-sm-2">
-						<button type="submit" class="btn btn-default">提交申请</button>
+						<button type="submit" class="btn btn-default">保存信息</button>
 					</div>
 				</div>
 			</form>

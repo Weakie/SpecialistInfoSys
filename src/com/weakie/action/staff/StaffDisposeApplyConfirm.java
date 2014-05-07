@@ -2,49 +2,52 @@ package com.weakie.action.staff;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.weakie.bean.ApplyInfo;
 import com.weakie.constant.SpecInfoConstant;
-import com.weakie.constant.SystemConstant;
 import com.weakie.service.ApplyInfoService;
 import com.weakie.service.SpecialistInfoService;
-import com.weakie.service.UserAccountService;
 import com.weakie.util.log.LogUtil;
 
-public class StaffDisposeApplyAccept extends ActionSupport {
+public class StaffDisposeApplyConfirm extends ActionSupport {
  
     private static final long serialVersionUID = 1L;
  
     //request
     private int applyInfoId;
     private String staffId;
-    
     //response
     private InputStream inputStream;
     
     //spring
     private ApplyInfoService applyInfoService;
-    private UserAccountService userAccountService;
     private SpecialistInfoService specInfoService;
     
     //method
-	public String execute() throws Exception{
+	public String execute(){
 		LogUtil.info("applyId: "+applyInfoId+" ,staffId: "+staffId);
-    	ApplyInfo info = this.applyInfoService.acceptNewApply(staffId, applyInfoId);
-    	String result = null;
-    	if(StringUtils.equals(staffId, info.getStaffID())){
-    		//若成功接收,修改专家信息状态
-    		this.specInfoService.updateSpecialistInfoState(info.getUserName(), SpecInfoConstant.SPECINFO_CONFIRMING);
-    		result = SystemConstant.SUCCESS+";"+applyInfoId+";"+staffId;
-    	}else{
-    		String nickName=this.userAccountService.getStaffNicmName(info.getStaffID());
-    		result = SystemConstant.FAIL+";"+applyInfoId+";"+nickName;
+		String userName = this.applyInfoService.confirmApply(staffId, applyInfoId);
+    	int result2 = 0;
+		if(StringUtils.isNotEmpty(userName)){
+			result2 = this.specInfoService.updateSpecialistInfoState(userName, SpecInfoConstant.SPECINFO_CONFIRMED);
     	}
-    	LogUtil.info(result);
-		this.inputStream = new ByteArrayInputStream(result.getBytes("UTF-8"));
+		String result = null;
+    	if(StringUtils.isEmpty(userName)){
+    		result = "0:申请信息修改失败";
+    	}else if(result2!=1){
+    		result = "1:申请信息修改成功,专家信息确认失败";
+    	}else{
+    		result = "2:确认成功";
+    	}
+		try {
+			this.inputStream = new ByteArrayInputStream(result.getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			LogUtil.error(e);
+		}
+		LogUtil.info(result);
         return SUCCESS;
     }
 
@@ -65,12 +68,9 @@ public class StaffDisposeApplyAccept extends ActionSupport {
 		this.applyInfoService = applyInfoService;
 	}
 
-	public void setUserAccountService(UserAccountService userAccountService) {
-		this.userAccountService = userAccountService;
-	}
-
 	public void setSpecInfoService(SpecialistInfoService specInfoService) {
 		this.specInfoService = specInfoService;
 	}
+
 
 }

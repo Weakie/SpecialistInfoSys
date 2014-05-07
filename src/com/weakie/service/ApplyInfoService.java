@@ -22,4 +22,12 @@ public interface ApplyInfoService {
 	 * @throws Exception
 	 */
 	public ApplyInfo acceptNewApply(String staffId, int applyId) throws Exception;
+	
+	/**
+	 * 确认专家信息
+	 * @param staffId
+	 * @param applyId
+	 * @return
+	 */
+	public String confirmApply(String staffId, int applyId);
 }

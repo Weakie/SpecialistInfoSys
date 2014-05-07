@@ -82,7 +82,7 @@
 	</select>
 	
 	<!-- below is for disposed the applyInfo -->
-	<update id="updateApplyInfoForDisposed" parameterType="Map" >
+	<update id="updateApplyInfoForDisposed" parameterType="Map">
 		UPDATE apply_info SET
 			disposeTime	= #{disposeTime},
 			status 		= 4
@@ -91,4 +91,11 @@
 			staffId  = 	#{staffId} AND
 			status 	 = 	3
 	</update>
+	<select id="selectApplyInfoForDisposed" parameterType="Map" resultType="String">
+		SELECT userName FROM apply_info 
+		WHERE 
+			id 		 = 	#{id} 	   AND 
+			staffId  = 	#{staffId} AND
+			status 	 = 	4
+	</select>
 </mapper>

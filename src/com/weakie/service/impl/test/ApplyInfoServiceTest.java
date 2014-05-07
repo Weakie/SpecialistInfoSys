@@ -26,4 +26,10 @@ public class ApplyInfoServiceTest implements ApplyInfoService {
 		return new ApplyInfo(1,"hahaha","hahaha",new Date(),new Date(),new Date(),1,"hahaha");
 	}
 
+	@Override
+	public String confirmApply(String staffId, int applyId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

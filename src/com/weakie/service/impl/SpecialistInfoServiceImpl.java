@@ -32,9 +32,13 @@ public class SpecialistInfoServiceImpl implements SpecialistInfoService {
 		return dao.insertSpecInfo(new SpecialistInfoBean(userName));
 	}
 
+	@Override
+	public int updateSpecialistInfoState(String userName, int state) {
+		return dao.updateSpecInfoState(userName, state);
+	}
+
 	public void setDao(SpecInfoDAO dao) {
 		this.dao = dao;
 	}
 
-	
 }
