@@ -72,4 +72,8 @@ public class ReadOnlyMap<K, V> implements Map<K, V> {
 		return this.map.entrySet();
 	}
 
+	@Override
+	public String toString(){
+		return this.map.toString();
+	}
 }

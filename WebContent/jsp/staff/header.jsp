@@ -15,7 +15,7 @@
 							<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=1&staffId=${sessionScope.USER.userName}">处理申请</a>
 						</li>
 						<li <c:if test="${pageHeader==2}">class="active"</c:if> >
-							<a href="/SpecialistInfoSys/specInfoAddPrepare?userName=${sessionScope.USER.userName}">关键字维护</a>
+							<a href="/SpecialistInfoSys/selectionInfoAddPrepare.action">关键字维护</a>
 						</li>
 						<c:if test="${sessionScope.USER.authority==1 }">
 						<li <c:if test="${pageHeader==3}">class="active"</c:if> >

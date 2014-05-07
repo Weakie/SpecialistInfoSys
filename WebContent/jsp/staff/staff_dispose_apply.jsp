@@ -56,7 +56,7 @@
 <div class="container">
 	<div class="row clearfix">
 		<!-- page header -->
-		<c:set var="pageHeader" value="2" scope="page"/>
+		<c:set var="pageHeader" value="1" scope="page"/>
 		<%@ include file="header.jsp" %>
 		
 		<div class="page-header">
@@ -126,16 +126,22 @@
 						<td id="statu-${info.id }">
 							<c:if test="${info.status==1 }">新申请</c:if>
 							<c:if test="${info.status==2 }">已过时</c:if>
-							<c:if test="${info.status==3&&info.staffID!=sessionScope.USER.userName }">已被${staffIdNameMap[info.userName]}接收</c:if>
+							<c:if test="${info.status==3&&info.staffID!=sessionScope.USER.userName }">已被${staffIdNameMap[info.staffID]}接收</c:if>
 							<c:if test="${info.status==3&&info.staffID==sessionScope.USER.userName }">已接收</c:if>
-							<c:if test="${info.status==4&&info.staffID!=sessionScope.USER.userName }">已被${staffIdNameMap[info.userName]}处理</c:if>
+							<c:if test="${info.status==4&&info.staffID!=sessionScope.USER.userName }">已被${staffIdNameMap[info.staffID]}处理</c:if>
 							<c:if test="${info.status==4&&info.staffID==sessionScope.USER.userName }">已处理</c:if>
 						</td>
 						<td id="operation-${info.id }">
-							<c:if test="${info.status==1 }"><a href="#" onclick="acceptApplyRequest('${sessionScope.USER.userName }',${info.id})">接收</a></c:if>
-							<c:if test="${info.status==3&&info.staffID==sessionScope.USER.userName }"><a href="/SpecialistInfoSys/specInfoAddPrepare.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">处理</a></c:if>
-							<c:if test="${info.status==4 }"><a href="/SpecialistInfoSys/staffDisposeApplyAccept.action?staffId=${sessionScope.USER.userName}">查看</a>-<a href="/SpecialistInfoSys/specInfoAddPrepare.action?userName=${info.userName }">修改</a></c:if>
-							<c:if test="${info.status==4 }"></c:if>
+							<c:if test="${info.status==1 }">
+								<a href="#" onclick="acceptApplyRequest('${sessionScope.USER.userName }',${info.id})">接收</a>
+							</c:if>
+							<c:if test="${info.status==3&&info.staffID==sessionScope.USER.userName }">
+								<a href="/SpecialistInfoSys/specInfoAddPrepare.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">处理</a>
+							</c:if>
+							<c:if test="${info.status==4&&info.staffID==sessionScope.USER.userName }">
+								<a href="/SpecialistInfoSys/staffDisposeApplyAccept.action?staffId=${sessionScope.USER.userName}">查看</a>-
+								<a href="/SpecialistInfoSys/specInfoAddPrepare.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">修改</a>
+							</c:if>
 						</td>
 					</tr>
 					<c:set var="i" value="${i+1 }" scope="page"/>

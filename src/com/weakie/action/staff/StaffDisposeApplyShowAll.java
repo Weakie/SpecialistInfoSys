@@ -38,6 +38,7 @@ public class StaffDisposeApplyShowAll extends ActionSupport {
     		staffIdSet.add(info.getStaffID());
     	}
     	this.staffIdNameMap = this.userAccountService.getStaffNiceNameMap(staffIdSet);
+    	LogUtil.debug("staff nickName:"+this.staffIdNameMap);
     	this.generatePages();
         return SUCCESS;
     }
