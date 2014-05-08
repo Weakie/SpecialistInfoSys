@@ -81,6 +81,10 @@
 			)
 	</insert>
 	
+	<select id="selectSpecInfoState" parameterType="String" resultType="int">
+	  SELECT state FROM spec_info WHERE userName = #{userName}
+	</select>
+	
 	<update id="updateSpecInfo" statementType="CALLABLE" parameterType="java.util.HashMap">
 	   <![CDATA[
            {call updateSpecInfo(
@@ -106,12 +110,11 @@
 				#{title_id_in,mode=IN,jdbcType=INTEGER}, 
 				#{major_id_in,mode=IN,jdbcType=INTEGER}, 
 				
-				#{state_in,mode=IN,jdbcType=INTEGER}, 
-				
               	#{position_in,mode=IN,jdbcType=VARCHAR},
               	#{pos_length_in,mode=IN,jdbcType=INTEGER}
            )}    
        ]]>
+       <!-- #{state_in,mode=IN,jdbcType=INTEGER},  -->
 	</update>
 	
 	<update id="updateState" parameterType="Map">

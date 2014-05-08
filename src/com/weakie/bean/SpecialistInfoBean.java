@@ -350,7 +350,7 @@ public class SpecialistInfoBean implements java.io.Serializable{
 		map.put("qualification_id_in", this.qualificationId);
 		map.put("title_id_in", this.titleId);
 		map.put("major_id_in", this.majorId);
-		map.put("state_in", this.state);
+		//map.put("state_in", this.state);
 		
 		StringBuilder sb = new StringBuilder();
 		int length = 0;

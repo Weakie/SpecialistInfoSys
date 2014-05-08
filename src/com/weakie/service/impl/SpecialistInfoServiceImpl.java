@@ -31,7 +31,12 @@ public class SpecialistInfoServiceImpl implements SpecialistInfoService {
 	public int insertNewSpecialistInfo(String userName) {
 		return dao.insertSpecInfo(new SpecialistInfoBean(userName));
 	}
-
+	
+	@Override
+	public int getSpecialistInfoState(String userName) {
+		return dao.getSpecInfoState(userName);
+	}
+	
 	@Override
 	public int updateSpecialistInfoState(String userName, int state) {
 		return dao.updateSpecInfoState(userName, state);
@@ -40,5 +45,7 @@ public class SpecialistInfoServiceImpl implements SpecialistInfoService {
 	public void setDao(SpecInfoDAO dao) {
 		this.dao = dao;
 	}
+
+	
 
 }

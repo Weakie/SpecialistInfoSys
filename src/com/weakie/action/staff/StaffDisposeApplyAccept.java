@@ -38,7 +38,7 @@ public class StaffDisposeApplyAccept extends ActionSupport {
     	if(StringUtils.equals(staffId, info.getStaffID())){
     		//若成功接收,修改专家信息状态
     		this.specInfoService.updateSpecialistInfoState(info.getUserName(), SpecInfoConstant.SPECINFO_CONFIRMING);
-    		result = SystemConstant.SUCCESS+";"+applyInfoId+";"+staffId;
+    		result = SystemConstant.SUCCESS+";"+applyInfoId+";"+staffId+";"+info.getUserName();
     	}else{
     		String nickName=this.userAccountService.getStaffNicmName(info.getStaffID());
     		result = SystemConstant.FAIL+";"+applyInfoId+";"+nickName;

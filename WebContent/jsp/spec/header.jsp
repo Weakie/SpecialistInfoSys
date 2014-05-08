@@ -17,6 +17,9 @@
 						<li <c:if test="${pageHeader==2}">class="active"</c:if> >
 							<a href="/SpecialistInfoSys/specInfoAddPrepare?userName=${sessionScope.USER.userName}">修改信息</a>
 						</li>
+						<li <c:if test="${pageHeader==3}">class="active"</c:if> >
+							<a href="/SpecialistInfoSys/specAddNewApplyPrepare?userName=${sessionScope.USER.userName}">提交申请</a>
+						</li>
 						<c:if test="${sessionScope.USER.authority==1 }">
 						<li <c:if test="${pageHeader==3}">class="active"</c:if> >
 							<a href="#">高级搜索</a>

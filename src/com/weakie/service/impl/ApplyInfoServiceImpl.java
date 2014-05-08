@@ -16,11 +16,11 @@ public class ApplyInfoServiceImpl implements ApplyInfoService {
 	private ApplyInfoDAO dao;
 	
 	@Override
-	public int addNewApply(String userName, String specName) {
+	public int addNewApply(String userName, String specName,String comment) {
 		if(StringUtils.isEmpty(userName)){
 			return 0;
 		}
-		ApplyInfo apply = new ApplyInfo(userName,specName,new Date());
+		ApplyInfo apply = new ApplyInfo(userName,specName,new Date(), comment);
 		return dao.insertApplyInfo(apply);
 	}
 
@@ -64,6 +64,11 @@ public class ApplyInfoServiceImpl implements ApplyInfoService {
 
 	public void setDao(ApplyInfoDAO dao) {
 		this.dao = dao;
+	}
+
+	@Override
+	public ApplyInfo getApplyInfoById(int id) {
+		return dao.getApplyInfoById(id);
 	}
 
 	

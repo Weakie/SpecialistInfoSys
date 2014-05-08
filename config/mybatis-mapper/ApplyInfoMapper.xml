@@ -15,6 +15,7 @@
 		<result property="acceptTime" column="acceptTime" javaType="java.util.Date" />
 		<result property="disposeTime" column="disposeTime" javaType="java.util.Date" />
 		<result property="staffID" column="staffID" />
+		<result property="comment" column="comment" />
 	</resultMap>
 	
 	
@@ -46,6 +47,10 @@
 	  	ORDER BY applyTime DESC 
 	  	LIMIT #{begin},#{number};
 	</select>
+	
+	<select id="selectApplyInfoById" parameterType="int" resultMap="applyInfoMap">
+	  	SELECT * FROM apply_info WHERE id = #{id}
+	</select>
 
 	<!-- below is for insert new applyInfo -->
 	<update id="updateStatusOvertime" parameterType="String">
@@ -54,11 +59,12 @@
 		WHERE userName = #{userName} AND ( status = 1 OR status = 3 )
 	</update>
 	<insert id="insertApplyInfo" parameterType="com.weakie.bean.ApplyInfo" useGeneratedKeys="true" keyProperty="id">
-		insert into apply_info (userName,specName,applyTime,status)
+		insert into apply_info (userName,specName,applyTime,comment,status)
 			values (
 				#{userName},
 				#{specName},
 				#{applyTime},
+				#{comment},
 				1
 			)
 	</insert>

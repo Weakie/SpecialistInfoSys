@@ -39,7 +39,7 @@
 		if(results[0]=="SUCCESS"){
 			alert(results[0]);
 			status.innerText="已接收";
-			ope.innerHTML="<a href=\"/SpecialistInfoSys/staffDisposeApplyDispose.action?staffId="+results[2]+"&applyId="+results[2]+"\">处理</a>";
+			ope.innerHTML="<a href=\"/SpecialistInfoSys/specInfoAddPrepare.action?staffId="+results[2]+"&applyInfoId="+results[1]+"&userName="+results[3]+"\">处理</a>";
 		}else{
 			alert(results[0]+",已经被"+results[2]+"接收");
 			statu.innerText=results[2]+"处理"; 

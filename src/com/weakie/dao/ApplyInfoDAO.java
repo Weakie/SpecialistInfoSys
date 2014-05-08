@@ -78,6 +78,19 @@ public class ApplyInfoDAO extends AbstractBaseDao {
 		return list;
 	}
 	
+	public ApplyInfo getApplyInfoById(int id){
+		SqlSession session = getSession();
+		ApplyInfo info = null;
+		try {
+			info = session.selectOne("com.weakie.dao.ApplyInfoDAO.selectApplyInfoById", id);
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		return info;
+	}
+	
 	public int insertApplyInfo(ApplyInfo applyInfo){
 		SqlSession session = getSession();
 		int result=0;

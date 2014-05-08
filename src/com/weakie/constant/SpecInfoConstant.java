@@ -8,5 +8,5 @@ public class SpecInfoConstant {
 	public static final int SPECINFO_CONFIRMED = 3;
 	
 	public static final boolean DEFAULT_SEX = true;
-	public static final int DEFAULT_STATUS = SPECINFO_INIT;
+	public static final int DEFAULT_STATUS = SPECINFO_NEW;
 }

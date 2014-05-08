@@ -42,6 +42,20 @@ public class SpecInfoDAO extends AbstractBaseDao {
 		return result;
 	}
 	
+	public int getSpecInfoState(String userName){
+		SqlSession session = getSession();
+		int result = 0;
+		try {
+			result = session.selectOne("com.weakie.dao.SpecInfoDAO.selectSpecInfoState", userName);
+			
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		return result;
+	}
+	
 	public int updateSpecInfo(SpecialistInfoBean specInfo){
 		SqlSession session = getSession();
 		Map<String,Object> param = specInfo.getMapValues();

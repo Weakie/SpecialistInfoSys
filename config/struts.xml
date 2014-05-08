@@ -107,6 +107,7 @@
 			<result name="success" type="redirectAction">
 				<param name="actionName">specInfoDisplay</param>
 				<param name="userName">${specInfoBean.userName}</param>
+				<param name="applyInfoId">${applyInfoId}</param>
 			</result>
 		</action>
 	
@@ -137,12 +138,16 @@
 		</action>
 		
 		<!-- 专家提交申请 -->
+		<action name="specAddNewApplyPrepare" class="specAddNewApplyAction" method="executePrepare">
+			<result name="success">/jsp/spec/specialist_info_add_apply.jsp</result>
+		</action>
 		<action name="specAddNewApply" class="specAddNewApplyAction" method="execute">
 			<result name="success" type="stream">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
+		
 		<!-- 工作人员 -->
 		<action name="staffDisposeApplyShowAll" class="staffDisposeApplyShowAllAction" method="execute">
 			<result name="success">/jsp/staff/staff_dispose_apply.jsp</result>
@@ -153,7 +158,7 @@
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
-		<action name="staffDisposeApplyConfirm" class="staffDisposeApplyConfirmAction" method="execute">
+		<action name="staffDisposeApplyConfirm" class="staffDisposeApplyAction" method="executeConfirm">
 			<result name="success" type="stream">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>

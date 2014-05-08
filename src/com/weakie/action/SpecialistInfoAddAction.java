@@ -44,10 +44,17 @@ public class SpecialistInfoAddAction extends ActionSupport {
 		
 		specInfoBean.setBirthday(year+"-"+StringUtils.leftPad(""+month, 2, '0'));
 		specInfoBean.setContact(contact);
-		specInfoBean.setState(SpecInfoConstant.SPECINFO_NEW);
-		
 		LogUtil.info("finish set info:"+specInfoBean);
+		
+		//update specInfo
 		specInfoService.updateSpecialistInfo(specInfoBean);
+		
+		//update specInfo State: confirmed -> new while update info
+		int state = specInfoService.getSpecialistInfoState(specInfoBean.getUserName());
+		if(state == SpecInfoConstant.SPECINFO_CONFIRMED){
+			LogUtil.info("userName="+specInfoBean.getUserName()+",state="+state+",update state to new.");
+			specInfoService.updateSpecialistInfoState(specInfoBean.getUserName(), SpecInfoConstant.SPECINFO_NEW);
+		}
         return SUCCESS;
     }
  

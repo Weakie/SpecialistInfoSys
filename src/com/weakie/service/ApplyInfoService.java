@@ -6,7 +6,7 @@ import com.weakie.bean.ApplyInfo;
 
 public interface ApplyInfoService {
 
-	public int addNewApply(String userName,String specName);
+	public int addNewApply(String userName,String specName,String comment);
 	/**
 	 * 得到申请信息,未排序
 	 * @param staffId
@@ -25,10 +25,17 @@ public interface ApplyInfoService {
 	public ApplyInfo acceptNewApply(String staffId, int applyId) throws Exception;
 	
 	/**
+	 * 根据id获得apply
+	 * @param id
+	 * @return
+	 */
+	public ApplyInfo getApplyInfoById(int id);
+	/**
 	 * 确认专家信息
 	 * @param staffId
 	 * @param applyId
 	 * @return
 	 */
 	public String confirmApply(String staffId, int applyId);
+	
 }

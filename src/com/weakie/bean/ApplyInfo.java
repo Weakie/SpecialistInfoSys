@@ -18,6 +18,7 @@ public class ApplyInfo implements java.io.Serializable, Comparable<ApplyInfo>{
 	private Date disposeTime;
 	private int status;
 	private String staffID;
+	private String comment;
 	
 	public ApplyInfo(){}
 	
@@ -27,10 +28,11 @@ public class ApplyInfo implements java.io.Serializable, Comparable<ApplyInfo>{
 	 * @param specName
 	 * @param applyTime
 	 */
-	public ApplyInfo(String userName, String specName, Date applyTime) {
+	public ApplyInfo(String userName, String specName, Date applyTime, String comment) {
 		this.userName = userName;
 		this.specName = specName;
 		this.applyTime = applyTime;
+		this.comment = comment;
 	}
 	
 	public ApplyInfo(int id, String userName, String specName, Date applyTime,
@@ -112,11 +114,20 @@ public class ApplyInfo implements java.io.Serializable, Comparable<ApplyInfo>{
 		return 0;
 	}
 
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
 	@Override
 	public String toString() {
 		return "ApplyInfo [id=" + id + ", userName=" + userName + ", specName="
 				+ specName + ", applyTime=" + applyTime + ", acceptTime="
 				+ acceptTime + ", disposeTime=" + disposeTime + ", status="
-				+ status + ", staffID=" + staffID + "]";
+				+ status + ", staffID=" + staffID + ", comment=" + comment
+				+ "]";
 	}
 }

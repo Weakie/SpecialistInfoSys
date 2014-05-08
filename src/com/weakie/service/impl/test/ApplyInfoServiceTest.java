@@ -32,10 +32,17 @@ public class ApplyInfoServiceTest implements ApplyInfoService {
 		return null;
 	}
 
+
 	@Override
-	public int addNewApply(String userName, String specName) {
+	public int addNewApply(String userName, String specName, String comment) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ApplyInfo getApplyInfoById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

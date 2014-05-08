@@ -17,7 +17,7 @@ public class StaffDisposeApplyConfirm extends ActionSupport {
     private static final long serialVersionUID = 1L;
  
     //request
-    private int applyInfoId;
+    private int applyInfoId;	//for confirm applyInfo
     private String staffId;
     //response
     private InputStream inputStream;
@@ -26,8 +26,9 @@ public class StaffDisposeApplyConfirm extends ActionSupport {
     private ApplyInfoService applyInfoService;
     private SpecialistInfoService specInfoService;
     
-    //method
-	public String execute(){
+   
+    //工作人员点击‘确认’
+	public String executeConfirm(){
 		LogUtil.info("applyId: "+applyInfoId+" ,staffId: "+staffId);
 		String userName = this.applyInfoService.confirmApply(staffId, applyInfoId);
     	int result2 = 0;
@@ -38,7 +39,7 @@ public class StaffDisposeApplyConfirm extends ActionSupport {
     	if(StringUtils.isEmpty(userName)){
     		result = "0:申请信息修改失败";
     	}else if(result2!=1){
-    		result = "1:申请信息修改成功,专家信息确认失败";
+    		result = "1:申请信息修改成功,专家信息确认失败,请再次确认";
     	}else{
     		result = "2:确认成功";
     	}
@@ -55,7 +56,7 @@ public class StaffDisposeApplyConfirm extends ActionSupport {
 	public InputStream getInputStream() {
 		return inputStream;
 	}
-
+	
 	public void setApplyInfoId(int applyInfoId) {
 		this.applyInfoId = applyInfoId;
 	}

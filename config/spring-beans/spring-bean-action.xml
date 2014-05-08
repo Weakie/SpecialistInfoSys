@@ -87,8 +87,8 @@
 		</property>
 	</bean>
 	
-	<!-- 工作人员确认申请 -->
-	<bean name="staffDisposeApplyConfirmAction" class="com.weakie.action.staff.StaffDisposeApplyConfirm" scope="prototype">
+	<!-- 工作人员处理申请 -->
+	<bean name="staffDisposeApplyAction" class="com.weakie.action.staff.StaffDisposeApplyConfirm" scope="prototype">
 		<property name="applyInfoService">
 			<ref bean="applyInfoService" />
 		</property>

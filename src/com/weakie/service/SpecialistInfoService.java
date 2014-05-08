@@ -15,5 +15,6 @@ public interface SpecialistInfoService {
 	
 	public int insertNewSpecialistInfo(String userName);
 	
+	public int getSpecialistInfoState(String userName);
 	public int updateSpecialistInfoState(String userName,int state);
 }
