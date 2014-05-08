@@ -8,7 +8,7 @@ import com.weakie.util.log.LogUtil;
  * @author dell
  *
  */
-public class SpecialistInfoAddPreparePreCheckAction extends ActionSupport {
+public class SpecialistInfoPreCheckAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 	//request

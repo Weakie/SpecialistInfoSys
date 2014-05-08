@@ -355,11 +355,12 @@
 		document.getElementById('fileToUpload').setAttribute('type', 'button');
 	}
 </script>
-		<div class="col-md-10 column">
-			<br><br><br>
+		<div class="page-header">
 			<h3 class="text-left">
-				<Strong>信息登记表</Strong>
+				<strong>信息登记表</strong>
 			</h3>
+		</div>
+		<div class="col-md-10 column">
 			<form action="/SpecialistInfoSys/specInfoAdd.action" method="post" onsubmit="return checkform();" class="form-horizontal">
 				<span class="label label-default">基本资料</span><br><br>
 				<input type="hidden" id="userName" name="specInfoBean.userName" value="${userName }" />

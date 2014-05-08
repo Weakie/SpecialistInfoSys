@@ -14,29 +14,30 @@ import com.weakie.util.log.LogUtil;
  * @author dell
  *
  */
-public class SpecialistInfoAddPrepareDirectAction extends ActionSupport {
+public class SpecialistInfoDirectAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
-	private String SPEC_UPDATE = "SPEC_UPDATE";
-	private	String STAFF_UPDATE = "STAFF_UPDATE";
+	private String SPEC = "SPEC";
+	private	String STAFF = "STAFF";
 	
-	public String execute() throws Exception {
+	public String executeDirect() throws Exception {
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		Person p = (Person) session.get(SystemConstant.USER);
 		if(p.getRole() == UserAccountConstant.ROLE_SPEC){
 			LogUtil.info("person type:specialist");
-			return SPEC_UPDATE;
+			return SPEC;
 		}else{
 			LogUtil.info("person type:stuff");
-			return STAFF_UPDATE;
+			return STAFF;
 		}
 	}
-
-	public void setSPEC_UPDATE(String sPEC_UPDATE) {
-		SPEC_UPDATE = sPEC_UPDATE;
+	
+	public void setSPEC(String sPEC) {
+		SPEC = sPEC;
 	}
-
-	public void setSTAFF_UPDATE(String sTAFF_UPDATE) {
-		STAFF_UPDATE = sTAFF_UPDATE;
-	}	
+	public void setSTAFF(String sTAFF) {
+		STAFF = sTAFF;
+	}
+	
+	
 }

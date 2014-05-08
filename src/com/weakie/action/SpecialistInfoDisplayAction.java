@@ -61,7 +61,7 @@ public class SpecialistInfoDisplayAction extends ActionSupport {
 			StringBuilder workPos = new StringBuilder();
 			for(int cityId : this.specInfoBean.getWorkPositionId()){
 				String position = provNameMap.get(cityProvMap.get(cityId))+"-"+cityNameMap.get(cityId);
-				workPos.append(position+"\n");
+				workPos.append(position+";");
 			}
 			this.specInfoBean.setWorkPosition(workPos.toString());
 		}

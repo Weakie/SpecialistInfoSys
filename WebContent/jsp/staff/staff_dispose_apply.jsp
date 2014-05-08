@@ -139,7 +139,7 @@
 								<a href="/SpecialistInfoSys/specInfoAddPrepare.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">处理</a>
 							</c:if>
 							<c:if test="${info.status==4&&info.staffID==sessionScope.USER.userName }">
-								<a href="/SpecialistInfoSys/staffDisposeApplyAccept.action?staffId=${sessionScope.USER.userName}">查看</a>-
+								<a href="/SpecialistInfoSys/specInfoDisplay.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">查看</a>-
 								<a href="/SpecialistInfoSys/specInfoAddPrepare.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">修改</a>
 							</c:if>
 						</td>
