@@ -136,6 +136,13 @@
 			</result>
 		</action>
 		
+		<!-- 专家提交申请 -->
+		<action name="specAddNewApply" class="specAddNewApplyAction" method="execute">
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
 		<!-- 工作人员 -->
 		<action name="staffDisposeApplyShowAll" class="staffDisposeApplyShowAllAction" method="execute">
 			<result name="success">/jsp/staff/staff_dispose_apply.jsp</result>

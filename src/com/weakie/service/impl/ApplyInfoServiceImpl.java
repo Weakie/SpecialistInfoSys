@@ -1,7 +1,10 @@
 package com.weakie.service.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.weakie.bean.ApplyInfo;
 import com.weakie.constant.ApplyConstant;
@@ -12,6 +15,15 @@ public class ApplyInfoServiceImpl implements ApplyInfoService {
 
 	private ApplyInfoDAO dao;
 	
+	@Override
+	public int addNewApply(String userName, String specName) {
+		if(StringUtils.isEmpty(userName)){
+			return 0;
+		}
+		ApplyInfo apply = new ApplyInfo(userName,specName,new Date());
+		return dao.insertApplyInfo(apply);
+	}
+
 	@Override
 	public List<ApplyInfo> getApplyInfos(String staffId, int status, int pageIndex) {
 		//pageIndex can not < 0;
@@ -54,4 +66,5 @@ public class ApplyInfoServiceImpl implements ApplyInfoService {
 		this.dao = dao;
 	}
 
+	
 }

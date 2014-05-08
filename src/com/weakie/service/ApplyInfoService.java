@@ -6,6 +6,7 @@ import com.weakie.bean.ApplyInfo;
 
 public interface ApplyInfoService {
 
+	public int addNewApply(String userName,String specName);
 	/**
 	 * 得到申请信息,未排序
 	 * @param staffId

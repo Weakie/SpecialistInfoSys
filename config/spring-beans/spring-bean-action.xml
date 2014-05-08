@@ -56,8 +56,15 @@
 	</bean>
 	
 	
-	
-	
+	<!-- 专家提交申请 -->
+	<bean name="specAddNewApplyAction" class="com.weakie.action.spec.SpecAddNewApply" scope="prototype">
+		<property name="applyInfoService">
+			<ref bean="applyInfoService" />
+		</property>
+		<property name="specInfoService">
+			<ref bean="specialistInfoService" />
+		</property>
+	</bean>
 	<!-- 工作人员显示申请 -->
 	<bean name="staffDisposeApplyShowAllAction" class="com.weakie.action.staff.StaffDisposeApplyShowAll" scope="prototype">
 		<property name="applyInfoService">
