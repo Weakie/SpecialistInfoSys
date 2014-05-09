@@ -37,11 +37,11 @@
 						<li>
 							<a href="#"><span class="badge pull-right">42</span>系统消息</a>
 						</li>
-						<li class="dropdown">
+						<li class="dropdown" <c:if test="${pageHeader==5}">class="active"</c:if>>
 							 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i>个人设置<strong class="caret"></strong></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="#">修改密码</a>
+									<a href="/SpecialistInfoSys/resetPasswordFormForStaff.action">修改密码</a>
 								</li>
 								<li>
 									<a href="#">账户信息</a>

@@ -30,7 +30,7 @@
 				</div>
 				<div class="col-md-4 column">
 					<br><br><br><br>
-					<img id="image" class="img-thumbnail" alt="暂无照片" width="140" height="140" src="/SpecialistInfoSys/downloadImage?username=${specInfoBean.userName}">
+					<img id="image" class="img-thumbnail" alt="暂无照片" width="140" height="140" src="/SpecialistInfoSys/downloadImage.action?userName=${specInfoBean.userName}">
 				</div>
 			</div>
 			<hr>

@@ -20,7 +20,7 @@ public class SpecialistInfoImageAction extends ActionSupport {
 	
 	//upload-download
 	private File file;
-	private String username;
+	private String userName;
 	
 	//result
 	private InputStream inputStream;
@@ -31,12 +31,12 @@ public class SpecialistInfoImageAction extends ActionSupport {
 	private boolean pathUnderServer = true;
 	
 	public String executeUpload() throws UnsupportedEncodingException{
-		LogUtil.debug("userName: " + username);
+		LogUtil.debug("userName: " + userName);
 		
 		if(pathUnderServer){
 			prePath = ServletActionContext.getServletContext().getRealPath("/");;
 		}
-		File destFile = new File(prePath + imgpath, username+".jpg");
+		File destFile = new File(prePath + imgpath, userName+".jpg");
 		
 		LogUtil.debug("source file length: "+file.length()/1024+" KB");
 		LogUtil.debug("source file path: "+file.getAbsolutePath());
@@ -53,7 +53,7 @@ public class SpecialistInfoImageAction extends ActionSupport {
 			while ((length = is.read(buffer)) > 0) {
 				os.write(buffer, 0, length);
 			}
-			LogUtil.info(username+" upload file complete.");
+			LogUtil.info(userName+" upload file complete.");
 		} catch (FileNotFoundException e) {
 			LogUtil.error(e);
 		} catch (IOException e) {
@@ -74,18 +74,18 @@ public class SpecialistInfoImageAction extends ActionSupport {
 				}
 			}
 		}
-		String result = "user:"+this.username+":照片上传成功";
+		String result = "user:"+this.userName+":照片上传成功";
 		this.inputStream = new ByteArrayInputStream(result.getBytes("UTF-8"));
 		return SUCCESS;
 	}
 	
 	public String executeDownload() {
-		LogUtil.debug("download image userName: " + username);
+		LogUtil.debug("download image userName: " + userName);
 		
 		if(pathUnderServer){
 			prePath = ServletActionContext.getServletContext().getRealPath("/");;
 		}
-		File tarFile = new File(prePath + imgpath, username+".jpg");
+		File tarFile = new File(prePath + imgpath, userName+".jpg");
 		if(tarFile.exists()){
 			try {
 				this.inputStream = new FileInputStream(tarFile);
@@ -106,12 +106,12 @@ public class SpecialistInfoImageAction extends ActionSupport {
 		this.file = file;
 	}
 	
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String username) {
+		this.userName = username;
 	}
 
 	public void setImgpath(String imgpath) {

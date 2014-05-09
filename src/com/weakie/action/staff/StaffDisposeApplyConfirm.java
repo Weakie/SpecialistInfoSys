@@ -39,7 +39,7 @@ public class StaffDisposeApplyConfirm extends ActionSupport {
     	if(StringUtils.isEmpty(userName)){
     		result = "0:申请信息修改失败";
     	}else if(result2!=1){
-    		result = "1:申请信息修改成功,专家信息确认失败,请再次确认";
+    		result = "1:申请信息修改成功,专家信息已经确认";
     	}else{
     		result = "2:确认成功";
     	}

@@ -317,7 +317,7 @@
 	    xhr.addEventListener("load", uploadComplete, false);
 	    xhr.addEventListener("error", uploadFailed, false);
 	    xhr.addEventListener("abort", uploadCanceled, false);
-	    xhr.open("POST", "/SpecialistInfoSys/uploadImage.action?username="+username);
+	    xhr.open("POST", "/SpecialistInfoSys/uploadImage.action?userName="+username);
 	    xhr.send(fd);
 	}
 	
@@ -337,7 +337,7 @@
 	    var result = evt.target.responseText.split(":");
 	    if(result[0]=="user"){
 	    	var image = document.getElementById("image");
-	 	    image.src="/SpecialistInfoSys/downloadImage?username="+result[1];
+	 	    image.src="/SpecialistInfoSys/downloadImage.action?userName="+result[1];
 	    }
 	}
 	
@@ -357,10 +357,19 @@
 </script>
 		
 		<div class="col-md-10 column">
-			<form action="/SpecialistInfoSys/specInfoAdd.action" method="post" onsubmit="return checkform();" class="form-horizontal">
+			<form action="${formAction }" method="post" onsubmit="return checkform();" class="form-horizontal">
 				<span class="label label-default">基本资料</span><br><br>
 				<input type="hidden" id="userName" name="specInfoBean.userName" value="${userName }" />
-				<input type="hidden" name="applyInfoId" value="${applyInfoId }" />
+				<!-- for staff update -->
+				<c:if test="${!empty info.userName }">
+					<input type="hidden" name="userName" value="${info.userName }" />
+				</c:if>
+				<c:if test="${empty info.userName }">
+					<input type="hidden" name="userName" value="${userName }" />
+				</c:if>
+				<input type="hidden" name="applyInfoId" value="${info.id }" />
+				<input type="hidden" name="staffId" value="${info.staffID }" />
+				<!-- for staff update -->
 				<div class="form-group">
 					 <label for="name" class="col-sm-2 col-xs-2 control-label">姓名</label>
 					 <div class="col-sm-2 col-xs-2">
@@ -459,7 +468,7 @@
 						<div id="fileSize"></div>
 				        <input type="hidden" onclick="uploadFile('<s:property value="userName"/>')"  id="fileToUploadButton" value="上传文件" />
 				       	<div id="progressNumber"></div>
-				        <img id="image" class="img-thumbnail" alt="暂无照片" width="160" height="160" src="/SpecialistInfoSys/downloadImage?username=${specInfoBean.userName}">
+				        <img id="image" class="img-thumbnail" alt="暂无照片" width="160" height="160" src="/SpecialistInfoSys/downloadImage.action?userName=${specInfoBean.userName}">
 					 </div>
 					 
 				</div>

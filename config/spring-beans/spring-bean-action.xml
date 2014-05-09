@@ -19,11 +19,6 @@
 		<property name="pathUnderServer" value="false" />
 	</bean>
 	
-	<bean name="specialistInfoPreCheckAction" class="com.weakie.action.precheck.SpecialistInfoPreCheckAction" scope="prototype"></bean>
-	<bean name="specialistInfoRedirectAction" class="com.weakie.action.aftersend.SpecialistInfoDirectAction" scope="prototype">
-		<property name="SPEC" value="SPEC"/>
-		<property name="STAFF" value ="STAFF"/>
-	</bean>
 	<!-- 准备更新专家信息 -->
 	<bean name="specialistInfoAddPrepareAction" class="com.weakie.action.SpecialistInfoAddPrepareAction" scope="prototype">
 		<property name="specInfoService">

@@ -112,10 +112,10 @@
 					
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="/SpecialistInfoSys/jsp/register.jsp">注册</a>
+							<a href="/SpecialistInfoSys/jsp/registerForm.action">注册</a>
 						</li>
 						<li>
-							<a href="/SpecialistInfoSys/jsp/login.jsp">登录</a>
+							<a href="/SpecialistInfoSys/jsp/loginForm.action">登录</a>
 						</li>
 					</ul>
 				</div>

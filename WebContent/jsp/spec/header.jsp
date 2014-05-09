@@ -12,16 +12,16 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li <c:if test="${pageHeader==1}">class="active"</c:if> >
-							<a href="/SpecialistInfoSys/specInfoDisplay?userName=${sessionScope.USER.userName}">基本信息</a>
+							<a href="/SpecialistInfoSys/specInfoDisplay.action?userName=${sessionScope.USER.userName}">基本信息</a>
 						</li>
 						<li <c:if test="${pageHeader==2}">class="active"</c:if> >
-							<a href="/SpecialistInfoSys/specInfoAddPrepare?userName=${sessionScope.USER.userName}">修改信息</a>
+							<a href="/SpecialistInfoSys/specInfoAddPrepare.action?userName=${sessionScope.USER.userName}">修改信息</a>
 						</li>
 						<li <c:if test="${pageHeader==3}">class="active"</c:if> >
-							<a href="/SpecialistInfoSys/specAddNewApplyPrepare?userName=${sessionScope.USER.userName}">提交申请</a>
+							<a href="/SpecialistInfoSys/specAddNewApplyPrepare.action?userName=${sessionScope.USER.userName}">提交申请</a>
 						</li>
 						<c:if test="${sessionScope.USER.authority==1 }">
-						<li <c:if test="${pageHeader==3}">class="active"</c:if> >
+						<li <c:if test="${pageHeader==4}">class="active"</c:if> >
 							<a href="#">高级搜索</a>
 						</li>
 						</c:if>
@@ -40,11 +40,11 @@
 						<li>
 							<a href="#"><span class="badge pull-right">42</span>系统消息</a>
 						</li>
-						<li class="dropdown">
+						<li class="dropdown" <c:if test="${pageHeader==5}">class="active"</c:if>>
 							 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i>个人设置<strong class="caret"></strong></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="#">修改密码</a>
+									<a href="/SpecialistInfoSys/resetPasswordForm.action">修改密码</a>
 								</li>
 								<li>
 									<a href="#">账户信息</a>

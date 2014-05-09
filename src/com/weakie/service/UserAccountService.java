@@ -36,6 +36,13 @@ public interface UserAccountService {
 	public boolean register(String userName,String password) throws Exception;
 	
 	/**
+	 * ÖØÖÃÃÜÂë
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public Person resetPassword(String userName,String password,String newPassword) throws Exception;
+	/**
 	 * ·µ»ØstaffµÄnickname
 	 * @param staffId
 	 * @return

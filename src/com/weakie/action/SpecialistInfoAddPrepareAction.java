@@ -46,6 +46,9 @@ public class SpecialistInfoAddPrepareAction extends ActionSupport {
      * @throws Exception
      */
     public String executePrepare() {
+    	//for staff update, specialist update is not needed
+    	LogUtil.info("userName="+userName+" ,ApplyId="+applyInfoId+" ,staffId="+staffId);
+    	//begin
     	LogUtil.debug("prepare action.");
 
     	this.orgTypeMap = this.selectService.getOrgType();
@@ -195,4 +198,23 @@ public class SpecialistInfoAddPrepareAction extends ActionSupport {
 		this.selectService = selectService;
 	}
 
+	//below variable is for staff update
+	private String staffId;
+	private String applyInfoId;
+
+	public String getStaffId() {
+		return staffId;
+	}
+
+	public void setStaffId(String staffId) {
+		this.staffId = staffId;
+	}
+
+	public String getApplyInfoId() {
+		return applyInfoId;
+	}
+
+	public void setApplyInfoId(String applyInfoId) {
+		this.applyInfoId = applyInfoId;
+	}
 }

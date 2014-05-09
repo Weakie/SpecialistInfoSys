@@ -39,7 +39,7 @@
 		if(results[0]=="SUCCESS"){
 			alert(results[0]);
 			status.innerText="已接收";
-			ope.innerHTML="<a href=\"/SpecialistInfoSys/specInfoAddPrepare.action?staffId="+results[2]+"&applyInfoId="+results[1]+"&userName="+results[3]+"\">处理</a>";
+			ope.innerHTML="<a href=\"/SpecialistInfoSys/specInfoAddPrepareForStaff.action?staffId="+results[2]+"&applyInfoId="+results[1]+"&userName="+results[3]+"\">处理</a>";
 		}else{
 			alert(results[0]+",已经被"+results[2]+"接收");
 			statu.innerText=results[2]+"处理"; 
@@ -115,13 +115,13 @@
 							${info.specName }
 						</td>
 						<td>
-							${info.applyTime }
+							${info.applyTimeString }
 						</td>
 						<td>
-							${info.acceptTime }
+							${info.acceptTimeString }
 						</td>
 						<td>
-							${info.disposeTime }
+							${info.disposeTimeString }
 						</td>
 						<td id="statu-${info.id }">
 							<c:if test="${info.status==1 }">新申请</c:if>
@@ -136,11 +136,11 @@
 								<a href="#" onclick="acceptApplyRequest('${sessionScope.USER.userName }',${info.id})">接收</a>
 							</c:if>
 							<c:if test="${info.status==3&&info.staffID==sessionScope.USER.userName }">
-								<a href="/SpecialistInfoSys/specInfoAddPrepare.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">处理</a>
+								<a href="/SpecialistInfoSys/specInfoAddPrepareForStaff.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">处理</a>
 							</c:if>
 							<c:if test="${info.status==4&&info.staffID==sessionScope.USER.userName }">
-								<a href="/SpecialistInfoSys/specInfoDisplay.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">查看</a>-
-								<a href="/SpecialistInfoSys/specInfoAddPrepare.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">修改</a>
+								<a href="/SpecialistInfoSys/specInfoDisplayForStaff.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">查看</a>-
+								<a href="/SpecialistInfoSys/specInfoAddPrepareForStaff.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">修改</a>
 							</c:if>
 						</td>
 					</tr>

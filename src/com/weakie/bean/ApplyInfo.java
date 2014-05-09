@@ -1,6 +1,9 @@
 package com.weakie.bean;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * 信息申请Bean
@@ -8,6 +11,12 @@ import java.util.Date;
  * 2014年5月2日下午7:26:58
  */
 public class ApplyInfo implements java.io.Serializable, Comparable<ApplyInfo>{
+	private static SimpleDateFormat dateformatYear = new SimpleDateFormat("yyyy/MM/dd"); 
+	private static SimpleDateFormat dateformatDate = new SimpleDateFormat("M月d日");
+	private static SimpleDateFormat dateformatTime = new SimpleDateFormat("a hh:mm");
+
+	private Date today = new Date();
+	
 	private static final long serialVersionUID = 1L;
 	
 	private int id;         //1000000
@@ -66,17 +75,53 @@ public class ApplyInfo implements java.io.Serializable, Comparable<ApplyInfo>{
 	public void setSpecName(String specName) {
 		this.specName = specName;
 	}
+	@SuppressWarnings("deprecation")
+	public String getApplyTimeString(){
+		if(this.applyTime == null){
+			return StringUtils.EMPTY;
+		}
+		if(applyTime.getYear()!=today.getYear()){
+			return dateformatYear.format(applyTime);
+		}else if(applyTime.getDate()!=today.getDate()){
+			return dateformatDate.format(applyTime);
+		}
+		return dateformatTime.format(applyTime);
+	}
 	public Date getApplyTime() {
 		return applyTime;
 	}
 	public void setApplyTime(Date applyTime) {
 		this.applyTime = applyTime;
 	}
+	@SuppressWarnings("deprecation")
+	public String getAcceptTimeString(){
+		if(this.acceptTime == null){
+			return StringUtils.EMPTY;
+		}
+		if(acceptTime.getYear()!=today.getYear()){
+			return dateformatYear.format(acceptTime);
+		}else if(acceptTime.getDate()!=today.getDate()){
+			return dateformatDate.format(acceptTime);
+		}
+		return dateformatTime.format(acceptTime);
+	}
 	public Date getAcceptTime() {
 		return acceptTime;
 	}
 	public void setAcceptTime(Date acceptTime) {
 		this.acceptTime = acceptTime;
+	}
+	@SuppressWarnings("deprecation")
+	public String getDisposeTimeString(){
+		if(this.disposeTime == null){
+			return StringUtils.EMPTY;
+		}
+		if(disposeTime.getYear()!=today.getYear()){
+			return dateformatYear.format(disposeTime);
+		}else if(disposeTime.getDate()!=today.getDate()){
+			return dateformatDate.format(disposeTime);
+		}
+		return dateformatTime.format(disposeTime);
 	}
 	public Date getDisposeTime() {
 		return disposeTime;

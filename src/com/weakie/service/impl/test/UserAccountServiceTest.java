@@ -75,4 +75,11 @@ public class UserAccountServiceTest implements UserAccountService {
 		return "ะกอ๕";
 	}
 
+	@Override
+	public Person resetPassword(String userName, String password,
+			String newPassword) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

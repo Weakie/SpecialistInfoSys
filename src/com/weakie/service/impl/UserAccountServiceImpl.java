@@ -10,6 +10,7 @@ import com.weakie.constant.UserAccountConstant;
 import com.weakie.dao.PersonDAO;
 import com.weakie.service.UserAccountService;
 import com.weakie.util.ReadOnlyMap;
+import com.weakie.util.log.LogUtil;
 
 public class UserAccountServiceImpl implements UserAccountService {
 
@@ -51,6 +52,20 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 	public void setPersonDAO(PersonDAO personDAO) {
 		this.personDAO = personDAO;
+	}
+
+	@Override
+	public Person resetPassword(String userName, String password,
+			String newPassword) throws Exception {
+		int result = this.personDAO.updatePassword(userName, password, newPassword);
+		if(result == 1){
+			LogUtil.info("user:"+userName+",fail to reset password");
+		}
+		Person p = this.personDAO.checkPassword(userName, newPassword);
+		if(p == null){
+			LogUtil.info("user:"+userName+",fail to check password after reset password");
+		}
+		return p;
 	}
 
 }

@@ -3,6 +3,8 @@ package com.weakie.action;
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.weakie.bean.MessageStore;
@@ -20,6 +22,7 @@ public class UserLoginRegisterAction extends ActionSupport {
     //request
     private String userName;
     private String password;
+    private String newPassword;
     //result
     private InputStream inputStream;
     private MessageStore messageStore;
@@ -75,6 +78,30 @@ public class UserLoginRegisterAction extends ActionSupport {
 		}
 		return INPUT;
     }
+    
+    public String executeResetPassword() {
+    	LogUtil.debug(userName);
+    	if(StringUtils.isEmpty(userName)){
+    		messageStore=new MessageStore("«Îœ»µ«¬º"); 
+    		return INPUT;
+    	}
+    	Person p = null;
+		try {
+			p = accountService.resetPassword(userName, password, newPassword);
+			if(p!=null){
+	    		ActionContext.getContext().getSession().put(SystemConstant.USER, p);
+	    		messageStore=new MessageStore("√‹¬Î–ﬁ∏ƒ≥…π¶"); 
+	    		return SUCCESS;
+	    	}else{
+	    		messageStore=new MessageStore("√‹¬Î÷ÿ÷√ ß∞‹"); 
+	    	}
+		} catch (Exception e) {
+			e.printStackTrace();
+			LogUtil.error(e);
+			messageStore = new MessageStore("√‹¬Î÷ÿ÷√:œµÕ≥¥ÌŒÛ") ;
+		}
+		return INPUT;
+    }
  
     public MessageStore getMessageStore() {
         return messageStore;
@@ -90,6 +117,10 @@ public class UserLoginRegisterAction extends ActionSupport {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 
 	public void setAccountService(UserAccountService accountService) {

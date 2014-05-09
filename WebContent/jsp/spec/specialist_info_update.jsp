@@ -33,6 +33,8 @@
 				<strong>信息登记表</strong>
 			</h3>
 		</div>
+		
+		<c:set var="formAction" value="/SpecialistInfoSys/specInfoAdd.action" scope="page"/>
 		<%@ include file="../include/specialist_info_update.jsp" %>
 	</div>
 	<h5 class="text-center text-muted">

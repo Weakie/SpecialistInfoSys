@@ -30,6 +30,9 @@ public class SpecialistInfoAddAction extends ActionSupport {
     private SpecialistInfoService specInfoService;
     
 	public String executeAddInfo() throws Exception{
+		//for staff update, specialist update is not needed
+		LogUtil.info("userName="+userName+" ,ApplyId="+applyInfoId+" ,staffId="+staffId);
+		//begin
     	LogUtil.info("add info: " + specInfoBean.getUserName());
     	LogUtil.info("year:"+year+";month:"+month);
     	Map<String,String> contact = new HashMap<String,String>();
@@ -94,4 +97,33 @@ public class SpecialistInfoAddAction extends ActionSupport {
 		this.specInfoService = specInfoService;
 	}
     
+	//below variable is for staff update
+	private String userName;
+	private String staffId;
+	private String applyInfoId;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getStaffId() {
+		return staffId;
+	}
+
+	public void setStaffId(String staffId) {
+		this.staffId = staffId;
+	}
+
+	public String getApplyInfoId() {
+		return applyInfoId;
+	}
+
+	public void setApplyInfoId(String applyInfoId) {
+		this.applyInfoId = applyInfoId;
+	}
+	
 }

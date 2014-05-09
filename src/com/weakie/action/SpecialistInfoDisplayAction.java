@@ -23,6 +23,9 @@ public class SpecialistInfoDisplayAction extends ActionSupport {
     private SelectionService selectService;
     
 	public String execute() throws Exception{
+		//for staff display, specialist display is not needed
+    	LogUtil.info("userName="+userName+" ,ApplyId="+applyInfoId+" ,staffId="+staffId);
+    	//begin
     	LogUtil.info("display info action, userName: " + userName);
     	this.specInfoBean = this.specInfoService.getSpecialistInfoByUsername(userName);
     	if(this.specInfoBean!=null){
@@ -83,4 +86,23 @@ public class SpecialistInfoDisplayAction extends ActionSupport {
 		this.selectService = selectService;
 	}
 	
+	// below variable is for staff update
+	private String staffId;
+	private String applyInfoId;
+
+	public String getStaffId() {
+		return staffId;
+	}
+
+	public void setStaffId(String staffId) {
+		this.staffId = staffId;
+	}
+
+	public String getApplyInfoId() {
+		return applyInfoId;
+	}
+
+	public void setApplyInfoId(String applyInfoId) {
+		this.applyInfoId = applyInfoId;
+	}
 }

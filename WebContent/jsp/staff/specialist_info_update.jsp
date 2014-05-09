@@ -72,6 +72,9 @@
 		<div class="col-sm-6 col-xs-6">
 			<textarea class="form-control" id="comment" rows="4" placeholder="备注信息">${info.comment }</textarea><br>
 		</div>
+		
+		<c:set var="formAction" value="/SpecialistInfoSys/specInfoAddForStaff.action" scope="page"/>
+		<!-- include page need info in pageContex -->
 		<%@ include file="../include/specialist_info_update.jsp" %>
 	</div>
 	<h5 class="text-center text-muted">
