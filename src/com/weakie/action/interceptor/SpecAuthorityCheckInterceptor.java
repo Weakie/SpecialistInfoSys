@@ -11,6 +11,7 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.weakie.bean.Person;
 import com.weakie.constant.ActionConstant;
 import com.weakie.constant.SystemConstant;
+import com.weakie.constant.UserAccountConstant;
 import com.weakie.util.log.LogUtil;
 
 /**
@@ -41,9 +42,16 @@ public class SpecAuthorityCheckInterceptor  extends AbstractInterceptor {
 		
 		String userName = this.getParamener(param.get("userName"));
 		LogUtil.info(ctx.getName()+" ,userName="+userName);
-		if(!StringUtils.equals(user.getUserName(), userName)){
-			ctx.put("message", "你没有权力操作");
-			return ActionConstant.RESULT_FAIL;
+		if(StringUtils.equals(ctx.getName(), "uploadImage") || StringUtils.equals(ctx.getName(), "downloadImage")){
+			if(!StringUtils.equals(user.getUserName(), userName) && user.getRole() == UserAccountConstant.ROLE_SPEC ){
+				ctx.put("message", "你没有权力操作");
+				return ActionConstant.RESULT_FAIL;
+			}
+		}else {
+			if(!StringUtils.equals(user.getUserName(), userName)){
+				ctx.put("message", "你没有权力操作");
+				return ActionConstant.RESULT_FAIL;
+			}
 		}
 		
 		return invocation.invoke();
