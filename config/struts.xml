@@ -96,14 +96,33 @@
 			<interceptor-ref name="checklogin" />
 		</action>
 		<action name="resetPasswordFormForStaff">
-			<result>/jsp/spec/reset_password.jsp</result>
+			<result>/jsp/staff/reset_password.jsp</result>
 		</action>
 		<action name="resetPasswordForStaff" class="userLoginRegisterAction" method="executeResetPassword">
 			<result name="success">/jsp/staff/reset_password.jsp</result>
 			<result name="input">/jsp/staff/reset_password.jsp</result>
 			<interceptor-ref name="checklogin" />
 		</action>
-		
+		<!-- 账户信息 -->
+		<action name="accountInfoDisplayForm">
+			<result>/jsp/spec/account_info_display.jsp</result>
+			<interceptor-ref name="checklogin" />
+		</action>
+		<action name="accountInfoDisplayFormForStaff">
+			<result>/jsp/staff/account_info_display.jsp</result>
+		</action>
+		<!-- 重置昵称 -->
+		<action name="updateNickName" class="userLoginRegisterAction" method="updateNickName">
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+			<interceptor-ref name="specAuthorityForSpecInfo" />
+		</action>
+		<!-- 注销 -->
+		<action name="logout" class="userLoginRegisterAction" method="executeLogout">
+			<result name="success">/jsp/login.jsp</result>
+		</action>
 		<!-- 用户上传自己的图片 -->
 		<action name="uploadImage" class="specialistInfoImageAction" method="executeUpload">
 			<!-- 定义文件上传拦截器 -->

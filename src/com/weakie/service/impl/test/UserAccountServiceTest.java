@@ -82,4 +82,10 @@ public class UserAccountServiceTest implements UserAccountService {
 		return null;
 	}
 
+	@Override
+	public int updateNickName(String userName, String nickName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

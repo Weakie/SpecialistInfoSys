@@ -1,5 +1,6 @@
 package com.weakie.bean;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.weakie.constant.UserAccountConstant;
@@ -10,6 +11,7 @@ import com.weakie.constant.UserAccountConstant;
  */
 public class Person implements java.io.Serializable
 {
+	private static SimpleDateFormat dateformat = new SimpleDateFormat("yyyy年M月d日 a h点m分s秒"); 
 	private static final long serialVersionUID = 1L;
 	
 	private String userName;//用户名
@@ -93,11 +95,17 @@ public class Person implements java.io.Serializable
 	public void setRegisterTime(Date registerTime) {
 		this.registerTime = registerTime;
 	}
+	public String getRegisterTimeString(){
+		return dateformat.format(registerTime);
+	}
 	public Date getLoginTime() {
 		return loginTime;
 	}
 	public void setLoginTime(Date loginTime) {
 		this.loginTime = loginTime;
+	}
+	public String getLoginTimeString(){
+		return dateformat.format(loginTime);
 	}
 
 	@Override

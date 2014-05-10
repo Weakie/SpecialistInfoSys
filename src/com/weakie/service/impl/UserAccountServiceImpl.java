@@ -57,15 +57,22 @@ public class UserAccountServiceImpl implements UserAccountService {
 	@Override
 	public Person resetPassword(String userName, String password,
 			String newPassword) throws Exception {
-		int result = this.personDAO.updatePassword(userName, password, newPassword);
-		if(result == 1){
-			LogUtil.info("user:"+userName+",fail to reset password");
+		Person p = this.personDAO.checkPassword(userName, password);
+		if(p==null){
+			LogUtil.info("user:"+userName+",fail to check password before reset password");
+			return null;
 		}
-		Person p = this.personDAO.checkPassword(userName, newPassword);
+		this.personDAO.updatePassword(userName, password, newPassword);
+		p = this.personDAO.checkPassword(userName, newPassword);
 		if(p == null){
 			LogUtil.info("user:"+userName+",fail to check password after reset password");
 		}
 		return p;
+	}
+
+	@Override
+	public int updateNickName(String userName, String nickName) {
+		return this.personDAO.updateNickName(userName, nickName);
 	}
 
 }

@@ -53,4 +53,12 @@ public interface UserAccountService {
 	 * 返回syaff的nickname
 	 */
 	public String getStaffNicmName(String staffId);
+	
+	/**
+	 * 更新用户nickName
+	 * @param userName
+	 * @param nickName
+	 * @return
+	 */
+	public int updateNickName(String userName,String nickName);
 }

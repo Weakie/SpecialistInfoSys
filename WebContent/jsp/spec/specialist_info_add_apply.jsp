@@ -71,7 +71,7 @@
 			<c:if test="${specInfoBean.state==3 }"><span style="color:#80BFFF">已确认</span></c:if>
 			<c:if test="${specInfoBean.state!=3 }">已确认</c:if>
 		</div>
-		<c:if test="${specInfoBean.state!=1 }">
+		<c:if test="${specInfoBean.state==2 }">
 			<span style="color:#80BFFF">信息正在确认中</span>
 		</c:if>
 		<br>

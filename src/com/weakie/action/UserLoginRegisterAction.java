@@ -1,9 +1,14 @@
 package com.weakie.action;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -80,7 +85,7 @@ public class UserLoginRegisterAction extends ActionSupport {
     }
     
     public String executeResetPassword() {
-    	LogUtil.debug(userName);
+    	LogUtil.debug("reset password,userName="+userName);
     	if(StringUtils.isEmpty(userName)){
     		messageStore=new MessageStore("请先登录"); 
     		return INPUT;
@@ -102,7 +107,46 @@ public class UserLoginRegisterAction extends ActionSupport {
 		}
 		return INPUT;
     }
+    
+    public String updateNickName(){
+    	//decode first, for chinese
+    	try {
+			this.password =  java.net.URLDecoder.decode(this.password,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			LogUtil.error(e);
+		}
+    	LogUtil.debug("updateNickName-userName: "+userName+",nickName="+password);
+    	
+    	int result = 0;
+		try {
+			//password represent for nickname at this action
+			result = accountService.updateNickName(userName, password);
+			if(result!=0){
+	    		Person p = (Person) ActionContext.getContext().getSession().get(SystemConstant.USER);
+	    		p.setNickName(password);
+	    		ActionContext.getContext().getSession().put(SystemConstant.USER, p);
+	    		inputStream = new ByteArrayInputStream("1:修改成功".getBytes("UTF-8"));
+	    	}else{
+	    		inputStream = new ByteArrayInputStream("0:修改失败".getBytes("UTF-8"));
+	    	}
+		} catch (Exception e) {
+			LogUtil.error(e);
+			try {
+				inputStream = new ByteArrayInputStream("0:昵称重置:系统错误".getBytes("UTF-8"));
+			} catch (UnsupportedEncodingException e1) {
+				LogUtil.error(e);
+			}
+		}
+		return SUCCESS;
+    }
  
+    public String executeLogout() {
+    	HttpServletRequest request = ServletActionContext.getRequest();
+    	request.getSession().invalidate();
+    	return SUCCESS;
+    }
+    
+    
     public MessageStore getMessageStore() {
         return messageStore;
     }

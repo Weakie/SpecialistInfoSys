@@ -47,7 +47,7 @@
 									<a href="/SpecialistInfoSys/resetPasswordForm.action">修改密码</a>
 								</li>
 								<li>
-									<a href="#">账户信息</a>
+									<a href="/SpecialistInfoSys/accountInfoDisplayForm.action">账户信息</a>
 								</li>
 								<li>
 									<a href="#">申请搜索权限</a>
@@ -55,7 +55,7 @@
 								<li class="divider">
 								</li>
 								<li>
-									<a href="#">退出</a>
+									<a href="/SpecialistInfoSys/logout.action">退出</a>
 								</li>
 							</ul>
 						</li>
