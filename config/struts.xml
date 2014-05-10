@@ -34,6 +34,7 @@
             <interceptor name="specAuthority" class="com.weakie.action.interceptor.SpecAuthorityCheckInterceptor"/>
             <interceptor name="sraffDisposeAuthority" class="com.weakie.action.interceptor.StaffDisposeCheckInterceptor"/>
             <interceptor name="sraffCheckAuthority" class="com.weakie.action.interceptor.StaffCheckInterceptor"/>
+            <interceptor name="adminCheckAuthority" class="com.weakie.action.interceptor.AdminAuthorityCheckInterceptor"/>
             <!-- 拦截器栈 -->  
             <interceptor-stack name="checklogin">  
                 <interceptor-ref name="defaultStack" />  
@@ -54,6 +55,10 @@
             <interceptor-stack name="staffAuthorityCheck">  
                 <interceptor-ref name="defaultStack" />  
                 <interceptor-ref name="sraffCheckAuthority" />  
+            </interceptor-stack> 
+             <interceptor-stack name="adminAuthorityCheck">  
+                <interceptor-ref name="defaultStack" />  
+                <interceptor-ref name="adminCheckAuthority" />  
             </interceptor-stack>  
         </interceptors>  
   
@@ -113,6 +118,14 @@
 		</action>
 		<!-- 重置昵称 -->
 		<action name="updateNickName" class="userLoginRegisterAction" method="updateNickName">
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+			<interceptor-ref name="specAuthorityForSpecInfo" />
+		</action>
+		<!-- 申请搜索权限 -->
+		<action name="applyAuthority" class="userLoginRegisterAction" method="executeApplyAuthority">
 			<result name="success" type="stream">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
@@ -242,6 +255,19 @@
 				<param name="inputName">inputStream</param>
 			</result>
 			<interceptor-ref name="staffAuthorityCheck" />
+		</action>
+		
+		<!-- 管理员 -->
+		<action name="adminAuthorityShowAll" class="adminAuthorityShowAllAction" method="execute">
+			<result name="success">/jsp/admin/admin_authority_apply.jsp</result>
+			<interceptor-ref name="adminAuthorityCheck" />
+		</action>
+		<action name="adminAuthorityDispose" class="adminAuthorityDisposeAction" method="executeDisposeAuthority">
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+			<interceptor-ref name="adminAuthorityCheck" />
 		</action>
 	</package>
 </struts>

@@ -69,4 +69,22 @@
     <select id="getStaffNickNameByUserName" parameterType="String" resultType="String">
     	select userName,nickName from Person where userName = #{userName}
     </select>
+    
+    <update id="updateAuthority" parameterType="Map">
+		update Person set
+		authority = #{authority}
+		where userName = #{userName}
+	</update>
+    <select id="selectPersonInfoYes" parameterType="Map" resultMap="personMap">
+	  	SELECT * FROM person 
+	  	WHERE authority = 1
+	  	ORDER BY registerTime DESC 
+	  	LIMIT #{begin},#{number};
+	</select>
+	<select id="selectPersonInfoNo" parameterType="Map" resultMap="personMap">
+	  	SELECT * FROM person 
+	  	WHERE authority = -1 OR authority = 0
+	  	ORDER BY registerTime DESC 
+	  	LIMIT #{begin},#{number};
+	</select>
 </mapper>

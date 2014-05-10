@@ -126,4 +126,53 @@ public class PersonDAO extends AbstractBaseDao {
 		}
 		return result;
 	}
+	
+	public int updateUserAuthority(String userName,int authority){
+		SqlSession session = getSession();
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("userName", userName);
+		param.put("authority", authority);
+		int result=0;
+		try {
+			result = session.update("com.weakie.dao.PersonDAO.updateAuthority", param);
+			session.commit();
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		return result;	
+	}
+	
+	public List<Person> selectPersonInfoYes(int begin,int number){
+		SqlSession session = getSession();
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("begin", begin);
+		param.put("number", number);
+		List<Person> list = null;
+		try {
+			list = session.selectList("com.weakie.dao.PersonDAO.selectPersonInfoYes", param);
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		return list;
+	}
+	
+	public List<Person> selectPersonInfoNo(int begin,int number){
+		SqlSession session = getSession();
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("begin", begin);
+		param.put("number", number);
+		List<Person> list = null;
+		try {
+			list = session.selectList("com.weakie.dao.PersonDAO.selectPersonInfoNo", param);
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		return list;
+	}
 }

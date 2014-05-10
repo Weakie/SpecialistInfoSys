@@ -99,6 +99,17 @@
 		</property>
 	</bean>
 	
+	<!-- 管理员显示申请 -->
+	<bean name="adminAuthorityShowAllAction" class="com.weakie.action.admin.AdminAuthorityShowAll" scope="prototype">
+		<property name="userAccountService">
+			<ref bean="userAccountService" />
+		</property>
+	</bean>
+	<bean name="adminAuthorityDisposeAction" class="com.weakie.action.admin.AdminAuthorityDisposeAction" scope="prototype">
+		<property name="accountService">
+			<ref bean="userAccountService" />
+		</property>
+	</bean>
 	<!--
 	<bean id="userService" class="org.login.service.Impl.UsersService">
 		<property name="userDAO">

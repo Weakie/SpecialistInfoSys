@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.weakie.bean.MessageStore;
 import com.weakie.bean.Person;
 import com.weakie.constant.SystemConstant;
+import com.weakie.constant.UserAccountConstant;
 import com.weakie.service.SpecialistInfoService;
 import com.weakie.service.UserAccountService;
 import com.weakie.util.log.LogUtil;
@@ -134,12 +135,30 @@ public class UserLoginRegisterAction extends ActionSupport {
 			try {
 				inputStream = new ByteArrayInputStream("0:Í«≥∆÷ÿ÷√:œµÕ≥¥ÌŒÛ".getBytes("UTF-8"));
 			} catch (UnsupportedEncodingException e1) {
-				LogUtil.error(e);
+				LogUtil.error(e1);
 			}
 		}
 		return SUCCESS;
     }
  
+    public String executeApplyAuthority(){
+    	int result = this.accountService.updateUserAuthority(userName, UserAccountConstant.APPLY_AUTHORITY);
+    	try {
+    		if(result == 1){
+    			inputStream = new ByteArrayInputStream("1:…Í«Î≥…π¶".getBytes("UTF-8"));
+    		}else{
+    			inputStream = new ByteArrayInputStream("0:…Í«Î ß∞‹".getBytes("UTF-8"));
+    		}
+		} catch (UnsupportedEncodingException e) {
+			LogUtil.error(e);
+			try {
+				inputStream = new ByteArrayInputStream("0:…Í«Î ß∞‹:œµÕ≥¥ÌŒÛ".getBytes("UTF-8"));
+			} catch (UnsupportedEncodingException e1) {
+				LogUtil.error(e1);
+			}
+		}
+    	return SUCCESS;
+    }
     public String executeLogout() {
     	HttpServletRequest request = ServletActionContext.getRequest();
     	request.getSession().invalidate();

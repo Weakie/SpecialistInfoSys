@@ -1,5 +1,6 @@
 package com.weakie.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.weakie.bean.Person;
@@ -61,4 +62,16 @@ public interface UserAccountService {
 	 * @return
 	 */
 	public int updateNickName(String userName,String nickName);
+	
+	/**
+	 * 修改用户权限
+	 * @param username
+	 * @param authority
+	 * @return
+	 */
+	public int updateUserAuthority(String username,int authority);
+	/**
+	 * 得到用户
+	 */
+	public List<Person> getPersonInfos(int authority, int pageIndex);
 }

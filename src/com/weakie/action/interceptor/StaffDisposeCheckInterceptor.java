@@ -31,7 +31,8 @@ public class StaffDisposeCheckInterceptor  extends AbstractInterceptor {
 
 		// 如果没有登陆,返回重新登陆
 		if (user == null) {
-			ctx.put("message", "你还没登录");
+			String url = "<a href=\"/SpecialistInfoSys/loginForm.action\" >点此进入登录页面</a>";
+			ctx.put("message", "你还没登录,"+url);
 			return ActionConstant.RESULT_FAIL;
 		}
 		if(user.getRole() != UserAccountConstant.ROLE_STAFF){

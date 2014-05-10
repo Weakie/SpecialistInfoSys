@@ -1,11 +1,14 @@
 package com.weakie.service.impl;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.weakie.bean.Person;
+import com.weakie.constant.ApplyConstant;
 import com.weakie.constant.UserAccountConstant;
 import com.weakie.dao.PersonDAO;
 import com.weakie.service.UserAccountService;
@@ -73,6 +76,35 @@ public class UserAccountServiceImpl implements UserAccountService {
 	@Override
 	public int updateNickName(String userName, String nickName) {
 		return this.personDAO.updateNickName(userName, nickName);
+	}
+	
+	@Override
+	public int updateUserAuthority(String userName, int authority) {
+		return this.personDAO.updateUserAuthority(userName, authority);
+	}
+	
+	@Override
+	public List<Person> getPersonInfos(int authority, int pageIndex) {
+		int begin = ( pageIndex - 1 ) * ApplyConstant.PAGE_NUMS;
+		List<Person> list = null;
+		if(authority == UserAccountConstant.SEARCH_AUTHORITY){
+			list = this.personDAO.selectPersonInfoYes(begin, ApplyConstant.PAGE_NUMS);
+		}else{
+			list = this.personDAO.selectPersonInfoNo(begin, ApplyConstant.PAGE_NUMS);
+			Collections.sort(list, new Comparator<Person>(){
+				@Override
+				public int compare(Person o1, Person o2) {
+					if(o1.getAuthority() > o2.getAuthority()){
+						return 1;
+					}else if(o1.getAuthority() < o2.getAuthority()){
+						return -1;
+					}
+					return 0;
+				}
+				
+			});
+		}
+		return list;
 	}
 
 }

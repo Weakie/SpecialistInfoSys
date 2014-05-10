@@ -2,6 +2,7 @@ package com.weakie.service.impl.test;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -84,6 +85,18 @@ public class UserAccountServiceTest implements UserAccountService {
 
 	@Override
 	public int updateNickName(String userName, String nickName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Person> getPersonInfos(int authority, int pageIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updateUserAuthority(String username, int authority) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

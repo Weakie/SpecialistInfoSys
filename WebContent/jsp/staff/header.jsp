@@ -47,7 +47,7 @@
 									<a href="/SpecialistInfoSys/accountInfoDisplayFormForStaff.action">账户信息</a>
 								</li>
 								<li>
-									<a href="#">申请搜索权限</a>
+									<a href="/SpecialistInfoSys/applyAuthority.action?userName=${sessionScope.USER.userName}">申请搜索权限</a>
 								</li>
 								<li class="divider">
 								</li>

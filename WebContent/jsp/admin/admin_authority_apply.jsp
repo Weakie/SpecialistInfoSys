@@ -15,8 +15,8 @@
 		}
 	}
 	
-	function acceptApplyRequest(staffId,applyId) {
-		var url = "/SpecialistInfoSys/staffDisposeApplyAccept.action?staffId=" + staffId + "&applyInfoId=" + applyId;
+	function disposeApplyRequest(userName,authority) {
+		var url = "/SpecialistInfoSys/adminAuthorityDispose.action?userName=" + userName + "&authority=" + authority;
 
 		createXMLHttpRequest();
 		xmlHttp.onreadystatechange = disposeResult;
@@ -33,24 +33,28 @@
 	}
 	
 	function update(){
-		var results = xmlHttp.responseText.split(";");
+		var results = xmlHttp.responseText.split(":");
 		var statu = document.getElementById("statu-"+results[1]);
 		var ope = document.getElementById("operation-"+results[1]);
-		if(results[0]=="SUCCESS"){
-			alert(results[0]);
-			status.innerText="已接收";
-			ope.innerHTML="<a href=\"/SpecialistInfoSys/specInfoAddPrepareForStaff.action?staffId="+results[2]+"&applyInfoId="+results[1]+"&userName="+results[3]+"\">处理</a>";
+		if(results[0]=="1"){
+			if(results[2]=="1"){
+				alert(results[3]);
+				status.innerText="有";
+				ope.innerHTML="<a href=\"#\" onclick=\"disposeApplyRequest('"+results[1]+"',0)\">取消</a>";
+			}else if(results[2]=="0"){
+				alert(results[3]);
+				status.innerText="无";
+				ope.innerHTML="<a href=\"#\" onclick=\"disposeApplyRequest('"+results[1]+"',1)\">给予</a>";
+			}
 		}else{
-			alert(results[0]+",已经被"+results[2]+"接收");
-			statu.innerText=results[2]+"处理"; 
-			ope.innerHTML="";
+			alert('失败');
 		}
 	}
 </script>
 <head>
   <!-- include the static header -->
   <%@ include file="../page_static_header.html" %>
-  <title>申请处理-上海同济城市规划设计研究院</title>
+  <title>权限管理-上海同济城市规划设计研究院</title>
 </head>
 <body>
 <div class="container">
@@ -62,32 +66,20 @@
 		<div class="page-header">
 			<br>
 			<h3 class="text-left">
-				<strong>专家信息申请</strong>
+				<strong>权限管理</strong>
 			</h3>
 		</div>
 		<div class="col-md-12 column">
 			<ul class="breadcrumb">
 				<li>
-					<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=1&staffId=${sessionScope.USER.userName}">
-						<c:if test="${status==1 }"><b>新的申请</b></c:if><c:if test="${status!=1 }">新的申请</c:if>
-					</a> 
-					<span class="divider">/</span>
-				</li>
-				<li>
-					<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=3&staffId=${sessionScope.USER.userName}">
-						<c:if test="${status==3 }"><b>待处理的申请</b></c:if><c:if test="${status!=3 }">待处理的申请</c:if>
+					<a href="/SpecialistInfoSys/adminAuthorityShowAll.action?pageIndex=1&status=0">
+						<c:if test="${status==0 }"><b>无查询权限</b></c:if><c:if test="${status!=0 }">无查询权限</c:if>
 					</a> 
 					<span class="divider">/</span>
 				</li>
 				<li class="active">
-					<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=4&staffId=${sessionScope.USER.userName}">
-						<c:if test="${status==4 }"><b>已处理的申请</b></c:if><c:if test="${status!=4 }">已处理的申请</c:if>
-					</a> 
-					<span class="divider">/</span>
-				</li>
-				<li>
-					<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=0&staffId=${sessionScope.USER.userName}">
-						<c:if test="${status==0 }"><b>所有申请</b></c:if><c:if test="${status!=0 }">所有申请</c:if>
+					<a href="/SpecialistInfoSys/adminAuthorityShowAll.action?pageIndex=1&status=1">
+						<c:if test="${status==1 }"><b>有查询权限</b></c:if><c:if test="${status!=1 }">有查询权限</c:if>
 					</a> 
 					<span class="divider">/</span>
 				</li>
@@ -95,52 +87,39 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>序号</th><th>申请ID</th><th>用户名</th><th>专家姓名</th><th>申请时间</th><th>接收时间</th><th>处理时间</th><th>状态</th><th>操作</th>
+						<th>序号</th><th>用户名</th><th>角色</th><th>注册时间</th><th>登录时间</th><th>搜索权限</th><th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
 				<c:set var="i" value="1" scope="page"/>
-				<c:forEach var="info" items="${applyInfo}">
-					<tr <c:if test="${info.status==1 }">class="danger"</c:if> <c:if test="${info.status==2 }">class="warning"</c:if> <c:if test="${info.status==3 }">class="success"</c:if> <c:if test="${info.status==4 }">class="active"</c:if> >
+				<c:forEach var="info" items="${userInfo}">
+					<tr <c:if test="${info.authority==-1 }">class="danger"</c:if> <c:if test="${info.authority==0 }">class="warning"</c:if> <c:if test="${info.authority==1 }">class="success"</c:if> >
 						<td>
 							${i }
-						</td>
-						<td>
-							${info.id }
 						</td>
 						<td>
 							${info.userName }
 						</td>
 						<td>
-							${info.specName }
+							<c:if test="${info.role==1 }">专家</c:if><c:if test="${info.role==2 }">工作人员</c:if><c:if test="${info.role==3 }">管理员</c:if>
 						</td>
 						<td>
-							${info.applyTimeString }
+							${info.registerTimeString }
 						</td>
 						<td>
-							${info.acceptTimeString }
+							${info.loginTimeString }
 						</td>
-						<td>
-							${info.disposeTimeString }
+						<td id="statu-${info.userName }">
+							<c:if test="${info.authority==-1 }">新申请</c:if>
+							<c:if test="${info.authority== 0 }">无</c:if>
+							<c:if test="${info.authority== 1 }">有</c:if>
 						</td>
-						<td id="statu-${info.id }">
-							<c:if test="${info.status==1 }">新申请</c:if>
-							<c:if test="${info.status==2 }">已过时</c:if>
-							<c:if test="${info.status==3&&info.staffID!=sessionScope.USER.userName }">已被${staffIdNameMap[info.staffID]}接收</c:if>
-							<c:if test="${info.status==3&&info.staffID==sessionScope.USER.userName }">已接收</c:if>
-							<c:if test="${info.status==4&&info.staffID!=sessionScope.USER.userName }">已被${staffIdNameMap[info.staffID]}处理</c:if>
-							<c:if test="${info.status==4&&info.staffID==sessionScope.USER.userName }">已处理</c:if>
-						</td>
-						<td id="operation-${info.id }">
-							<c:if test="${info.status==1 }">
-								<a href="#" onclick="acceptApplyRequest('${sessionScope.USER.userName }',${info.id})">接收</a>
+						<td id="operation-${info.userName }">
+							<c:if test="${info.authority== 1 }">
+								<a href="#" onclick="disposeApplyRequest('${info.userName }',0)">取消</a>
 							</c:if>
-							<c:if test="${info.status==3&&info.staffID==sessionScope.USER.userName }">
-								<a href="/SpecialistInfoSys/specInfoAddPrepareForStaff.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">处理</a>
-							</c:if>
-							<c:if test="${info.status==4&&info.staffID==sessionScope.USER.userName }">
-								<a href="/SpecialistInfoSys/specInfoDisplayForStaff.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">查看</a>-
-								<a href="/SpecialistInfoSys/specInfoAddPrepareForStaff.action?userName=${info.userName }&applyInfoId=${info.id }&staffId=${info.staffID}">修改</a>
+							<c:if test="${info.authority!= 1 }">
+								<a href="#" onclick="disposeApplyRequest('${info.userName }',1)">给予</a>
 							</c:if>
 						</td>
 					</tr>
@@ -151,7 +130,7 @@
 			<ul class="pagination">
 				<c:forEach var="x" begin="0" end="6" step="1">
 				<li>
-					<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=${pages[x]}&status=${status }&staffId=${sessionScope.USER.userName}">
+					<a href="/SpecialistInfoSys/adminAuthorityShowAll.action?pageIndex=${pages[x]}&status=${status }&staffId=${sessionScope.USER.userName}">
 						<c:if test="${x==0 }">Prev</c:if>
 						<c:if test="${x!=0&&x!=6 }">${pages[x]}</c:if>
 						<c:if test="${x==6 }">Next</c:if>

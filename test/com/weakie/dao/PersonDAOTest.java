@@ -13,8 +13,8 @@ public class PersonDAOTest {
 	@Test
 	public void test() {
 		PersonDAO dao = new PersonDAO();
-		Person p = new Person("aaaa2a",1,1,new Date(),new Date());
-		p.setPassword("haha");
+		//Person p = new Person("aaaa2a",1,1,new Date(),new Date());
+		//p.setPassword("haha");
 		//dao.addNewPerson(p);
 		
 		//Person q1 = dao.checkPassword("aaaa", "haha");
@@ -28,6 +28,9 @@ public class PersonDAOTest {
 		System.out.println(dao.updatePassword("aaaa", "haga", "1111"));
 		
 		System.out.println(dao.updateNickName("aaaa", "haha"));
+		for(Person p:dao.selectPersonInfoNo(0, 10)){
+			System.out.println(p.getAuthority());
+		}
 	}
 
 }

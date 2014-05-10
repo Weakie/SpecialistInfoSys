@@ -12,10 +12,10 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li <c:if test="${pageHeader==1}">class="active"</c:if> >
-							<a href="/SpecialistInfoSys/staffDisposeApplyShowAll.action?pageIndex=1&status=1&staffId=${sessionScope.USER.userName}">处理申请</a>
+							<a href="/SpecialistInfoSys/adminAuthorityShowAll.action?pageIndex=1&status=0">权限管理</a>
 						</li>
 						<li <c:if test="${pageHeader==2}">class="active"</c:if> >
-							<a href="/SpecialistInfoSys/selectionInfoAddPrepare.action">关键字维护</a>
+							<a href="/SpecialistInfoSys/selectionInfoAddPrepare.action">添加工作人员</a>
 						</li>
 						<c:if test="${sessionScope.USER.authority==1 }">
 						<li <c:if test="${pageHeader==3}">class="active"</c:if> >
@@ -46,9 +46,7 @@
 								<li>
 									<a href="/SpecialistInfoSys/accountInfoDisplayFormForStaff.action">账户信息</a>
 								</li>
-								<li>
-									<a href="#">申请搜索权限</a>
-								</li>
+								
 								<li class="divider">
 								</li>
 								<li>
