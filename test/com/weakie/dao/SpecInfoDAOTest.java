@@ -14,7 +14,7 @@ public class SpecInfoDAOTest {
 	@Test
 	public void testUpdateSpecInfo() {
 		SpecInfoDAO dao = new SpecInfoDAO();
-		List<Integer> l = new ArrayList<Integer>();
+		/*List<Integer> l = new ArrayList<Integer>();
 		l.add(1);
 		l.add(2);
 		l.add(3);
@@ -30,7 +30,12 @@ public class SpecInfoDAOTest {
 		dao.updateSpecInfo(bean);
 		dao.updateSpecInfoState("林威建", 10);
 		bean = dao.selectSpecInfo("林威建");
-		System.out.println(bean.getWorkPositionId());
+		System.out.println(bean.getWorkPositionId());*/
+		List<SpecialistInfoBean> result = dao.search("%日本%");
+		for(SpecialistInfoBean bean:result){
+			System.out.println(bean.getUserName());
+		}
+		
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.weakie.service;
 
+import java.util.List;
+
 import com.weakie.bean.SpecialistInfoBean;
 
 /**
@@ -17,4 +19,6 @@ public interface SpecialistInfoService {
 	
 	public int getSpecialistInfoState(String userName);
 	public int updateSpecialistInfoState(String userName,int state);
+	
+	public List<SpecialistInfoBean> searchByValue(String[] values);
 }

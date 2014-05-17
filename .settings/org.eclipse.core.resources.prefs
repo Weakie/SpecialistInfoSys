@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/errortext.jsp=UTF-8
+encoding//WebContent/jsp/include/specialist_info_search_result.jsp=UTF-8
 encoding//WebContent/jsp/register.jsp=UTF-8
 encoding//WebContent/jsp/spec/specialist_info_update.jsp=UTF-8
 encoding//WebContent/jsp/staff/staff_dispose_apply.jsp=UTF-8

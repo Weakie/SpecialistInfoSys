@@ -4,6 +4,7 @@
 package com.weakie.service.impl.test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.weakie.bean.SpecialistInfoBean;
@@ -60,6 +61,12 @@ public class SpecialistInfoServiceTest implements SpecialistInfoService {
 	public int getSpecialistInfoState(String userName) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<SpecialistInfoBean> searchByValue(String[] values) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

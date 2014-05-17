@@ -88,4 +88,17 @@ public class SpecInfoDAO extends AbstractBaseDao {
 		}
 		return result;	
 	}
+	
+	public List<SpecialistInfoBean> search(String value){
+		List<SpecialistInfoBean> result = null;
+		SqlSession session = getSession();
+		try {
+			result = session.selectList("com.weakie.dao.SpecInfoDAO.selectSpecInfoByValue", value);
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		return result;
+	}
 }

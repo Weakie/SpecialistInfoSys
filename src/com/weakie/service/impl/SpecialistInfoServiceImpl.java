@@ -1,5 +1,10 @@
 package com.weakie.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.weakie.bean.SpecialistInfoBean;
 import com.weakie.dao.SpecInfoDAO;
 import com.weakie.service.SpecialistInfoService;
@@ -44,6 +49,18 @@ public class SpecialistInfoServiceImpl implements SpecialistInfoService {
 
 	public void setDao(SpecInfoDAO dao) {
 		this.dao = dao;
+	}
+
+	@Override
+	public List<SpecialistInfoBean> searchByValue(String[] values) {
+		Map<String,SpecialistInfoBean> result = new HashMap<String,SpecialistInfoBean>();
+		for(String value:values){
+			List<SpecialistInfoBean> list = dao.search("%"+value+"%");
+			for(SpecialistInfoBean bean:list){
+				result.put(bean.getUserName(), bean);
+			}
+		}
+		return new ArrayList<SpecialistInfoBean>(result.values());
 	}
 
 	
