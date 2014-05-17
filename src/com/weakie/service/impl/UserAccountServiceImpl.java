@@ -40,6 +40,16 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 
 	@Override
+	public boolean addNewStaff(String userName) {
+		//TODO ½âÃÜ¼ÓÃÜËã·¨
+		if(this.personDAO.checkUsernameExist(userName) >= 1){
+			return false;
+		}
+		int result = this.personDAO.addNewPerson(new Person(userName,UserAccountConstant.DEFAULT_PASSWORD,UserAccountConstant.ROLE_STAFF,UserAccountConstant.DEFAULT_AUTHORITY,new Date()));
+		return result == 1;
+	}
+	
+	@Override
 	public ReadOnlyMap<String, String> getStaffNiceNameMap(Set<String> staffId) {
 		if(staffId.isEmpty()){
 			Map<String,String> tmp = Collections.emptyMap();

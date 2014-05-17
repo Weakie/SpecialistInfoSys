@@ -12,6 +12,7 @@
 	<filter-name>struts2</filter-name>
 	<url-pattern>*.action</url-pattern>
   </filter-mapping>
+  
   <context-param>
     <param-name>log4jConfiguration</param-name>
     <param-value>classpath:log-config.xml</param-value>
@@ -20,12 +21,35 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:applicationContext.xml</param-value>
   </context-param>
+  
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   <listener>
     <listener-class>com.weakie.initialize.ServerListener</listener-class>
   </listener>
+  
+  <filter>
+      <filter-name>resourceFilter</filter-name>
+      <filter-class>com.weakie.web.filter.ResourceFilter</filter-class>
+      <init-param>
+          <param-name>exclude</param-name>
+          <param-value>.jsp</param-value>
+      </init-param>
+      <init-param>
+          <param-name>redirect</param-name>
+          <param-value>index.jsp</param-value>
+      </init-param>
+      <init-param>
+          <param-name>redirect_to</param-name>
+          <param-value>loginForm.action</param-value>
+      </init-param>
+  </filter>
+  <filter-mapping>
+      <filter-name>resourceFilter</filter-name>
+      <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+  
   <servlet>
     <description></description>
     <display-name>FileReaderServlet</display-name>

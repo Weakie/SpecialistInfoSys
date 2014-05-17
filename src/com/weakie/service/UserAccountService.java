@@ -37,6 +37,12 @@ public interface UserAccountService {
 	public boolean register(String userName,String password) throws Exception;
 	
 	/**
+	 * 添加新的工作人员
+	 * @param userName
+	 * @return
+	 */
+	public boolean addNewStaff(String userName);
+	/**
 	 * 重置密码
 	 * @param userName
 	 * @param password

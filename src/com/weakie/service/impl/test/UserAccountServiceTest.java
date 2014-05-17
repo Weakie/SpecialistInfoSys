@@ -101,4 +101,10 @@ public class UserAccountServiceTest implements UserAccountService {
 		return 0;
 	}
 
+	@Override
+	public boolean addNewStaff(String userName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

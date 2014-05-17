@@ -47,7 +47,7 @@
 									<a href="/SpecialistInfoSys/accountInfoDisplayFormForStaff.action">账户信息</a>
 								</li>
 								<li>
-									<a href="/SpecialistInfoSys/applyAuthority.action?userName=${sessionScope.USER.userName}">申请搜索权限</a>
+									<a href="#" onclick="applyForSearchRequest()">申请搜索权限</a>
 								</li>
 								<li class="divider">
 								</li>
@@ -60,4 +60,36 @@
 				</div>
 			</nav>
 		</div>
-		
+<script type="text/javascript">
+	var newXMLHttp;
+
+	function createNewXMLHttpRequest() {
+		if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		} else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+		}
+	}
+	
+	function applyForSearchRequest() {
+		var url = "/SpecialistInfoSys/applyAuthority.action?userName=${sessionScope.USER.userName}";
+
+		createNewXMLHttpRequest();
+		xmlHttp.onreadystatechange = disposeResult;
+		xmlHttp.open("GET", url, true);
+		xmlHttp.send(null);
+	}
+
+	function disposeResult() {
+		if (xmlHttp.readyState == 4) {
+			if (xmlHttp.status == 200) {
+				update();
+			}
+		}
+	}
+	
+	function update(){
+		var results = xmlHttp.responseText.split(":");
+		alert(results[1]);
+	}
+</script>	

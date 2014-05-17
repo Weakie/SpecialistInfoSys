@@ -35,7 +35,7 @@ public class AdminAuthorityCheckInterceptor  extends AbstractInterceptor {
 		}
 		LogUtil.info(ctx.getName()+" ,userName="+user.getUserName());
 		
-		if(user.getAuthority() != UserAccountConstant.ROLE_ADMIN){
+		if(user.getRole() != UserAccountConstant.ROLE_ADMIN){
 			ctx.put("message", "你没有权力操作");
 			return ActionConstant.RESULT_FAIL;
 		}

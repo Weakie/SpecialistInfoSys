@@ -15,7 +15,7 @@
 							<a href="/SpecialistInfoSys/adminAuthorityShowAll.action?pageIndex=1&status=0">权限管理</a>
 						</li>
 						<li <c:if test="${pageHeader==2}">class="active"</c:if> >
-							<a href="/SpecialistInfoSys/selectionInfoAddPrepare.action">添加工作人员</a>
+							<a href="/SpecialistInfoSys/addNewStaffForm.action">添加工作人员</a>
 						</li>
 						<c:if test="${sessionScope.USER.authority==1 }">
 						<li <c:if test="${pageHeader==3}">class="active"</c:if> >
@@ -41,10 +41,10 @@
 							 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i>个人设置<strong class="caret"></strong></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="/SpecialistInfoSys/resetPasswordFormForStaff.action">修改密码</a>
+									<a href="/SpecialistInfoSys/resetPasswordFormForAdmin.action">修改密码</a>
 								</li>
 								<li>
-									<a href="/SpecialistInfoSys/accountInfoDisplayFormForStaff.action">账户信息</a>
+									<a href="/SpecialistInfoSys/accountInfoDisplayFormForAdmin.action">账户信息</a>
 								</li>
 								
 								<li class="divider">

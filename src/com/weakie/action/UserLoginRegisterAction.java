@@ -52,12 +52,36 @@ public class UserLoginRegisterAction extends ActionSupport {
     
     public String executeRegister(){
     	LogUtil.debug("register: "+userName);
+    	if(StringUtils.isEmpty(userName)||StringUtils.isEmpty(password)){
+    		messageStore = new MessageStore("用户名或密码不能为空") ;
+    		return INPUT;
+    	}
     	try {
 			if(accountService.register(userName, password)){
 				this.specInfoService.insertNewSpecialistInfo(userName);
 				return SUCCESS;
 			}else{
 				messageStore = new MessageStore("注册失败") ;
+			}
+		} catch (Exception e) {
+			LogUtil.error(e);
+			messageStore = new MessageStore("注册失败:系统错误") ;
+		}
+        return INPUT;
+    }
+    
+    public String executeAddNewStaff(){
+    	LogUtil.debug("add staff: "+userName);
+    	if(StringUtils.isEmpty(userName)){
+    		messageStore = new MessageStore("用户名不能为空") ;
+    		return INPUT;
+    	}
+    	try {
+			if(accountService.addNewStaff(userName)){
+				messageStore = new MessageStore("添加成功") ;
+				return SUCCESS;
+			}else{
+				messageStore = new MessageStore("添加失败") ;
 			}
 		} catch (Exception e) {
 			LogUtil.error(e);
@@ -152,7 +176,7 @@ public class UserLoginRegisterAction extends ActionSupport {
 		} catch (UnsupportedEncodingException e) {
 			LogUtil.error(e);
 			try {
-				inputStream = new ByteArrayInputStream("0:申请失败:系统错误".getBytes("UTF-8"));
+				inputStream = new ByteArrayInputStream("0:申请失败-系统错误".getBytes("UTF-8"));
 			} catch (UnsupportedEncodingException e1) {
 				LogUtil.error(e1);
 			}

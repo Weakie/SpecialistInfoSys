@@ -78,6 +78,10 @@
 		var pwdConfirm = pwdInputCofirm.value;
 		if(pwd!=pwdConfirm){
 			var div = document.getElementById("confirm_div");
+			var oldTag = div.childNodes;
+			if(oldTag[2] != null){
+				div.removeChild(oldTag[2]);
+			}
 			var p = document.createElement("p");
 			var font = document.createElement("font");
 			font.setAttribute("color", "red");
@@ -135,13 +139,13 @@
 						<div class="form-group" id="username_div_parent">
 							<label for="userName" class="col-sm-3 control-label">用户名</label>
 							<div class="col-sm-8" id="username_div">
-								<input type="text" class="form-control" id="userName" name="userName" onblur="confirmUsernameExist()" onkeyup="confirmUsernameExist()" />
+								<input type="text" class="form-control" id="userName" name="userName"  value="${userName}" onblur="confirmUsernameExist()" onkeyup="confirmUsernameExist()" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputPassword" class="col-sm-3 control-label">密码</label>
 							<div class="col-sm-8">
-								<input type="password" class="form-control" id="inputPassword" name="password">
+								<input type="password" class="form-control" id="inputPassword" name="password" >
 							</div>
 						</div>
 						<div class="form-group" id="confirm_div_parent">

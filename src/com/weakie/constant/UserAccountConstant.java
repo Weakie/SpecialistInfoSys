@@ -2,6 +2,7 @@ package com.weakie.constant;
 
 public class UserAccountConstant {
 	public static final String DEFAULT_NICKNAME="ÐÂÓÃ»§";
+	public static final String DEFAULT_PASSWORD="000000";
 	
 	public static final int NOSEARCH_AUTHORITY = 0;
 	public static final int SEARCH_AUTHORITY = 1;
