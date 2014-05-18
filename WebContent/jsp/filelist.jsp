@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.*" %>
@@ -14,8 +15,8 @@
 	File superParent = (parent.getParentFile()==null ? parent : parent.getParentFile());
 %>
 	<%=parent.getAbsolutePath() %><br>
-	<a href="./FileListServlet?baseDir=<%=parent.getAbsolutePath()%>">.</a><br>
-	<a href="./FileListServlet?baseDir=<%=superParent.getAbsolutePath()%>">..</a><br>
+	<a href="./FileListServlet?baseDir=<%=URLEncoder.encode(parent.getAbsolutePath(),"UTF-8")%>">.</a><br>
+	<a href="./FileListServlet?baseDir=<%=URLEncoder.encode(superParent.getAbsolutePath(),"UTF-8")%>">..</a><br>
 <%
 	if(files != null){
 		for(File file : files){
@@ -24,11 +25,13 @@
 			}
 			if(file.isDirectory()){
 %>
-				<a href="./FileListServlet?baseDir=<%=file.getAbsolutePath()%>"><%=file.getName()%><%=(file.isDirectory()?File.separator:"")%></a><br>
+<a href="./FileListServlet?baseDir=<%=file.getAbsolutePath()%>"><%=file.getName()%><%=(file.isDirectory()?File.separator:"")%></a><br>
+				<!-- <a href="./FileListServlet?baseDir=<%=URLEncoder.encode(file.getAbsolutePath(),"UTF-8")%>"><%=file.getName()%><%=(file.isDirectory()?File.separator:"")%></a><br>-->
 <%
 			}else{
 %>
-				<a href="./FileReaderServlet?fileName=<%=file.getAbsolutePath()%>"><%=file.getName()%></a><br>	
+<a href="./FileReaderServlet?fileName=<%=file.getAbsolutePath()%>"><%=file.getName()%></a><br>
+				<!-- <a href="./FileReaderServlet?fileName=<%=URLEncoder.encode(file.getAbsolutePath(),"UTF-8")%>"><%=file.getName()%></a><br>-->	
 <%
 			}
 		}

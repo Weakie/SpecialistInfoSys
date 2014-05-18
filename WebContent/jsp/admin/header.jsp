@@ -18,15 +18,15 @@
 							<a href="/SpecialistInfoSys/addNewStaffForm.action">添加工作人员</a>
 						</li>
 						<c:if test="${sessionScope.USER.authority==1 }">
-						<li <c:if test="${pageHeader==3}">class="active"</c:if> >
-							<a href="#">高级搜索</a>
+						<li <c:if test="${pageHeader==9}">class="active"</c:if> >
+							<a href="/SpecialistInfoSys/advanceSearchPrepare.action">高级搜索</a>
 						</li>
 						</c:if>
 					</ul>
 					<c:if test="${sessionScope.USER.authority==1 }">
-					<form class="navbar-form navbar-left" >
+					<form action="/SpecialistInfoSys/searchSpecInfo.action" method="post" class="navbar-form navbar-left" >
 						<div class="form-group">
-							<input type="text" class="form-control" style="width:305px;" placeholder="关键字：专业类别、研究专长、工作地点"/>
+							<input type="text" name="searchValue" value="${searchValue}" class="form-control" style="width:305px;" placeholder="关键字：专业类别、研究专长、工作地点"/>
 						</div> <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>搜索</button>
 					</form>
 					</c:if>
@@ -34,9 +34,11 @@
 						<li>
 							<a href="#">你好, ${sessionScope.USER.nickName}</a>
 						</li>
+						<!-- 
 						<li>
 							<a href="#"><span class="badge pull-right">42</span>系统消息</a>
 						</li>
+						 -->
 						<li class="dropdown" <c:if test="${pageHeader==5}">class="active"</c:if>>
 							 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i>个人设置<strong class="caret"></strong></a>
 							<ul class="dropdown-menu">

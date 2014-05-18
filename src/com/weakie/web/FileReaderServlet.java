@@ -31,10 +31,12 @@ public class FileReaderServlet extends HttpServlet {
     }
 
 	/**
+	 * @throws IOException 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fileName = request.getParameter("fileName");
+		fileName = new String(fileName.getBytes("ISO-8859-1"),"UTF-8");
 		LogUtil.info("request to read file: "+fileName);
 		File file = new File(fileName);
 		if(file.isFile()){
@@ -46,7 +48,8 @@ public class FileReaderServlet extends HttpServlet {
 			}
 			LogUtil.info("download filename="+downloadName);
 			response.addHeader("Content-Disposition", "attachment; filename=\"" + downloadName+"\"");
-			response.setContentType("application/octet-stream;charset=GB18030");
+			//response.setContentType("application/octet-stream;charset=utf-8");
+			response.setContentType("video/avi");
 			//response.addHeader("Cache-control", "max-age=3600");
 			//response.setContentType("application/x-msdownload");
 			response.setContentLength((int)file.length());

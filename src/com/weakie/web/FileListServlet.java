@@ -31,6 +31,7 @@ public class FileListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dir = request.getParameter("baseDir");
+		dir = new String(dir.getBytes("ISO-8859-1"),"UTF-8");
 		LogUtil.info("new request:"+dir);
 		if(StringUtils.isEmpty(dir)){
 			dir = getServletContext().getInitParameter("baseDir");

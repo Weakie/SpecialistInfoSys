@@ -63,6 +63,13 @@ public class SpecialistInfoServiceImpl implements SpecialistInfoService {
 		return new ArrayList<SpecialistInfoBean>(result.values());
 	}
 
+	@Override
+	public List<SpecialistInfoBean> advancedSearch(int orgType,
+			int qualification, int title, int majorClass, int major,
+			int province, int city) {
+		return this.dao.searchAdvance(orgType, qualification, title, majorClass, major, province, city);
+	}
+
 	
 
 }

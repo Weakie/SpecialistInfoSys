@@ -8,37 +8,25 @@
 			<h3 class="text-left">
 				<Strong>搜索结果</Strong>
 			</h3>
+			<c:set var="i" value="1" scope="page"/>
+			<c:forEach var="info" items="${specInfos}">
 			<div class="row clearfix">
 				<div class="col-md-8 column">
 					<h2>
-						张三
+						${info.name }
 					</h2>
 					<p>
-						专家的基本信息，右边是图片
+						${info.infoString }
 					</p>
 					<p>
-						<a class="btn" href="#">View details »</a>
+						<a class="btn" href="/SpecialistInfoSys/specInfoSearchResultDetail.action?userName=${info.userName}" target="_blank">View details »</a>
 					</p>
 				</div>
 				<div class="col-md-4 column">
-					<img alt="140x140" src="http://lorempixel.com/140/140/" />
+					<img class="img-thumbnail" alt="暂无照片" width="160" height="160" src="/SpecialistInfoSys/downloadImage.action?userName=${info.userName}" />
 				</div>
 			</div>
 			<hr>
-			<div class="row clearfix">
-				<div class="col-md-8 column">
-					<h2>
-						李四
-					</h2>
-					<p>
-						专家的基本信息，右边是图片
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
-				</div>
-				<div class="col-md-4 column">
-					<img alt="140x140" src="http://lorempixel.com/140/140/" />
-				</div>
-			</div>
+			<c:set var="i" value="${i+1 }" scope="page"/>
+			</c:forEach>
 		</div>

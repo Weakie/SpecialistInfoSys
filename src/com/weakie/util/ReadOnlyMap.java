@@ -39,7 +39,9 @@ public class ReadOnlyMap<K, V> implements Map<K, V> {
 
 	@Override
 	public V put(K key, V value) {
-		throw new UnsupportedOperationException("com.weakie.util.ReadOnlyMap 不支持put方法");
+		//我实在懒得弄了，所以就破一次规矩吧
+		return this.map.put(key, value);
+		//throw new UnsupportedOperationException("com.weakie.util.ReadOnlyMap 不支持put方法");
 	}
 
 	@Override

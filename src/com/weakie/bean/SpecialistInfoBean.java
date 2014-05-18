@@ -306,6 +306,24 @@ public class SpecialistInfoBean implements java.io.Serializable{
 	public void setState(int state) {
 		this.state = state;
 	}
+	
+	/**
+	 * 显示专家信息，搜索结果的时候使用
+	 * @return
+	 */
+	public String getInfoString(){
+		
+		return "专家信息 --姓名：" + name
+				+ ", 性别：" + (sex?"女":"男") + ", 出生年月：" + birthday + ", 邮箱："
+				+ email + ", 联系方式：" + contact + ", 工作单位：" + organization 
+				+ ", 职务：" + role + ", 单位性质：" + orgType 
+				+ ", 工作地点：" + workPosition + ", 社会兼职："
+				+ partTimeJob + ", 学位、学历：" + degree + ", 外语能力：" + language
+				+ ", 毕业院校：" + school + ", 从业时间：" + workTime
+				+ ", 职业资格：" + qualification + ", 职称：" + title
+				+ ", 专业方向：" + major + ", 科研经历获奖情况"
+				+ experience + ", 其他：" + other + ", website：" + website;
+	}
 	@Override
 	public String toString() {
 		return "SpecialistInfoBean [userName=" + userName + ", name=" + name

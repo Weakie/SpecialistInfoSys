@@ -1,8 +1,11 @@
 package com.weakie.action;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.weakie.bean.SpecialistInfoBean;
@@ -15,10 +18,24 @@ public class SearchSpecInfoAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
  
     //request
-    private String value;
-   
+    private String searchValue;
     //response
     private List<SpecialistInfoBean> specInfos;
+    
+    //advance search prepare
+    private Map<Integer,String> orgTypeMap;
+    private Map<Integer,String> qualificationMap;
+    private Map<Integer,String> titleMap;
+    private Map<Integer,String> provinceMap;
+    private Map<Integer,String> majorClassMap;
+    //advance search request
+    private int orgType;
+    private int qualification;
+    private int title;
+    private int majorClass;
+    private int major;
+    private int province;
+    private int city;
     
     //spring
     private SpecialistInfoService specInfoService;
@@ -26,12 +43,40 @@ public class SearchSpecInfoAction extends ActionSupport {
     
 	public String execute() throws Exception{
 		//for staff display, specialist display is not needed
-    	LogUtil.info("search value = "+value);
-    	this.specInfos = this.specInfoService.searchByValue(value.split(" "));
+    	LogUtil.info("search value = "+searchValue);
+    	if(StringUtils.isEmpty(searchValue)){
+    		this.specInfos = Collections.emptyList();
+    		return SUCCESS;
+    	}
+    	this.specInfos = this.specInfoService.searchByValue(searchValue.split(" "));
     	this.initSpecialistBeanDisplayData();
 		LogUtil.info("display spec info:"+this.specInfos.size());
         return SUCCESS;
     }
+	
+	public String executeAdvanceSearchPrepare(){
+		this.orgTypeMap = this.selectService.getOrgType();
+		this.orgTypeMap.put(-1, "--«Î—°‘Ò--");
+        this.qualificationMap = this.selectService.getQualification();
+        this.qualificationMap.put(-1, "--«Î—°‘Ò--");
+        this.titleMap = this.selectService.getTitle();
+        this.titleMap.put(-1, "--«Î—°‘Ò--");
+    	this.provinceMap = this.selectService.getProvince(true);
+    	this.provinceMap.put(-1, "--«Î—°‘Ò--");
+        this.majorClassMap = this.selectService.getMajorClass();
+        this.majorClassMap.put(-1, "--«Î—°‘Ò--");
+       
+    	return SUCCESS;
+	}
+	
+	public String executeAdvanceSearch(){
+		//for staff display, specialist display is not needed
+    	LogUtil.info("search value = "+orgType+";"+ qualification+";"+ title+";"+ majorClass+";"+ major+";"+ province+";"+ city);
+    	this.specInfos = this.specInfoService.advancedSearch(orgType, qualification, title, majorClass, major, province, city);
+    	this.initSpecialistBeanDisplayData();
+		LogUtil.info("display spec info:"+this.specInfos.size());
+        return SUCCESS;
+	}
 	
 	private void initSpecialistBeanDisplayData(){
 		Map<Integer,String> orgTypeMap = this.selectService.getOrgType();
@@ -41,7 +86,7 @@ public class SearchSpecInfoAction extends ActionSupport {
 		Map<Integer,String> majorClassMap = this.selectService.getMajorClass();
 		Map<Integer,String> majorMap = new HashMap<Integer,String>();
 		Map<Integer,Integer> majorIdMajorClassIdMap = new HashMap<Integer,Integer>();
-		for(Integer majorClassId:majorMap.keySet()){
+		for(Integer majorClassId:majorClassMap.keySet()){
 			Map<Integer,String> major = this.selectService.getMajor(majorClassId);
 			for(Integer id:major.keySet()){
 				majorIdMajorClassIdMap.put(id, majorClassId);
@@ -83,6 +128,69 @@ public class SearchSpecInfoAction extends ActionSupport {
 			}
 		}
 	}
+	
+	public String getSearchValue() {
+		return searchValue;
+	}
+
+	public void setSearchValue(String searchValue) {
+		this.searchValue = searchValue;
+	}
+
+	public List<SpecialistInfoBean> getSpecInfos() {
+		return specInfos;
+	}
+
+	//-------------------
+	public Map<Integer, String> getOrgTypeMap() {
+		return orgTypeMap;
+	}
+
+	public Map<Integer, String> getQualificationMap() {
+		return qualificationMap;
+	}
+
+	public Map<Integer, String> getTitleMap() {
+		return titleMap;
+	}
+
+	public Map<Integer, String> getProvinceMap() {
+		return provinceMap;
+	}
+
+	public Map<Integer, String> getMajorClassMap() {
+		return majorClassMap;
+	}
+
+	//---------------------
+	public void setOrgType(int orgType) {
+		this.orgType = orgType;
+	}
+
+	public void setQualification(int qualification) {
+		this.qualification = qualification;
+	}
+
+	public void setTitle(int title) {
+		this.title = title;
+	}
+
+	public void setMajorClass(int majorClass) {
+		this.majorClass = majorClass;
+	}
+
+	public void setMajor(int major) {
+		this.major = major;
+	}
+
+	public void setProvince(int province) {
+		this.province = province;
+	}
+
+	public void setCity(int city) {
+		this.city = city;
+	}
+
 	public void setSpecInfoService(SpecialistInfoService specInfoService) {
 		this.specInfoService = specInfoService;
 	}

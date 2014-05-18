@@ -31,10 +31,17 @@ public class SpecInfoDAOTest {
 		dao.updateSpecInfoState("林威建", 10);
 		bean = dao.selectSpecInfo("林威建");
 		System.out.println(bean.getWorkPositionId());*/
-		List<SpecialistInfoBean> result = dao.search("%日本%");
+		/*List<SpecialistInfoBean> result = dao.search("%日本%");
 		for(SpecialistInfoBean bean:result){
 			System.out.println(bean.getUserName());
+		}*/
+		List<SpecialistInfoBean> result = dao.searchAdvance(-1, -1, -1, -1, -1, 1, 1);
+		for(SpecialistInfoBean bean:result){
+			System.out.println(bean.getUserName());
+			System.out.println(bean.getWorkPositionId());
+			System.out.println(bean.getMajorId());
 		}
+		
 		
 	}
 

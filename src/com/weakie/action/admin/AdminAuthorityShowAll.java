@@ -24,6 +24,7 @@ public class AdminAuthorityShowAll extends ActionSupport {
     //method
 	public String execute() throws Exception{
 		LogUtil.info("pageIndex:"+pageIndex+" ,status:"+status);
+		pageIndex = Math.max(pageIndex, 1);
     	this.userInfo = this.userAccountService.getPersonInfos(status==1? 1:0, pageIndex);
     	this.generatePages();
         return SUCCESS;

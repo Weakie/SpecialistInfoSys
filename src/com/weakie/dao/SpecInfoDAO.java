@@ -94,6 +94,37 @@ public class SpecInfoDAO extends AbstractBaseDao {
 		SqlSession session = getSession();
 		try {
 			result = session.selectList("com.weakie.dao.SpecInfoDAO.selectSpecInfoByValue", value);
+			for(SpecialistInfoBean p:result){
+					List<Integer> pos = session.selectList("com.weakie.dao.SpecInfoDAO.selectPositionForSpecInfo", p.getUserName());
+					p.setWorkPositionId(pos);
+			}
+		} catch(Exception e){
+			LogUtil.error(e);
+		} finally {
+		  session.close();
+		}
+		return result;
+	}
+	
+	public List<SpecialistInfoBean> searchAdvance(int orgType,
+			int qualification, int title, int majorClass, int major,
+			int province, int city){
+		List<SpecialistInfoBean> result = null;
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("orgType", orgType);
+		param.put("qualification", qualification);
+		param.put("title", title);
+		param.put("majorClass", majorClass);
+		param.put("major", major);
+		param.put("province", province);
+		param.put("city", city);
+		SqlSession session = getSession();
+		try {
+			result = session.selectList("com.weakie.dao.SpecInfoDAO.selectSpecInfoByAdvance", param);
+			for(SpecialistInfoBean p:result){
+				List<Integer> pos = session.selectList("com.weakie.dao.SpecInfoDAO.selectPositionForSpecInfo", p.getUserName());
+				p.setWorkPositionId(pos);
+			}
 		} catch(Exception e){
 			LogUtil.error(e);
 		} finally {

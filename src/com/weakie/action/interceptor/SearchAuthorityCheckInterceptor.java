@@ -20,7 +20,7 @@ import com.weakie.util.log.LogUtil;
  * @author weakie E-mail:weakielin@gmail.com
  * 2014年5月9日下午10:48:05
  */
-public class SpecAuthorityCheckInterceptor  extends AbstractInterceptor {
+public class SearchAuthorityCheckInterceptor  extends AbstractInterceptor {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -38,24 +38,17 @@ public class SpecAuthorityCheckInterceptor  extends AbstractInterceptor {
 		
 		//验证是否有操作权利
 		Map<String,Object> param = ctx.getParameters();
-		LogUtil.debug(ctx.getName()+" ,staff dispose specInfo:"+param+",user:"+user.getUserName());
+		LogUtil.debug(ctx.getName()+" ,show search result for specInfo:"+param+",user:"+user.getUserName());
 		
 		String userName = this.getParamener(param.get("userName"));
 		LogUtil.info(ctx.getName()+" ,userName="+userName);
-		//下载上传图片或查看信息的时候
-		if(StringUtils.equals(ctx.getName(), "uploadImage") || StringUtils.equals(ctx.getName(), "downloadImage")){
-			if(!StringUtils.equals(user.getUserName(), userName) && user.getRole() == UserAccountConstant.ROLE_SPEC && user.getAuthority() != UserAccountConstant.SEARCH_AUTHORITY){
-				ctx.put("message", "你没有权力操作");
-				return ActionConstant.RESULT_FAIL;
-			}
+		//查看信息的时候
+		if( user.getAuthority() != UserAccountConstant.SEARCH_AUTHORITY){
+			ctx.put("message", "你没有权力操作");
+			return ActionConstant.RESULT_FAIL;
 		}else {
-			if(!StringUtils.equals(user.getUserName(), userName)){
-				ctx.put("message", "你没有权力操作");
-				return ActionConstant.RESULT_FAIL;
-			}
+			return invocation.invoke();
 		}
-		
-		return invocation.invoke();
 	}
 	
 	private String getParamener(Object paramIn){

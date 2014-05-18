@@ -110,6 +110,15 @@
 			<ref bean="userAccountService" />
 		</property>
 	</bean>
+	<!-- 搜索 -->
+	<bean name="searchSpecInfoAction" class="com.weakie.action.SearchSpecInfoAction" scope="prototype">
+		<property name="specInfoService">
+			<ref bean="specialistInfoService" />
+		</property>
+		<property name="selectService">
+			<ref bean="selectionService" />
+		</property>
+	</bean>
 	<!--
 	<bean id="userService" class="org.login.service.Impl.UsersService">
 		<property name="userDAO">

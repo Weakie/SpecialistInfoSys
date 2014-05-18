@@ -57,7 +57,7 @@
 						<b>角色: </b>
 						<c:if test="${sessionScope.USER.role == 1}">专家</c:if>
 						<c:if test="${sessionScope.USER.role == 2}">工作人员</c:if>
-						<c:if test="${sessionScope.USER.role == 3}">专家</c:if>
+						<c:if test="${sessionScope.USER.role == 3}">管理员</c:if>
 					</p>
 					<br>
 					<p>

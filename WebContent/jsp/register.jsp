@@ -139,7 +139,7 @@
 						<div class="form-group" id="username_div_parent">
 							<label for="userName" class="col-sm-3 control-label">用户名</label>
 							<div class="col-sm-8" id="username_div">
-								<input type="text" class="form-control" id="userName" name="userName"  value="${userName}" onblur="confirmUsernameExist()" onkeyup="confirmUsernameExist()" />
+								<input type="text" class="form-control" id="userName" name="userName" value="${userName}"  placeholder="6-12位字母或数字组成" onblur="confirmUsernameExist()" onkeyup="confirmUsernameExist()" />
 							</div>
 						</div>
 						<div class="form-group">

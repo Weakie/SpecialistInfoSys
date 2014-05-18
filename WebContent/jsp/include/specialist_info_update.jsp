@@ -503,7 +503,7 @@
 					 <label for="province-1" class="col-sm-2 col-xs-2 control-label">工作地点</label>
 					 <div class="col-sm-8 col-xs-8">
 					 	<p class="help-block">
-							最多添加10个工作地点.若以下列表中没有,请在最后的备注栏中填写,我们的工作人员会为你添加.
+							最多添加10个工作地点.若以下列表中没有,请最后提交申请的时候在备注栏中填写,我们的工作人员会为你添加.
 						</p>
 					  	<table class="col-sm-6">
 							 <tbody id="address-table">

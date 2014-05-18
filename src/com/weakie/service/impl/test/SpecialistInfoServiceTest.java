@@ -69,4 +69,12 @@ public class SpecialistInfoServiceTest implements SpecialistInfoService {
 		return null;
 	}
 
+	@Override
+	public List<SpecialistInfoBean> advancedSearch(int orgType,
+			int qualification, int title, int majorClass, int major,
+			int province, int city) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
