@@ -3,6 +3,7 @@ package com.weakie.factory;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@Deprecated
 public class ThreadPoolFactory {
 
 	//private static ThreadPoolFactory instance = new ThreadPoolFactory();

@@ -25,9 +25,12 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+  
+  <!-- 
   <listener>
     <listener-class>com.weakie.initialize.ServerListener</listener-class>
   </listener>
+  -->
   
   <filter>
       <filter-name>resourceFilter</filter-name>
@@ -50,39 +53,7 @@
       <url-pattern>*.jsp</url-pattern>
   </filter-mapping>
   
-  <servlet>
-    <description></description>
-    <display-name>FileReaderServlet</display-name>
-    <servlet-name>FileReaderServlet</servlet-name>
-    <servlet-class>com.weakie.web.FileReaderServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FileReaderServlet</servlet-name>
-    <url-pattern>/FileReaderServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>FileListServlet</display-name>
-    <servlet-name>FileListServlet</servlet-name>
-    <servlet-class>com.weakie.web.FileListServlet</servlet-class>
-    <init-param>
-      <description></description>
-      <param-name>baseDir</param-name>
-      <param-value>/home</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FileListServlet</servlet-name>
-    <url-pattern>/FileListServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>FileUploadServlet</display-name>
-    <servlet-name>FileUploadServlet</servlet-name>
-    <servlet-class>com.weakie.web.FileUploadServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FileUploadServlet</servlet-name>
-    <url-pattern>/FileUploadServlet</url-pattern>
-  </servlet-mapping>
+  <session-config>
+	<session-timeout>60</session-timeout>
+  </session-config>
 </web-app>

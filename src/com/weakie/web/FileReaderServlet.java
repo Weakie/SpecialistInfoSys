@@ -19,6 +19,7 @@ import com.weakie.util.log.LogUtil;
 /**
  * Servlet implementation class FileReaderServlet
  */
+@Deprecated
 public class FileReaderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

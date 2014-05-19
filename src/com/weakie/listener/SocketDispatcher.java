@@ -6,6 +6,7 @@ import java.net.Socket;
 
 import com.weakie.util.log.LogUtil;
 
+@Deprecated
 public class SocketDispatcher implements Runnable {
 
 	private ServerSocket listen;

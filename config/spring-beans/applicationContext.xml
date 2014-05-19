@@ -24,7 +24,7 @@
 	
 	<!-- <bean id="sqlSessionFactory" class="factorybean.StaticMailConfigFactory" factory-method="getMailConfig"></bean> -->
 	
-	
+	<!-- 
 	<bean id="socketDispatcher" class="com.weakie.listener.SocketDispatcher"></bean>
 
 	<bean id="initialize" class="com.weakie.initialize.Initialize">
@@ -35,5 +35,6 @@
 			<ref bean="executor" />
 		</property>
 	</bean>
-	
+	 -->
+	 
 </beans>

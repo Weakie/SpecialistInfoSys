@@ -7,6 +7,7 @@ import com.weakie.global.SpringBeanUtil;
 import com.weakie.listener.SocketDispatcher;
 import com.weakie.util.log.LogUtil;
 
+@Deprecated
 public class Initialize {
 	private static Initialize instance;
 	private ExecutorService executor;

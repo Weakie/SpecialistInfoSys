@@ -15,6 +15,7 @@ import com.weakie.util.log.LogUtil;
 /**
  * Servlet implementation class FileListServlet
  */
+@Deprecated
 public class FileListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

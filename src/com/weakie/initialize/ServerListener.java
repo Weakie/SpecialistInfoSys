@@ -10,6 +10,7 @@ import com.weakie.util.log.LogUtil;
  * Application Lifecycle Listener implementation class Listener
  *
  */
+@Deprecated
 public final class ServerListener implements ServletContextListener {
 
     /**
