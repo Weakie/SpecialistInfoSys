@@ -126,6 +126,7 @@
 	<select id="selectSpecInfoByValue" parameterType="String" resultMap="specInfoMap">
 	  SELECT * FROM spec_info 
 	  WHERE 
+	  state 		= 3
 	  name 			LIKE #{value} OR
 	  sex 			LIKE #{value} OR
 	  birthday 		LIKE #{value} OR
@@ -154,7 +155,8 @@
 	
 	<select id="selectSpecInfoByAdvance" parameterType="Map" resultMap="specInfoMap">
 	  SELECT * FROM spec_info 
-	  WHERE '1' = '1'
+	  WHERE 
+	  state = 3
 	  <if test="orgType != -1">
     	AND orgTypeId = #{orgType}
   	  </if>

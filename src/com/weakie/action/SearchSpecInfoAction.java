@@ -1,5 +1,6 @@
 package com.weakie.action;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.weakie.bean.SpecialistInfoBean;
 import com.weakie.service.SelectionService;
 import com.weakie.service.SpecialistInfoService;
+import com.weakie.util.SpecInfoBeanUtil;
 import com.weakie.util.log.LogUtil;
 
 public class SearchSpecInfoAction extends ActionSupport {
@@ -20,7 +22,8 @@ public class SearchSpecInfoAction extends ActionSupport {
     //request
     private String searchValue;
     //response
-    private List<SpecialistInfoBean> specInfos;
+    private List<SpecialistInfoBean> specInfoBeans;
+    private List<SpecInfoBeanUtil> specInfos;
     
     //advance search prepare
     private Map<Integer,String> orgTypeMap;
@@ -45,12 +48,17 @@ public class SearchSpecInfoAction extends ActionSupport {
 		//for staff display, specialist display is not needed
     	LogUtil.info("search value = "+searchValue);
     	if(StringUtils.isEmpty(searchValue)){
-    		this.specInfos = Collections.emptyList();
+    		this.specInfoBeans = Collections.emptyList();
     		return SUCCESS;
     	}
-    	this.specInfos = this.specInfoService.searchByValue(searchValue.split(" "));
+    	this.specInfoBeans = this.specInfoService.searchByValue(searchValue.split(" "));
     	this.initSpecialistBeanDisplayData();
-		LogUtil.info("display spec info:"+this.specInfos.size());
+		LogUtil.info("display spec info:"+this.specInfoBeans.size());
+		//for display
+		this.specInfos = new ArrayList<SpecInfoBeanUtil>();
+		for(SpecialistInfoBean bean:this.specInfoBeans){
+			this.specInfos.add(new SpecInfoBeanUtil(bean,searchValue.split(" ")));
+		}
         return SUCCESS;
     }
 	
@@ -72,9 +80,14 @@ public class SearchSpecInfoAction extends ActionSupport {
 	public String executeAdvanceSearch(){
 		//for staff display, specialist display is not needed
     	LogUtil.info("search value = "+orgType+";"+ qualification+";"+ title+";"+ majorClass+";"+ major+";"+ province+";"+ city);
-    	this.specInfos = this.specInfoService.advancedSearch(orgType, qualification, title, majorClass, major, province, city);
+    	this.specInfoBeans = this.specInfoService.advancedSearch(orgType, qualification, title, majorClass, major, province, city);
     	this.initSpecialistBeanDisplayData();
-		LogUtil.info("display spec info:"+this.specInfos.size());
+		LogUtil.info("display spec info:"+this.specInfoBeans.size());
+		//for display
+		this.specInfos = new ArrayList<SpecInfoBeanUtil>();
+		for(SpecialistInfoBean bean:this.specInfoBeans){
+			this.specInfos.add(new SpecInfoBeanUtil(bean));
+		}
         return SUCCESS;
 	}
 	
@@ -107,7 +120,7 @@ public class SearchSpecInfoAction extends ActionSupport {
 			cityNameMap.putAll(city);
 		}
 		//update the specInfoBean
-		for(SpecialistInfoBean bean:this.specInfos){
+		for(SpecialistInfoBean bean:this.specInfoBeans){
 			bean.setOrgType(orgTypeMap.get(bean.getOrgTypeId()));
 			bean.setQualification(qualificationMap.get(bean.getQualificationId()));
 			bean.setTitle(titleMap.get(bean.getTitleId())); 
@@ -137,7 +150,7 @@ public class SearchSpecInfoAction extends ActionSupport {
 		this.searchValue = searchValue;
 	}
 
-	public List<SpecialistInfoBean> getSpecInfos() {
+	public List<SpecInfoBeanUtil> getSpecInfos() {
 		return specInfos;
 	}
 

@@ -32,6 +32,18 @@
 	
 	function onGetConfirmResult(){
 		alert(xmlHttp.responseText);
+		var result = xmlHttp.responseText.split(':')[0];
+		if(result==2){
+			var confirm_not = document.getElementById("confim_not");
+			if(confirm_not == null){
+				confirm_not = document.getElementById("confim_ing");
+			}
+			confirm_not.setAttribute("style","color:black");
+			var confirm_ing = document.getElementById("confim_ed");
+			confirm_ing.setAttribute("style","color:#80BFFF");
+			var button = document.getElementById("button");
+			button.disabled = true;
+		}
 	}
 </script>
 <body>
@@ -44,14 +56,14 @@
 		<div class="page-header">
 			<kbd>状态: </kbd> 
 			&nbsp;&nbsp;
-			<c:if test="${specInfoBean.state==1 }"><span style="color:#80BFFF">未确认</span></c:if>
+			<c:if test="${specInfoBean.state==1 }"><span id="confim_not" style="color:#80BFFF">未确认</span></c:if>
 			<c:if test="${specInfoBean.state!=1 }">未确认</c:if>
 			&nbsp;&gt;&gt;&nbsp;
-			<c:if test="${specInfoBean.state==2 }"><span style="color:#80BFFF">确认中</span></c:if>
-			<c:if test="${specInfoBean.state!=2 }">确认中</c:if>
+			<c:if test="${specInfoBean.state==2 }"><span id="confim_ing" style="color:#80BFFF">待确认</span></c:if>
+			<c:if test="${specInfoBean.state!=2 }">待确认</c:if>
 			&nbsp;&gt;&gt;&nbsp;
-			<c:if test="${specInfoBean.state==3 }"><span style="color:#80BFFF">已确认</span></c:if>
-			<c:if test="${specInfoBean.state!=3 }">已确认</c:if>
+			<c:if test="${specInfoBean.state==3 }"><span id="confim_ed" style="color:#80BFFF">已确认</span></c:if>
+			<c:if test="${specInfoBean.state!=3 }"><span id="confim_ed" >已确认</span></c:if>
 		</div>
 		<div class="page-header">
 			<h3 class="text-left">
@@ -66,11 +78,11 @@
 			pageContext.setAttribute("info", info);
 		%>
 		<div class="page-header">
-			<input type="button" id="button" value="不修改直接确认" class="btn btn-primary" onClick="confirmSpecInfo(${applyInfoId},'${staffId }')" >
+			<input type="button" id="button" value="不修改直接确认" class="btn btn-primary" onClick="confirmSpecInfo(${applyInfoId},'${staffId }')" <c:if test="${specInfoBean.state!=1 }">disabled="disabled"</c:if>>
 		</div>
 		<span class="label label-default">修改参考</span><br><br>
 		<div class="col-sm-6 col-xs-6">
-			<textarea class="form-control" id="comment" rows="4" placeholder="备注信息">${info.comment }</textarea><br>
+			<textarea class="form-control" id="comment" rows="4" placeholder="修改备注">${info.comment }</textarea><br>
 		</div>
 		
 		<c:set var="formAction" value="/SpecialistInfoSys/specInfoAddForStaff.action" scope="page"/>
