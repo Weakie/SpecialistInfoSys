@@ -19,20 +19,20 @@
 		var url = "/SpecialistInfoSys/staffDisposeApplyAccept.action?staffId=" + staffId + "&applyInfoId=" + applyId;
 
 		createXMLHttpRequest();
-		xmlHttp.onreadystatechange = disposeResult;
+		xmlHttp.onreadystatechange = disposeOpeResult;
 		xmlHttp.open("GET", url, true);
 		xmlHttp.send(null);
 	}
 
-	function disposeResult() {
+	function disposeOpeResult() {
 		if (xmlHttp.readyState == 4) {
 			if (xmlHttp.status == 200) {
-				update();
+				updateOpeResult();
 			}
 		}
 	}
 	
-	function update(){
+	function updateOpeResult(){
 		var results = xmlHttp.responseText.split(";");
 		var statu = document.getElementById("statu-"+results[1]);
 		var ope = document.getElementById("operation-"+results[1]);

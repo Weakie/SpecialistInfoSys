@@ -40,8 +40,23 @@ public class UserLoginRegisterAction extends ActionSupport {
         return inputStream;
     }
    
+    /**
+     * Ajax,检查用户名是否存在
+     * @return
+     */
 	public String executeUserNameExists(){
     	LogUtil.debug("exits: "+userName);
+    	//合法性检查
+    	if(StringUtils.isEmpty(userName)){
+    		inputStream = new StringBufferInputStream(SystemConstant.INVALID+":1");
+    		return SUCCESS;
+    	}
+    	//如果不是由5-12位字母或者数字组成
+    	if(!StringUtils.isAlphanumeric(userName) || StringUtils.length(userName)<5 || StringUtils.length(userName)>12){
+    		inputStream = new StringBufferInputStream(SystemConstant.INVALID+":2");
+    		return SUCCESS;
+    	}
+    	//检查用户名是否存在
     	if(accountService.checkAccount(userName)){
     		inputStream = new StringBufferInputStream(SystemConstant.EXIST);
     	}else{
@@ -50,18 +65,31 @@ public class UserLoginRegisterAction extends ActionSupport {
         return SUCCESS;
     }
     
+	/**
+	 * 注册-页面提交
+	 * @return
+	 */
     public String executeRegister(){
     	LogUtil.debug("register: "+userName);
+    	//合法性检查
     	if(StringUtils.isEmpty(userName)||StringUtils.isEmpty(password)){
     		messageStore = new MessageStore("用户名或密码不能为空") ;
     		return INPUT;
     	}
+    	//如果不是由5-12位字母或者数字组成
+    	if(!StringUtils.isAlphanumeric(userName) 
+    			|| StringUtils.length(userName)<5 || StringUtils.length(userName)>12
+    			|| StringUtils.length(password)<8 || StringUtils.length(password)>12){
+    		messageStore = new MessageStore("用户名或密码格式不对") ;
+    		return INPUT;
+    	}
+    	//注册-包含检查用户名是否存在
     	try {
 			if(accountService.register(userName, password)){
 				this.specInfoService.insertNewSpecialistInfo(userName);
 				return SUCCESS;
 			}else{
-				messageStore = new MessageStore("注册失败") ;
+				messageStore = new MessageStore("注册失败-用户名已存在") ;
 			}
 		} catch (Exception e) {
 			LogUtil.error(e);
@@ -70,18 +98,30 @@ public class UserLoginRegisterAction extends ActionSupport {
         return INPUT;
     }
     
+    /**
+     * 添加新的工作人员账户
+     * @return
+     */
     public String executeAddNewStaff(){
     	LogUtil.debug("add staff: "+userName);
+    	//合法性检查
     	if(StringUtils.isEmpty(userName)){
     		messageStore = new MessageStore("用户名不能为空") ;
     		return INPUT;
     	}
+    	//如果用户名不是由5-12位字母或者数字组成
+    	if(!StringUtils.isAlphanumeric(userName) 
+    			|| StringUtils.length(userName)<5 || StringUtils.length(userName)>12){
+    		messageStore = new MessageStore("用户名由5-12位字母或者数字组成") ;
+    		return INPUT;
+    	}
+    	//注册-包含检查用户名是否存在
     	try {
 			if(accountService.addNewStaff(userName)){
 				messageStore = new MessageStore("添加成功") ;
 				return SUCCESS;
 			}else{
-				messageStore = new MessageStore("添加失败") ;
+				messageStore = new MessageStore("添加失败-用户名已存在") ;
 			}
 		} catch (Exception e) {
 			LogUtil.error(e);
@@ -90,8 +130,18 @@ public class UserLoginRegisterAction extends ActionSupport {
         return INPUT;
     }
     
+    /**
+     * 登录
+     * @return
+     */
     public String executeLogin() {
-    	LogUtil.debug(userName);
+    	LogUtil.info(userName);
+    	//合法性检查
+    	if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)){
+    		messageStore = new MessageStore("用户名或密码不能为空") ;
+    		return INPUT;
+    	}
+    	//登录-加入sessionScope
     	Person p = null;
 		try {
 			p = accountService.login(userName, password);
@@ -102,19 +152,35 @@ public class UserLoginRegisterAction extends ActionSupport {
 	    		messageStore=new MessageStore("登录失败"); 
 	    	}
 		} catch (Exception e) {
-			e.printStackTrace();
 			LogUtil.error(e);
 			messageStore = new MessageStore("登录失败:系统错误") ;
 		}
 		return INPUT;
     }
     
+    /**
+     * 用户重置密码
+     * @return
+     */
     public String executeResetPassword() {
     	LogUtil.debug("reset password,userName="+userName);
+    	//合法性检查
     	if(StringUtils.isEmpty(userName)){
     		messageStore=new MessageStore("请先登录"); 
     		return INPUT;
     	}
+    	//密码长度检查
+    	if(StringUtils.length(password)<8 || StringUtils.length(password)>12
+    			|| StringUtils.length(newPassword)<8 || StringUtils.length(newPassword)>12){
+    		messageStore=new MessageStore("密码由8-12位字符组成"); 
+    		return INPUT;
+    	}
+    	//新旧密码是否相同
+    	if(StringUtils.equals(password, newPassword)){
+    		messageStore=new MessageStore("原始密码和新密码不能相同"); 
+    		return INPUT;
+    	}
+    	//修改密码
     	Person p = null;
 		try {
 			p = accountService.resetPassword(userName, password, newPassword);
@@ -133,8 +199,12 @@ public class UserLoginRegisterAction extends ActionSupport {
 		return INPUT;
     }
     
+    /**
+     * 用户修改昵称
+     * @return
+     */
     public String updateNickName(){
-    	//decode first, for chinese
+    	//decode first, for Chinese.
     	try {
 			this.password =  java.net.URLDecoder.decode(this.password,"UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -165,6 +235,10 @@ public class UserLoginRegisterAction extends ActionSupport {
 		return SUCCESS;
     }
  
+    /**
+     * 用户申请搜索权限
+     * @return
+     */
     public String executeApplyAuthority(){
     	int result = this.accountService.updateUserAuthority(userName, UserAccountConstant.APPLY_AUTHORITY);
     	try {
@@ -183,6 +257,11 @@ public class UserLoginRegisterAction extends ActionSupport {
 		}
     	return SUCCESS;
     }
+    
+    /**
+     * 登出
+     * @return
+     */
     public String executeLogout() {
     	HttpServletRequest request = ServletActionContext.getRequest();
     	request.getSession().invalidate();

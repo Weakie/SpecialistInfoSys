@@ -698,9 +698,9 @@
 				</div>
 				<span class="label label-default">其他</span><br>
 				<div class="form-group">
-					<label for="other" class="col-sm-2 control-label">备注</label>
+					<label for="other" class="col-sm-2 control-label">作品、观点</label>
 					<div class="col-sm-6 col-xs-6">
-						<textarea class="form-control" id="other" name="specInfoBean.other" rows="3" placeholder="备注信息">${specInfoBean.other}</textarea>
+						<textarea class="form-control" id="other" name="specInfoBean.other" rows="3" placeholder="作品、观点">${specInfoBean.other}</textarea>
 					</div>
 				</div>
 				<div class="form-group">

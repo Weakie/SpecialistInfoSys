@@ -37,8 +37,26 @@
 	
 	function update() {
 		clear();
-		var results = xmlHttp.responseText;
-		if(results == "EXIST"){
+		var results = xmlHttp.responseText.split(":");
+		if(results[0] == "INVALID"){
+			//add new hint
+			var div = document.getElementById("username_div");
+			var p = document.createElement("p");
+			var font = document.createElement("font");
+			font.setAttribute("color", "red");
+			if(results[1] == "1"){
+				font.appendChild(document.createTextNode("用户名不能为空"));
+			}else if(results[1] == "2"){
+				font.appendChild(document.createTextNode("用户名由5-12位字母或者数字组成"));
+			}
+			p.appendChild(font);
+			div.appendChild(p);
+			//set class of div
+			var div_parent = document.getElementById("username_div_parent");
+			div_parent.setAttribute("class", "form-group has-error");
+			document.getElementById("userName").focus();
+			result=0;
+		}else if(results[0] == "EXIST"){
 			//add new hint
 			var div = document.getElementById("username_div");
 			var p = document.createElement("p");
@@ -52,7 +70,7 @@
 			div_parent.setAttribute("class", "form-group has-error");
 			document.getElementById("userName").focus();
 			result=0;
-		}else{
+		}else if(results[0] == "NOTEXIST"){
 			//add new hint
 			var div = document.getElementById("username_div");
 			var p = document.createElement("p");

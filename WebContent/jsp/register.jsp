@@ -34,8 +34,26 @@
 	
 	function update() {
 		clear();
-		var results = xmlHttp.responseText;
-		if(results == "EXIST"){
+		var results = xmlHttp.responseText.split(":");
+		if(results[0] == "INVALID"){
+			//add new hint
+			var div = document.getElementById("username_div");
+			var p = document.createElement("p");
+			var font = document.createElement("font");
+			font.setAttribute("color", "red");
+			if(results[1] == "1"){
+				font.appendChild(document.createTextNode("用户名不能为空"));
+			}else if(results[1] == "2"){
+				font.appendChild(document.createTextNode("用户名由5-12位字母或者数字组成"));
+			}
+			p.appendChild(font);
+			div.appendChild(p);
+			//set class of div
+			var div_parent = document.getElementById("username_div_parent");
+			div_parent.setAttribute("class", "form-group has-error");
+			document.getElementById("userName").focus();
+			result=0;
+		}else if(results[0] == "EXIST"){
 			//add new hint
 			var div = document.getElementById("username_div");
 			var p = document.createElement("p");
@@ -49,7 +67,7 @@
 			div_parent.setAttribute("class", "form-group has-error");
 			document.getElementById("userName").focus();
 			result=0;
-		}else{
+		}else if(results[0] == "NOTEXIST"){
 			var div_parent = document.getElementById("username_div_parent");
 			div_parent.setAttribute("class", "form-group has-success");
 			result=1;
@@ -139,13 +157,13 @@
 						<div class="form-group" id="username_div_parent">
 							<label for="userName" class="col-sm-3 control-label">用户名</label>
 							<div class="col-sm-8" id="username_div">
-								<input type="text" class="form-control" id="userName" name="userName" value="${userName}"  placeholder="6-12位字母或数字组成" onblur="confirmUsernameExist()" onkeyup="confirmUsernameExist()" />
+								<input type="text" class="form-control" id="userName" name="userName" value="${userName}"  placeholder="长度5-12位的字母或数字组成" onblur="confirmUsernameExist()" onkeyup="confirmUsernameExist()" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputPassword" class="col-sm-3 control-label">密码</label>
 							<div class="col-sm-8">
-								<input type="password" class="form-control" id="inputPassword" name="password" >
+								<input type="password" class="form-control" id="inputPassword" name="password" placeholder="长度8-12位的任何字符">
 							</div>
 						</div>
 						<div class="form-group" id="confirm_div_parent">

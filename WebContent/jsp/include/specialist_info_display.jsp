@@ -84,5 +84,13 @@
 					</p>
 				</div>
 			</div>
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<span class="label label-default">其他</span><br><br>
+					<p>
+						<b>作品、观点: </b><br>${specInfoBean.other}
+					</p>
+				</div>
+			</div>
 		</div>
 	

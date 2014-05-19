@@ -82,7 +82,7 @@ public class SpecialistInfoAddPrepareAction extends ActionSupport {
 		        this.cityMap = this.selectService.getCity(firstProvinceId);
 	    	}else{
 	    		LogUtil.info("work position id is not initialized");
-		    	this.provinceMap = this.selectService.getProvince(false);
+		    	this.provinceMap = this.selectService.getProvince(true);
 		    	//这里参数应该与provinceMap第一个值对应的数据有关
 		    	int firstProvinceId = this.provinceMap.keySet().iterator().next();
 		        this.cityMap = this.selectService.getCity(firstProvinceId);

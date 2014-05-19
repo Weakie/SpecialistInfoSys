@@ -24,6 +24,7 @@
 			<c:if test="${specInfoBean.state==3 }"><span style="color:#80BFFF">已确认</span></c:if>
 			<c:if test="${specInfoBean.state!=3 }">已确认</c:if>
 		</div>
+		<br><br>
 		<%@ include file="./include/specialist_info_display.jsp" %>
 	</div>
 	<h5 class="text-center text-muted">
