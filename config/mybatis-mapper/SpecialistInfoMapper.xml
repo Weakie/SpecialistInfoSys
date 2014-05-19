@@ -126,31 +126,33 @@
 	<select id="selectSpecInfoByValue" parameterType="String" resultMap="specInfoMap">
 	  SELECT * FROM spec_info 
 	  WHERE 
-	  state 		= 3
-	  name 			LIKE #{value} OR
-	  sex 			LIKE #{value} OR
-	  birthday 		LIKE #{value} OR
-	  organization 	LIKE #{value} OR
-	  website 		LIKE #{value} OR
-	  role 			LIKE #{value} OR
-	  email 		LIKE #{value} OR
-	  partTimeJob 	LIKE #{value} OR
-	  contact 		LIKE #{value} OR
-	  degree 		LIKE #{value} OR
-	  school 		LIKE #{value} OR
-	  language	 	LIKE #{value} OR
-	  worktime 		LIKE #{value} OR
-	  experience	LIKE #{value} OR
-	  state			LIKE #{value} OR
-	  other			LIKE #{value} OR
-	  orgTypeId IN (SELECT id FROM organization_type WHERE field_name LIKE #{value}) OR
-	  qualificationId IN (SELECT id FROM qualification WHERE field_name LIKE #{value}) OR
-	  titleId IN (SELECT id FROM title WHERE field_name LIKE #{value}) OR
-	  majorId IN (SELECT id FROM major_field WHERE field_name LIKE #{value} 
-	  					OR field_category IN (SELECT id FROM major_field_category WHERE field_name LIKE #{value}) ) OR
-	  userName IN (SELECT user_name FROM working_position_con WHERE 
-	  					position_id IN (SELECT id FROM working_position WHERE field_city LIKE #{value} 
-	  						OR field_province IN (SELECT id FROM province_country WHERE field_name LIKE #{value}) ))
+	  state 		= 3 AND 
+	  (
+		  name 			LIKE #{value} OR
+		  sex 			LIKE #{value} OR
+		  birthday 		LIKE #{value} OR
+		  organization 	LIKE #{value} OR
+		  website 		LIKE #{value} OR
+		  role 			LIKE #{value} OR
+		  email 		LIKE #{value} OR
+		  partTimeJob 	LIKE #{value} OR
+		  contact 		LIKE #{value} OR
+		  degree 		LIKE #{value} OR
+		  school 		LIKE #{value} OR
+		  language	 	LIKE #{value} OR
+		  worktime 		LIKE #{value} OR
+		  experience	LIKE #{value} OR
+		  state			LIKE #{value} OR
+		  other			LIKE #{value} OR
+		  orgTypeId IN (SELECT id FROM organization_type WHERE field_name LIKE #{value}) OR
+		  qualificationId IN (SELECT id FROM qualification WHERE field_name LIKE #{value}) OR
+		  titleId IN (SELECT id FROM title WHERE field_name LIKE #{value}) OR
+		  majorId IN (SELECT id FROM major_field WHERE field_name LIKE #{value} 
+		  					OR field_category IN (SELECT id FROM major_field_category WHERE field_name LIKE #{value}) ) OR
+		  userName IN (SELECT user_name FROM working_position_con WHERE 
+		  					position_id IN (SELECT id FROM working_position WHERE field_city LIKE #{value} 
+		  						OR field_province IN (SELECT id FROM province_country WHERE field_name LIKE #{value}) ))
+	  )
 	</select>
 	
 	<select id="selectSpecInfoByAdvance" parameterType="Map" resultMap="specInfoMap">

@@ -55,6 +55,9 @@ public class SpecInfoBeanUtil {
 	}
 	
 	private String convertToHTML(String source){
+		if(StringUtils.isEmpty(source)){
+			return "нч";
+		}
 		if(this.searchWords==null){
 			return source;
 		}

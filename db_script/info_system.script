@@ -1,0 +1,360 @@
+-- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
+--
+-- Host: localhost    Database: info_system
+-- ------------------------------------------------------
+-- Server version	5.6.17-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `apply_info`
+--
+
+DROP TABLE IF EXISTS `apply_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `apply_info` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `userName` varchar(45) NOT NULL,
+  `specName` varchar(45) NOT NULL,
+  `applyTime` datetime NOT NULL,
+  `acceptTime` datetime DEFAULT NULL,
+  `disposeTime` datetime DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  `staffId` varchar(45) DEFAULT NULL,
+  `comment` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `FK_USERNAME_idx` (`userName`),
+  KEY `FK_STAFFID_idx` (`staffId`),
+  KEY `Index_APPLY` (`applyTime`),
+  KEY `Index_ACCEPT` (`acceptTime`),
+  KEY `Index_DISPOSE` (`disposeTime`),
+  CONSTRAINT `FK_STAFFID` FOREIGN KEY (`staffId`) REFERENCES `person` (`userName`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_USERNAME` FOREIGN KEY (`userName`) REFERENCES `spec_info` (`userName`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COMMENT='此表无法删除数据';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `apply_info`
+--
+
+LOCK TABLES `apply_info` WRITE;
+/*!40000 ALTER TABLE `apply_info` DISABLE KEYS */;
+INSERT INTO `apply_info` VALUES (20,'1122','hehehe','2014-05-06 21:26:46',NULL,NULL,2,NULL,NULL),(21,'123','hehehe','2014-05-06 21:26:46',NULL,NULL,2,NULL,NULL),(22,'1122','hehehe','2014-05-06 22:17:25','2014-05-06 22:17:25','2014-05-07 02:35:42',4,'aaa',NULL),(23,'123','hehehe','2014-05-06 22:14:24','2014-05-06 22:14:24',NULL,2,'aaa',NULL),(24,'1122','hehehe','2014-05-07 02:36:45','2014-05-07 03:05:08','2014-05-07 03:07:48',4,'aaa',NULL),(26,'123','hehehe','2014-05-07 02:36:46','2014-05-07 02:47:27','2014-05-07 03:00:22',4,'aaa',NULL),(27,'123','林威建','2014-05-08 20:17:20',NULL,NULL,2,NULL,NULL),(28,'123','林威建','2014-05-08 20:19:38',NULL,NULL,2,NULL,NULL),(29,'123','林威建','2014-05-08 20:20:40',NULL,NULL,2,NULL,NULL),(30,'123','林威建','2014-05-08 21:33:22',NULL,NULL,2,NULL,''),(31,'123','林威建','2014-05-08 21:38:48',NULL,NULL,2,NULL,''),(32,'123','林威建','2014-05-08 21:38:51',NULL,NULL,2,NULL,''),(33,'123','林威建','2014-05-08 21:39:14',NULL,NULL,2,NULL,''),(34,'123','林威建','2014-05-08 21:40:13',NULL,NULL,2,NULL,''),(35,'123','林威建','2014-05-08 21:41:36',NULL,NULL,2,NULL,''),(36,'123','林威建','2014-05-08 21:52:15',NULL,NULL,2,NULL,''),(37,'123','林威建','2014-05-08 21:52:35','2014-05-08 22:57:39','2014-05-08 23:04:12',4,'aaa','%E5%93%88%E5%93%88%E5%93%88%E5%93%88'),(38,'123','林威建','2014-05-08 23:06:11','2014-05-08 23:06:38','2014-05-09 00:35:41',4,'aaa','；SD卡就是浪费绝色赌妃开机速度'),(39,'123','林威建','2014-05-09 00:38:23','2014-05-09 00:38:44','2014-05-09 00:39:00',4,'aaa','哈罗罗顺口溜顺口溜量减少到家了'),(40,'123','林威建','2014-05-09 01:59:26','2014-05-09 01:59:43','2014-05-09 02:02:31',4,'aaa','哈哈哈'),(41,'123','林威建','2014-05-09 02:03:14','2014-05-09 02:14:38','2014-05-09 17:09:49',4,'aaa','wq'),(42,'123','林威建','2014-05-10 00:35:49','2014-05-10 01:08:49','2014-05-10 01:09:16',4,'aaa','haha'),(43,'123','林威建','2014-05-10 01:45:02','2014-05-10 01:45:52',NULL,2,'aaa','好了'),(44,'123','林威建','2014-05-10 01:53:56','2014-05-10 01:54:42','2014-05-10 01:54:49',4,'aaaa','盛大'),(45,'123','林威建','2014-05-10 17:32:51','2014-05-10 17:33:33','2014-05-10 17:33:48',4,'aaaa','阿斯达'),(46,'1234','','2014-05-17 20:54:16','2014-05-19 20:54:56','2014-05-19 20:58:39',4,'12345',''),(47,'123456','Tony','2014-05-19 21:25:56','2014-05-19 21:44:04','2014-05-20 00:45:54',4,'aaaa',''),(48,'kobemvp','kobe','2014-05-19 21:41:55','2014-05-19 21:43:39','2014-05-19 21:44:43',4,'aaaa',''),(49,'zzzzzz','','2014-05-19 21:48:14','2014-05-19 21:49:00','2014-05-19 22:08:55',4,'aaaa',''),(50,'1122','lin','2014-05-19 23:02:11','2014-05-19 23:02:36','2014-05-19 23:04:36',4,'aaaa','');
+/*!40000 ALTER TABLE `apply_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `major_field`
+--
+
+DROP TABLE IF EXISTS `major_field`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `major_field` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `field_name` varchar(45) NOT NULL,
+  `field_category` int(10) unsigned NOT NULL COMMENT '专业类别',
+  PRIMARY KEY (`id`),
+  KEY `fk_field_category_idx` (`field_category`),
+  CONSTRAINT `fk_field_category` FOREIGN KEY (`field_category`) REFERENCES `major_field_category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='专业方向';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `major_field`
+--
+
+LOCK TABLES `major_field` WRITE;
+/*!40000 ALTER TABLE `major_field` DISABLE KEYS */;
+INSERT INTO `major_field` VALUES (1,'公共建筑',1),(2,'别墅',1),(3,'住宅',1),(4,'工业建筑',1),(5,'绿色建筑',1),(6,'室内装饰',1),(7,'经济地理',2),(8,'策划',2),(9,'发展战略',2),(10,'总体规划',2),(11,'城市设计',2),(12,'旅游规划',2),(13,'市政规划',2),(14,'风景旅游',3),(15,'主题园区',3),(16,'宏观经济',4),(17,'产业经济',4),(18,'绿色经济',4),(19,'计算机',0),(20,'其他',1),(21,'园林绿化',3),(22,'新技术',0),(23,'新能源',0),(24,'网络',0),(25,'绿色可持续发展',0),(26,'',5);
+/*!40000 ALTER TABLE `major_field` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `major_field_category`
+--
+
+DROP TABLE IF EXISTS `major_field_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `major_field_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `field_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='专业方向(大类)';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `major_field_category`
+--
+
+LOCK TABLES `major_field_category` WRITE;
+/*!40000 ALTER TABLE `major_field_category` DISABLE KEYS */;
+INSERT INTO `major_field_category` VALUES (0,'其他'),(1,'建筑'),(2,'规划'),(3,'景观'),(4,'经济'),(5,'其他1');
+/*!40000 ALTER TABLE `major_field_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `organization_type`
+--
+
+DROP TABLE IF EXISTS `organization_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `organization_type` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `field_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='单位性质';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `organization_type`
+--
+
+LOCK TABLES `organization_type` WRITE;
+/*!40000 ALTER TABLE `organization_type` DISABLE KEYS */;
+INSERT INTO `organization_type` VALUES (1,'测试数据1'),(2,'研究所'),(3,'中国'),(4,'大学'),(8,'小学'),(10,'测试数据2'),(11,'测试数据3'),(12,'啊啊啊'),(13,''),(14,'政府');
+/*!40000 ALTER TABLE `organization_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `person`
+--
+
+DROP TABLE IF EXISTS `person`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `person` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `userName` varchar(45) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `nickName` varchar(45) DEFAULT NULL,
+  `role` int(11) NOT NULL,
+  `authority` int(11) NOT NULL,
+  `registerTime` datetime NOT NULL,
+  `loginTime` datetime NOT NULL,
+  PRIMARY KEY (`id`,`userName`),
+  UNIQUE KEY `userName_UNIQUE` (`userName`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `person`
+--
+
+LOCK TABLES `person` WRITE;
+/*!40000 ALTER TABLE `person` DISABLE KEYS */;
+INSERT INTO `person` VALUES (5,'aaa','aaa','锤石',2,1,'2014-05-03 23:14:44','2014-05-17 20:47:24'),(8,'aaaa','aaaa','haha',2,1,'2014-05-03 23:17:39','2014-05-20 01:04:08'),(9,'aaaa2a','haha',NULL,1,1,'2014-05-04 00:32:31','2014-05-04 00:32:31'),(10,'aaaaa','wocaonimabi','新用户',1,1,'2014-05-06 01:22:24','2014-05-06 02:20:07'),(12,'1122','1122','新用户',1,-1,'2014-05-06 02:24:54','2014-05-19 23:01:55'),(13,'123','123','超级赛亚人',3,1,'2014-05-06 18:16:20','2014-05-20 01:04:24'),(14,'qaz','qaz','新用户',1,1,'2014-05-06 18:56:03','2014-05-06 18:56:08'),(15,'456','000000','新用户',2,1,'2014-05-17 20:25:34','2014-05-20 00:37:33'),(17,'789','000000','新用户',2,1,'2014-05-17 20:32:13','2014-05-17 20:32:13'),(18,'1234','1234','新用户',1,1,'2014-05-17 20:52:15','2014-05-19 20:59:23'),(19,'12345','00000000','新用户',2,0,'2014-05-19 20:54:22','2014-05-19 20:58:29'),(20,'22222222222','11111111','新用户',1,0,'2014-05-19 21:18:15','2014-05-19 21:18:15'),(21,'kobemvp','123456789','新用户',1,1,'2014-05-19 21:18:32','2014-05-20 00:11:43'),(22,'123456','11111111','新用户',1,1,'2014-05-19 21:19:57','2014-05-20 01:15:31'),(23,'zzzzzz','zzzzzzzz','新用户',1,0,'2014-05-19 21:29:33','2014-05-19 21:48:10'),(24,'22222222','11111111','新用户',1,0,'2014-05-19 21:38:59','2014-05-19 21:38:59'),(25,'kobe24','AAAAAAAA','新用户',1,0,'2014-05-19 22:26:25','2014-05-19 22:33:50'),(26,'12344','00000000','新用户',2,0,'2014-05-20 01:04:46','2014-05-20 01:04:46');
+/*!40000 ALTER TABLE `person` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `province_country`
+--
+
+DROP TABLE IF EXISTS `province_country`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `province_country` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `field_name` varchar(45) NOT NULL COMMENT '国内表示省.国外表示国家',
+  `field_country` bit(1) NOT NULL COMMENT '0:国内;1:国外',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='省或国家';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `province_country`
+--
+
+LOCK TABLES `province_country` WRITE;
+/*!40000 ALTER TABLE `province_country` DISABLE KEYS */;
+INSERT INTO `province_country` VALUES (1,'日本','\0'),(2,'江苏省',''),(3,'山东省',''),(4,'广东省',''),(5,'浙江省',''),(6,'河南省',''),(7,'美国','\0'),(8,'英国','\0');
+/*!40000 ALTER TABLE `province_country` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qualification`
+--
+
+DROP TABLE IF EXISTS `qualification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qualification` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `field_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='职业资格';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qualification`
+--
+
+LOCK TABLES `qualification` WRITE;
+/*!40000 ALTER TABLE `qualification` DISABLE KEYS */;
+INSERT INTO `qualification` VALUES (1,'低级'),(2,'中级'),(3,'高级'),(4,'超高级'),(5,'');
+/*!40000 ALTER TABLE `qualification` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `spec_info`
+--
+
+DROP TABLE IF EXISTS `spec_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `spec_info` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `userName` varchar(45) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `sex` bit(1) NOT NULL,
+  `birthday` varchar(45) DEFAULT NULL,
+  `organization` varchar(45) DEFAULT NULL,
+  `orgTypeId` int(11) unsigned DEFAULT NULL,
+  `website` varchar(1000) DEFAULT NULL,
+  `role` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `partTimeJob` text,
+  `contact` varchar(200) DEFAULT NULL,
+  `degree` varchar(45) DEFAULT NULL,
+  `school` varchar(45) DEFAULT NULL,
+  `language` varchar(45) DEFAULT NULL,
+  `worktime` varchar(45) DEFAULT NULL,
+  `qualificationId` int(11) unsigned DEFAULT NULL,
+  `titleId` int(11) unsigned DEFAULT NULL,
+  `majorId` int(11) unsigned DEFAULT NULL,
+  `experience` text,
+  `state` int(11) NOT NULL,
+  `other` text,
+  PRIMARY KEY (`id`,`userName`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `username_UNIQUE` (`userName`),
+  KEY `FK_ORGTYPE_idx` (`orgTypeId`),
+  KEY `FK_QUALIFICATION_idx` (`qualificationId`),
+  KEY `FK_MAJORFIELD_idx` (`majorId`),
+  KEY `FK_TITLE_idx` (`titleId`),
+  CONSTRAINT `FK_MAJORFIELD` FOREIGN KEY (`majorId`) REFERENCES `major_field` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ORGTYPE` FOREIGN KEY (`orgTypeId`) REFERENCES `organization_type` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
+  CONSTRAINT `FK_QUALIFICATION` FOREIGN KEY (`qualificationId`) REFERENCES `qualification` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_TITLE` FOREIGN KEY (`titleId`) REFERENCES `title` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `spec_info`
+--
+
+LOCK TABLES `spec_info` WRITE;
+/*!40000 ALTER TABLE `spec_info` DISABLE KEYS */;
+INSERT INTO `spec_info` VALUES (2,'hehe','haha','\0','1991-07','z',1,'z','z','weakielin@gmail.com','a','z','a','a','a','a',1,1,1,'a',2,'a'),(6,'1122','lin','\0','1991-07','tongji',1,'www.tongji.edu.cn','xiaozhang','244161716@qq.com','','3:3;2:2;1:1;','硕士','tj','cet-6','1',3,2,1,'',3,''),(7,'123','林威建','\0','1991-07','同济大学',8,'www.tongji.edu.cn','研究生','244161716@qq.com','盛大飒飒的味道大阿什顿','威:1234213;建:1245367;','硕士','tj','cet-6','2',3,2,1,'房顶上非师范生的冯绍峰',3,'上大大'),(8,'qaz',NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL),(9,'1234','hahaha','','1965-01','',1,'','','223@qq.com','','qww:qw12121;','','','','',1,1,19,'',3,'四度空间裸房婚撒旦了客家话奥斯卡局领导哈萨克家里电话上课讲话的wipeujrdk爱上快乐到家神盾局卡洛'),(10,'22222222222',NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL),(11,'kobemvp','kobe','\0','1978-08','同济大学',2,'http://www.lib.tongji.edu.cn','校长','kobe@163.com','上海大众汽车高级特聘教授','林威建:15158132588;吕涛:15158132566;','博士','同济大学','CET_6','2005',4,2,19,'CATIA二次开发',3,'《哥斯拉》'),(12,'123456','Tony','\0','1950-03','同济',1,'www.tongji.com','党委书记','superlvtao@163.com','专家','专家1:110;专家2:120;','博士','清华大学','专业8级','2009',4,2,7,'国家科技进步二等奖',3,'这个电视剧很好看。'),(13,'zzzzzz','','','1950-01','',1,'','','','','','','','','',1,1,19,'',1,''),(14,'22222222',NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL),(15,'kobe24',NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL);
+/*!40000 ALTER TABLE `spec_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `title`
+--
+
+DROP TABLE IF EXISTS `title`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `title` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `field_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='职称';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `title`
+--
+
+LOCK TABLES `title` WRITE;
+/*!40000 ALTER TABLE `title` DISABLE KEYS */;
+INSERT INTO `title` VALUES (1,'低级'),(2,'高级'),(3,'其他'),(4,'中级'),(5,'');
+/*!40000 ALTER TABLE `title` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `working_position`
+--
+
+DROP TABLE IF EXISTS `working_position`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `working_position` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `field_city` varchar(45) NOT NULL,
+  `field_province` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `fk_field_province_idx` (`field_province`),
+  CONSTRAINT `FK_PROVINCE` FOREIGN KEY (`field_province`) REFERENCES `province_country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='地点(城市)';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `working_position`
+--
+
+LOCK TABLES `working_position` WRITE;
+/*!40000 ALTER TABLE `working_position` DISABLE KEYS */;
+INSERT INTO `working_position` VALUES (1,'东京',1),(2,'大阪',1),(3,'名古屋',1),(4,'a',1),(5,'a',1),(6,'旧金山',7),(7,'纽约',7),(8,'温州',5),(9,'杭州',5),(10,'广州',4),(11,'苏州',2),(12,'南京',2),(13,'无锡',2);
+/*!40000 ALTER TABLE `working_position` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `working_position_con`
+--
+
+DROP TABLE IF EXISTS `working_position_con`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `working_position_con` (
+  `user_name` varchar(45) NOT NULL,
+  `position_id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index1` (`user_name`,`position_id`,`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `FK_POSITION_idx` (`position_id`,`user_name`,`id`),
+  CONSTRAINT `FK_POSITION` FOREIGN KEY (`position_id`) REFERENCES `working_position` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_USERID` FOREIGN KEY (`user_name`) REFERENCES `spec_info` (`userName`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8 COMMENT='工作地点、连接表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `working_position_con`
+--
+
+LOCK TABLES `working_position_con` WRITE;
+/*!40000 ALTER TABLE `working_position_con` DISABLE KEYS */;
+INSERT INTO `working_position_con` VALUES ('1122',1,197),('1122',1,198),('1122',1,199),('1122',1,200),('123',1,161),('123',6,162),('123',8,163),('123',9,164),('123',11,165),('1234',1,173),('1234',11,174),('123456',11,175),('123456',11,176),('kobemvp',9,184),('zzzzzz',11,179);
+/*!40000 ALTER TABLE `working_position_con` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-05-20  1:27:44
