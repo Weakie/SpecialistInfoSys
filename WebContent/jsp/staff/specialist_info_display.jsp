@@ -88,7 +88,7 @@
 		LogUtil.info( request.getAttribute("staffId")+":"+request.getAttribute("applyInfoId"));
 		%>
 		<div class="page-header">
-			<input type="button" id="button" value="确认信息" class="btn btn-primary" onClick="confirmSpecInfo(${applyInfoId},'${staffId }')" <c:if test="${specInfoBean.state!=1 }">disabled="disabled"</c:if>>
+			<input type="button" id="button" value="确认信息" class="btn btn-primary" onClick="confirmSpecInfo(${applyInfoId},'${staffId }')" <c:if test="${specInfoBean.state==3 }">disabled="disabled"</c:if>>
 		</div>
 		<div class="page-header">
 			<h3 class="text-left">

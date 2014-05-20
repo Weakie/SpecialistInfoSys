@@ -1,0 +1,74 @@
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateSpecInfo`(
+IN username_in varchar(45),
+IN name_in varchar(45), 
+IN sex_in bit, 
+IN birthday_in varchar(45), 
+IN email_in varchar(45),
+IN contact_in varchar(200), 
+IN organization_in varchar(45), 
+IN website_in varchar(1000), 
+IN role_in varchar(45), 
+IN part_time_job_in TEXT, 
+IN degree_in varchar(45), 
+IN language_in varchar(45), 
+IN school_in varchar(45), 
+IN work_time_in varchar(45), 
+IN experience_in TEXT, 
+IN other_in varchar(1000), 
+
+IN org_type_id_in int, 
+IN qualification_id_in int, 
+IN title_id_in int, 
+IN major_id_in int,
+ 
+#IN state_in int, 
+
+IN position_in varchar(100),
+IN pos_length_in int
+)
+BEGIN
+declare i int;
+declare pos int;
+set i=1;
+start transaction;
+	select * from spec_info where userName = username_in for update;
+
+	delete from working_position_con where user_name = username_in;
+	
+	while i <= pos_length_in do #loop
+		set pos =  cast(substring_index(substring_index(position_in,',',i),',',-1) as signed);
+		insert into working_position_con(user_name,position_id)
+			values(username_in,pos);
+		set i=i+1;
+	end while;
+
+	update spec_info set 
+		name = name_in,
+		sex = sex_in,
+		birthday = birthday_in,
+		email = email_in,
+		contact = contact_in,
+		organization = organization_in,
+		website = website_in,
+		role = role_in,
+		partTimeJob = part_time_job_in,
+		degree = degree_in,
+		language = language_in,
+		school = school_in,
+		workTime = work_time_in,
+		experience = experience_in,
+		other = other_in,
+		orgTypeId = org_type_id_in,
+		qualificationId = qualification_id_in,
+		titleId = title_id_in,
+		majorId = major_id_in#,
+		#state = state_in
+		where userName = username_in;
+commit;
+END

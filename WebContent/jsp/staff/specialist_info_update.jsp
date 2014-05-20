@@ -78,7 +78,7 @@
 			pageContext.setAttribute("info", info);
 		%>
 		<div class="page-header">
-			<input type="button" id="button" value="不修改直接确认" class="btn btn-primary" onClick="confirmSpecInfo(${applyInfoId},'${staffId }')" <c:if test="${specInfoBean.state!=1 }">disabled="disabled"</c:if>>
+			<input type="button" id="button" value="不修改直接确认" class="btn btn-primary" onClick="confirmSpecInfo(${applyInfoId},'${staffId }')" <c:if test="${specInfoBean.state==3 }">disabled="disabled"</c:if>>
 		</div>
 		<span class="label label-default">修改参考</span><br><br>
 		<div class="col-sm-6 col-xs-6">
